@@ -1,32 +1,81 @@
 {
-  "type": "object",
-  "properties": {
-    "name": {
-      "type": "string",
-      "minLength": 1
-    },
-    "description": {
-      "title": "Long Description",
-      "type": "string"
-    },
-    "done": {
-      "type": "boolean"
-    },
-    "due_date": {
-      "type": "string",
-      "format": "date"
-    },
-    "rating": {
-      "type": "integer",
-      "maximum": 5
-    },
-    "recurrence": {
-      "type": "string",
-      "enum": ["Never", "Daily", "Weekly", "Monthly"]
-    },
-    "recurrence_interval": {
-      "type": "integer"
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "apiItem": {
+      "type": "object",
+      "properties": {
+        "Endpoint": { "type": "string" },
+        "Method": { "type": "string" },
+        "Params": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "required": ["Endpoint", "Method", "Params"]
     }
   },
-  "required": ["name", "due_date"]
+  "type": "object",
+  "properties": {
+    "Question": {
+      "type": "object",
+      "properties": {
+        "content": { "type": "string" }
+      },
+      "required": ["content"]
+    },
+    "Conditions": {
+      "type": "object",
+      "properties": {
+        "PreCondition": {
+          "type": "string"
+        },
+        "PreConditionError": {
+          "type": "string"
+        },
+        "PostCondition": {
+          "type": "string"
+        },
+        "PostConditionError": {
+          "type": "string"
+        }
+      },
+      "required": ["PreCondition", "PreConditionError", "PostCondition", "PostConditionError"]
+    },
+    "NextNode": {
+      "type": "object",
+      "properties": {
+        "ValueCheck": { "type": "string" },
+        "Next": { "type": "string" }
+      },
+      "required": ["ValueCheck", "Next"]
+    },
+    "APIs": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/apiItem" }
+    },
+    "Functions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Input": { "type": "string" },
+          "Output": { "type": "string" }
+        },
+        "required": ["Input", "Output"]
+      }
+    },
+    "ExecutionOrder": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Type": { "type": "string" },
+          "Name": { "type": "string" },
+          "Input": { "type": "string" },
+          "EvaluationFunction": { "type": "string" }
+        },
+        "required": ["Type", "Name", "Input", "EvaluationFunction"]
+      }
+    }
+  }
 }

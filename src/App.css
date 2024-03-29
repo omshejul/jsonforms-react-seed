@@ -34,3 +34,6 @@ html {
     transform: rotate(360deg);
   }
 }
+.MuiGrid-container span{
+  padding-left: 0.5rem;
+}

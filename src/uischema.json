@@ -3,53 +3,146 @@
   "elements": [
     {
       "type": "Control",
-      "label": "Completed",
-      "scope": "#/properties/done"
+      "scope": "#/properties/Question/properties/content",
+      "label": "Question"
     },
     {
-      "type": "Control",
-      "scope": "#/properties/name"
-    },
-    {
-      "type": "HorizontalLayout",
+      "type": "Group",
+      "label": "Conditions",
       "elements": [
         {
           "type": "Control",
-          "scope": "#/properties/due_date"
+          "scope": "#/properties/Conditions/properties/PreCondition",
+          "label": "Pre Condition"
         },
         {
           "type": "Control",
-          "scope": "#/properties/rating"
+          "scope": "#/properties/Conditions/properties/PreConditionError",
+          "label": "Pre Condition Error"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/Conditions/properties/PostCondition",
+          "label": "Post Condition"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/Conditions/properties/PostConditionError",
+          "label": "Post Condition Error"
         }
       ]
     },
     {
-      "type": "HorizontalLayout",
+      "type": "Group",
+      "label": "Next Node",
       "elements": [
         {
           "type": "Control",
-          "scope": "#/properties/recurrence"
+          "scope": "#/properties/NextNode/properties/ValueCheck",
+          "label": "Value Check Condition"
         },
         {
           "type": "Control",
-          "scope": "#/properties/recurrence_interval",
-          "rule": {
-            "effect": "HIDE",
-            "condition": {
-              "type": "LEAF",
-              "scope": "#/properties/recurrence",
-              "expectedValue": "Never"
+          "scope": "#/properties/NextNode/properties/Next",
+          "label": "Next Node"
+        }
+      ]
+    },
+    {
+      "type": "Group",
+      "label": "APIs",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/APIs",
+          "options": {
+            "detail": {
+              "type": "HorizontalLayout",
+              "elements": [
+                {
+                  "type": "Control",
+                  "scope": "#/properties/Endpoint",
+                  "label": "Endpoint"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/Method",
+                  "label": "Method"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/Params",
+                  "label": "Parameters"
+                }
+              ]
             }
           }
         }
       ]
     },
     {
-      "type": "Control",
-      "scope": "#/properties/description",
-      "options": {
-        "multi": true
-      }
+      "type": "Group",
+      "label": "Functions",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/Functions",
+          "options": {
+            "detail": {
+              "type": "HorizontalLayout",
+              "elements": [
+                {
+                  "type": "Control",
+                  "scope": "#/properties/Input",
+                  "label": "Input"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/Output",
+                  "label": "Output"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "Group",
+      "label": "Execution Order",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/ExecutionOrder",
+          "options": {
+            "detail": {
+              "type": "HorizontalLayout",
+              "elements": [
+                {
+                  "type": "Control",
+                  "scope": "#/properties/Type",
+                  "label": "Type"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/Name",
+                  "label": "Name"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/Input",
+                  "label": "Input"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/EvaluationFunction",
+                  "label": "Evaluation Function"
+                }
+              ]
+            }
+          }
+        }
+      ]
     }
   ]
 }
