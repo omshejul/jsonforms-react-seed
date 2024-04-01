@@ -1,8 +1,9 @@
 
 
-# Project Title
+# Dialog Manager
 
-A brief description of what this project does and who it's for.
+Dialog Manager built on with jsonforms
+This repo is fork of the repo [jsonforms-react-seed](https://github.com/eclipsesource/jsonforms-react-seed)
 
 ## Overview
 
@@ -26,16 +27,16 @@ Before you begin, ensure you have met the following requirements:
 Clone the repository to your local machine:
 
 ```bash
-git clone https://your-repository-url.git
-cd your-repository-directory
+git clone https://github.com/omshejul/jsonforms-react-seed.git
+cd jsonforms-react-seed
 ```
 
 Install the dependencies:
 
 ```bash
-npm install
+npm ci # for clean install
 # or
-yarn install
+yarn ci
 ```
 
 ## Usage
@@ -67,18 +68,6 @@ yarn build
 
 This will generate a `build` directory with optimized production files.
 
-## Contributing
+# Tips:
 
-Contributions to the project are welcome! Feel free to fork the repository and submit pull requests.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE) - see the LICENSE file for details.
-
-## Contact
-
-For any inquiries or contributions, please contact [Your Name or Project Email].
-
----
-
-This template provides a basic structure for your `README.md`. Feel free to adjust it according to the specific needs and details of your project. Remember to replace placeholder texts (like repository URLs and contact information) with actual data related to your project.
+-If api is giving CORS error try adding https://cors-anywhere.herokuapp.com/ in front of the api url

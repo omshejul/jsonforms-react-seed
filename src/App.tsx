@@ -18,8 +18,6 @@ import RatingControl from './RatingControl';
 import ratingControlTester from './ratingControlTester';
 import RenderButton from './Components/RenderButton';
 
-
-
 const renderers = [
   ...materialRenderers,
   { tester: ratingControlTester, renderer: RatingControl },
@@ -29,16 +27,20 @@ const App: React.FC = () => {
   const classes = useStyles();
   const [data, setData] = useState<any>(initialData);
   const stringifiedData = useMemo(() => JSON.stringify(data, null, 2), [data]);
-
   const [apiResults, setApiResults] = useState<Record<string, any>>({});
 
   const runApi = async (api: Api, index: number) => {
-    let params = {};
-
+    let params = {};    
+    const useProxyForKnownCorsIssues = true;
+    const corsProxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    const apiUrl = useProxyForKnownCorsIssues ? `${corsProxyUrl}${api.Endpoint}` : api.Endpoint;
 
     if (api.Params && Array.isArray(api.Params)) {
       params = api.Params.reduce(
-        (acc: Record<string, string>, param: { key: string; value: string }) => {
+        (
+          acc: Record<string, string>,
+          param: { key: string; value: string }
+        ) => {
           acc[param.key] = param.value;
           return acc;
         },
@@ -49,7 +51,7 @@ const App: React.FC = () => {
     try {
       const response = await axios({
         method: api.Method.toLowerCase(),
-        url: api.Endpoint,
+        url: apiUrl,
         params,
         headers: {
           'Content-Type': 'application/json',
@@ -65,11 +67,9 @@ const App: React.FC = () => {
     }
   };
 
-
   const clearData = () => {
     setData(blankData);
   };
-
 
   return (
     <Accordion>
@@ -209,7 +209,7 @@ const useStyles = makeStyles({
     backgroundColor: 'hsl(0, 0%, 98%)',
     border: '1px solid #ccc',
     marginBottom: '1rem',
-    overflowX: "scroll",
+    overflowX: 'scroll',
   },
   resetButton: {
     margin: 'auto !important',
@@ -226,9 +226,8 @@ const useStyles = makeStyles({
     display: 'flex',
   },
   apiResultsJSON: {
-    overflowX: "scroll",
+    overflowX: 'scroll',
   },
-
 });
 
 const initialData = {
