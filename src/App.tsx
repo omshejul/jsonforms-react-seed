@@ -1,24 +1,194 @@
-import { Fragment, useState, useMemo } from 'react';
 import { JsonForms } from '@jsonforms/react';
-import Grid from '@mui/material/Grid';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-
-import './App.css';
-import schema from './schema.json';
-import uischema from './uischema.json';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Button, Card, CardContent, Grid, Typography } from '@mui/material';
+import Accordion from '@mui/material/Accordion';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import { Fragment, useMemo, useState } from 'react';
 import {
   materialCells,
   materialRenderers,
 } from '@jsonforms/material-renderers';
-import { rankWith, isControl, and, schemaMatches , JsonSchema} from '@jsonforms/core';
-
-
+import axios from 'axios';
+import './App.css';
+import schema from './schema.json';
+import uischema from './uischema.json';
+import { makeStyles } from '@mui/styles';
 import RatingControl from './RatingControl';
 import ratingControlTester from './ratingControlTester';
-import { makeStyles } from '@mui/styles';
+import RenderButton from './Components/RenderButton';
 
-import ApiCallRenderer from './ApiCallRenderer'; // Import your custom renderer
+
+
+const renderers = [
+  ...materialRenderers,
+  { tester: ratingControlTester, renderer: RatingControl },
+];
+
+const App: React.FC = () => {
+  const classes = useStyles();
+  const [data, setData] = useState<any>(initialData);
+  const stringifiedData = useMemo(() => JSON.stringify(data, null, 2), [data]);
+
+  const [apiResults, setApiResults] = useState<Record<string, any>>({});
+
+  const runApi = async (api: Api, index: number) => {
+    let params = {};
+
+
+    if (api.Params && Array.isArray(api.Params)) {
+      params = api.Params.reduce(
+        (acc: Record<string, string>, param: { key: string; value: string }) => {
+          acc[param.key] = param.value;
+          return acc;
+        },
+        {}
+      );
+    }
+
+    try {
+      const response = await axios({
+        method: api.Method.toLowerCase(),
+        url: api.Endpoint,
+        params,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      setApiResults((prevResults) => ({
+        ...prevResults,
+        [index]: response.data,
+      }));
+    } catch (error) {
+      console.error('API call failed:', error);
+    }
+  };
+
+
+  const clearData = () => {
+    setData(blankData);
+  };
+
+
+  return (
+    <Accordion>
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon />}
+        aria-controls='panel1a-content'
+        id='panel1a-header'
+      >
+        <Typography className={classes.heading}>Form 1</Typography>
+      </AccordionSummary>
+      <AccordionDetails>
+        <Fragment>
+          <Grid
+            container
+            justifyContent={'center'}
+            spacing={1}
+            className={classes.container}
+          >
+            <Grid item xs={12} lg={6}>
+              <Typography variant={'h4'} className={classes.title}>
+                Rendered form
+              </Typography>
+              <div className={classes.demoform}>
+                {console.log(data)}
+                <JsonForms
+                  schema={schema}
+                  uischema={uischema}
+                  data={data}
+                  renderers={renderers}
+                  cells={materialCells}
+                  onChange={({ errors, data }) => setData(data)}
+                />
+                {/* Test APIs Section */}
+                <Typography
+                  variant='h4'
+                  style={{ textAlign: 'center', margin: '20px 0' }}
+                >
+                  Test APIs
+                </Typography>
+
+                {data.APIs.map((api: Api, index: number) => (
+                  <Grid item key={index}>
+                    <Card>
+                      <CardContent>
+                        <Typography variant='h6'>
+                          API {index + 1}: {api.Name}
+                        </Typography>
+                        <Typography variant='body2'>
+                          Endpoint: {api.Endpoint}
+                        </Typography>
+                        <Typography variant='body2'>
+                          Method: {api.Method}
+                        </Typography>
+                        <Button
+                          variant='contained'
+                          onClick={() => runApi(api, index)}
+                          style={{ marginTop: '10px' }}
+                        >
+                          Run API {index + 1}
+                        </Button>
+                      </CardContent>
+                    </Card>
+                    <div className='apiResultsBTN'>
+                      {apiResults[index] && (
+                        <Card style={{ marginTop: '10px' }}>
+                          <CardContent>
+                            <Typography variant='h6'>
+                              Results from API {index + 1}:
+                            </Typography>
+                            {/* {console.log("api result",apiResults[index])} */}
+                            {RenderButton(apiResults[index])}
+                          </CardContent>
+                        </Card>
+                      )}
+                    </div>
+                    <div>
+                      {apiResults[index] && (
+                        <Card style={{ marginTop: '10px' }}>
+                          <CardContent>
+                            <Typography variant='h6'>
+                              Results JSON from API {index + 1}:
+                            </Typography>
+                            <pre className={classes.apiResultsJSON}>
+                              {JSON.stringify(apiResults[index], null, 2)}
+                            </pre>
+                          </CardContent>
+                        </Card>
+                      )}
+                    </div>
+                  </Grid>
+                ))}
+
+                {/* Test APIs Section */}
+              </div>
+            </Grid>
+            <Grid item xs={12} lg={6}>
+              <Typography variant={'h4'} className={classes.title}>
+                Bound data
+              </Typography>
+              <div className={classes.dataContent}>
+                <pre id='boundData'>{stringifiedData}</pre>
+              </div>
+              <Button
+                className={classes.resetButton}
+                onClick={clearData}
+                color='primary'
+                variant='contained'
+              >
+                Clear data
+              </Button>
+            </Grid>
+          </Grid>
+        </Fragment>
+      </AccordionDetails>
+    </Accordion>
+  );
+};
+
+export default App;
 
 const useStyles = makeStyles({
   container: {
@@ -31,11 +201,15 @@ const useStyles = makeStyles({
   },
   dataContent: {
     display: 'flex',
-    justifyContent: 'center',
-    borderRadius: '1em',
-    color: '#333',
-    backgroundColor: '#eee',
+    padding: '1em',
+    width: '100%',
+    justifyContent: 'start',
+    borderRadius: '5px',
+    color: '#202020',
+    backgroundColor: 'hsl(0, 0%, 98%)',
+    border: '1px solid #ccc',
     marginBottom: '1rem',
+    overflowX: "scroll",
   },
   resetButton: {
     margin: 'auto !important',
@@ -45,6 +219,16 @@ const useStyles = makeStyles({
     margin: 'auto',
     padding: '1rem',
   },
+  heading: {
+    fontSize: '1.25rem',
+  },
+  apiResults: {
+    display: 'flex',
+  },
+  apiResultsJSON: {
+    overflowX: "scroll",
+  },
+
 });
 
 const initialData = {
@@ -63,9 +247,15 @@ const initialData = {
   },
   APIs: [
     {
-      Endpoint: 'https://api.example.com/data',
+      Name: 'Some Name',
+      Endpoint: 'https://httpbin.org/get',
       Method: 'GET',
-      Params: ['param1', 'param2'],
+      Params: [
+        {
+          key: 'param1',
+          value: 'value1',
+        },
+      ],
     },
   ],
   Functions: [
@@ -89,84 +279,48 @@ const initialData = {
     },
   ],
 };
-
-
-const apiCallRendererTester = rankWith(
-  1000, // High priority to override default renderers
-  and(
-    isControl, // Ensure it's a control element
-    schemaMatches((schema: JsonSchema, rootSchema: JsonSchema) => {
-      const matches = typeof schema.type === 'string' && 
-                      schema.type === 'object' && 
-                      schema.properties !== undefined && 
-                      'Endpoint' in schema.properties;
-      console.log(`Testing schema for API call renderer: ${matches}`, schema);
-      return matches;
-    })
-  )
-);
-
-
-
-
-const renderers = [
-  ...materialRenderers,
-  { tester: ratingControlTester, renderer: RatingControl },
-  { tester: apiCallRendererTester, renderer: ApiCallRenderer }, // Include your custom renderer
-];
-
-const App = () => {
-  const classes = useStyles();
-  const [data, setData] = useState<any>(initialData);
-  const stringifiedData = useMemo(() => JSON.stringify(data, null, 2), [data]);
-
-  const clearData = () => {
-    setData({});
-  };
-
-  return (
-    <Fragment>
-      <Grid
-        container
-        justifyContent={'center'}
-        spacing={1}
-        className={classes.container}
-      >
-        <Grid item sm={6}>
-          <Typography variant={'h4'} className={classes.title}>
-            Bound data
-          </Typography>
-          <div className={classes.dataContent}>
-            <pre id='boundData'>{stringifiedData}</pre>
-          </div>
-          <Button
-            className={classes.resetButton}
-            onClick={clearData}
-            color='primary'
-            variant='contained'
-          >
-            Clear data
-          </Button>
-        </Grid>
-        <Grid item sm={6}>
-          <Typography variant={'h4'} className={classes.title}>
-            Rendered form
-          </Typography>
-          <div className={classes.demoform}>
-            <JsonForms
-              schema={schema}
-              uischema={uischema}
-              data={data}
-              renderers={renderers}
-              cells={materialCells}
-              onChange={({ errors, data }) => setData(data)}
-            />
-          </div>
-        </Grid>
-      </Grid>
-    </Fragment>
-  );
+const blankData = {
+  Question: {
+    content: '',
+  },
+  Conditions: {
+    PreCondition: '',
+    PreConditionError: '',
+    PostCondition: '',
+    PostConditionError: '',
+  },
+  NextNode: {
+    ValueCheck: '',
+    Next: '',
+  },
+  APIs: [
+    {
+      Name: '',
+      Endpoint: '',
+      Method: '',
+      Params: [],
+    },
+  ],
+  Functions: [
+    {
+      Input: '',
+      Output: '',
+    },
+  ],
+  ExecutionOrder: [
+    {
+      Type: '',
+      Name: '',
+      Input: '',
+      EvaluationFunction: '',
+    },
+  ],
 };
 
-export default App;
-
+interface Api {
+  Name: string;
+  Endpoint: string;
+  Method: 'GET' | 'POST' | 'PUT' | 'DELETE';
+  Params?: { [key: string]: any };
+  Headers?: Record<string, string>;
+}

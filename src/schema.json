@@ -4,14 +4,25 @@
     "apiItem": {
       "type": "object",
       "properties": {
+        "Name": { "type": "string" },
         "Endpoint": { "type": "string" },
-        "Method": { "type": "string" },
+        "Method": {
+          "type": "string",
+          "enum": ["GET", "POST", "PUT", "DELETE"]
+        },
         "Params": {
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "object",
+            "properties": {
+              "key": { "type": "string" },
+              "value": { "type": "string" }
+            },
+            "required": ["key", "value"]
+          }
         }
       },
-      "required": ["Endpoint", "Method", "Params"]
+      "required": ["Name", "Endpoint", "Method"]
     }
   },
   "type": "object",
@@ -39,7 +50,12 @@
           "type": "string"
         }
       },
-      "required": ["PreCondition", "PreConditionError", "PostCondition", "PostConditionError"]
+      "required": [
+        "PreCondition",
+        "PreConditionError",
+        "PostCondition",
+        "PostConditionError"
+      ]
     },
     "NextNode": {
       "type": "object",

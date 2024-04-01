@@ -20,6 +20,13 @@ const theme = createTheme({
         variant: 'outlined',
       },
     },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          boxShadow: '0px 0px 0rem 1px hsla(0, 0%, 50%, 0.3)', 
+        },
+      },
+    },
   },
 });
 

@@ -55,10 +55,17 @@
         {
           "type": "Control",
           "scope": "#/properties/APIs",
+          "label": "APIs",
+
           "options": {
             "detail": {
-              "type": "HorizontalLayout",
+              "type": "VerticalLayout",
               "elements": [
+                {
+                  "type": "Control",
+                  "scope": "#/properties/Name",
+                  "label": "Name"
+                },
                 {
                   "type": "Control",
                   "scope": "#/properties/Endpoint",
@@ -72,8 +79,13 @@
                 {
                   "type": "Control",
                   "scope": "#/properties/Params",
-                  "label": "Parameters"
+                  "options": {
+                    "showSortButtons": false
+                  }
                 }
+                
+                
+                
               ]
             }
           }
