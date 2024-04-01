@@ -17,6 +17,8 @@ import { makeStyles } from '@mui/styles';
 import RatingControl from './RatingControl';
 import ratingControlTester from './ratingControlTester';
 import RenderButton from './Components/RenderButton';
+import { Description } from '@mui/icons-material';
+import { error } from 'console';
 
 const renderers = [
   ...materialRenderers,
@@ -30,10 +32,12 @@ const App: React.FC = () => {
   const [apiResults, setApiResults] = useState<Record<string, any>>({});
 
   const runApi = async (api: Api, index: number) => {
-    let params = {};    
+    let params = {};
     const useProxyForKnownCorsIssues = true;
     const corsProxyUrl = 'https://cors-anywhere.herokuapp.com/';
-    const apiUrl = useProxyForKnownCorsIssues ? `${corsProxyUrl}${api.Endpoint}` : api.Endpoint;
+    const apiUrl = useProxyForKnownCorsIssues
+      ? `${corsProxyUrl}${api.Endpoint}`
+      : api.Endpoint;
 
     if (api.Params && Array.isArray(api.Params)) {
       params = api.Params.reduce(
@@ -68,7 +72,7 @@ const App: React.FC = () => {
   };
 
   const clearData = () => {
-    setData(blankData);
+    setData({});
   };
 
   return (
@@ -78,7 +82,9 @@ const App: React.FC = () => {
         aria-controls='panel1a-content'
         id='panel1a-header'
       >
-        <Typography className={classes.heading}>Form 1</Typography>
+        <Typography className={classes.heading}>
+          {data.formName ? data.formName :"Form 1"}
+        </Typography>
       </AccordionSummary>
       <AccordionDetails>
         <Fragment>
@@ -103,65 +109,69 @@ const App: React.FC = () => {
                   onChange={({ errors, data }) => setData(data)}
                 />
                 {/* Test APIs Section */}
-                <Typography
-                  variant='h4'
-                  style={{ textAlign: 'center', margin: '20px 0' }}
-                >
-                  Test APIs
-                </Typography>
 
-                {data.APIs.map((api: Api, index: number) => (
-                  <Grid item key={index}>
-                    <Card>
-                      <CardContent>
-                        <Typography variant='h6'>
-                          API {index + 1}: {api.Name}
-                        </Typography>
-                        <Typography variant='body2'>
-                          Endpoint: {api.Endpoint}
-                        </Typography>
-                        <Typography variant='body2'>
-                          Method: {api.Method}
-                        </Typography>
-                        <Button
-                          variant='contained'
-                          onClick={() => runApi(api, index)}
-                          style={{ marginTop: '10px' }}
-                        >
-                          Run API {index + 1}
-                        </Button>
-                      </CardContent>
-                    </Card>
-                    <div className='apiResultsBTN'>
-                      {apiResults[index] && (
-                        <Card style={{ marginTop: '10px' }}>
+                {data.APIs && data.APIs.length > 0 && (
+                  <>
+                    <Typography
+                      variant='h4'
+                      style={{ textAlign: 'center', margin: '20px 0' }}
+                    >
+                      Test APIs
+                    </Typography>
+
+                    {data.APIs.map((api: Api, index: number) => (
+                      <Grid item key={index}>
+                        <Card>
                           <CardContent>
                             <Typography variant='h6'>
-                              Results from API {index + 1}:
+                              API {index + 1}: {api.Name}
                             </Typography>
-                            {/* {console.log("api result",apiResults[index])} */}
-                            {RenderButton(apiResults[index])}
+                            <Typography variant='body2'>
+                              Endpoint: {api.Endpoint}
+                            </Typography>
+                            <Typography variant='body2'>
+                              Method: {api.Method}
+                            </Typography>
+                            <Button
+                              variant='contained'
+                              onClick={() => runApi(api, index)}
+                              style={{ marginTop: '10px' }}
+                            >
+                              Run API {index + 1}
+                            </Button>
                           </CardContent>
                         </Card>
-                      )}
-                    </div>
-                    <div>
-                      {apiResults[index] && (
-                        <Card style={{ marginTop: '10px' }}>
-                          <CardContent>
-                            <Typography variant='h6'>
-                              Results JSON from API {index + 1}:
-                            </Typography>
-                            <pre className={classes.apiResultsJSON}>
-                              {JSON.stringify(apiResults[index], null, 2)}
-                            </pre>
-                          </CardContent>
-                        </Card>
-                      )}
-                    </div>
-                  </Grid>
-                ))}
-
+                        <div className='apiResultsBTN'>
+                          {apiResults[index] && (
+                            <Card style={{ marginTop: '10px' }}>
+                              <CardContent>
+                                <Typography variant='h6'>
+                                  Results from API {index + 1}:
+                                </Typography>
+                                {/* {console.log("api result",apiResults[index])} */}
+                                {RenderButton(apiResults[index])}
+                              </CardContent>
+                            </Card>
+                          )}
+                        </div>
+                        <div>
+                          {apiResults[index] && (
+                            <Card style={{ marginTop: '10px' }}>
+                              <CardContent>
+                                <Typography variant='h6'>
+                                  Results JSON from API {index + 1}:
+                                </Typography>
+                                <pre className={classes.apiResultsJSON}>
+                                  {JSON.stringify(apiResults[index], null, 2)}
+                                </pre>
+                              </CardContent>
+                            </Card>
+                          )}
+                        </div>
+                      </Grid>
+                    ))}
+                  </>
+                )}
                 {/* Test APIs Section */}
               </div>
             </Grid>
@@ -231,89 +241,57 @@ const useStyles = makeStyles({
 });
 
 const initialData = {
-  Question: {
-    content: 'What is the capital of France?',
+  formName: '',
+  formData: {
+    question: 'What is the capital of France?',
+    response: '',
+    Conditions: {
+      PreCondition: 'user_input.length > 0',
+      PreConditionError: 'Input cannot be empty',
+      PostCondition: "user_input === 'Paris'",
+      PostConditionError: 'Wrong answer. The correct answer is Paris.',
+    },
+    APIs: [
+      {
+        Name: 'Some Name',
+        Endpoint: 'https://httpbin.org/get',
+        Method: 'GET',
+        Params: [
+          {
+            key: 'param1',
+            value: 'value1',
+          },
+        ],
+      },
+    ],
+    Functions: [
+      {
+        Input: 'data from previous step',
+        Output: 'processed data',
+      },
+    ],
+    ExecutionOrder: [
+      {
+        Type: 'Condition',
+        Name: 'Check Input Length',
+        Input: 'user_input',
+        EvaluationFunction: 'lengthCheck',
+      },
+      {
+        Type: 'API Request',
+        Name: 'Fetch Data',
+        Input: 'Query Params',
+        EvaluationFunction: 'fetchData',
+      },
+    ],
+    NextNodes: [
+      {
+        valueCheck: "user_input.startsWith('P')",
+        next: 'If condition is true, navigate to the next node',
+        condition: '',
+      },
+    ],
   },
-  Conditions: {
-    PreCondition: 'user_input.length > 0',
-    PreConditionError: 'Input cannot be empty',
-    PostCondition: "user_input === 'Paris'",
-    PostConditionError: 'Wrong answer. The correct answer is Paris.',
-  },
-  NextNode: {
-    ValueCheck: "user_input.startsWith('P')",
-    Next: 'If condition is true, navigate to the next node',
-  },
-  APIs: [
-    {
-      Name: 'Some Name',
-      Endpoint: 'https://httpbin.org/get',
-      Method: 'GET',
-      Params: [
-        {
-          key: 'param1',
-          value: 'value1',
-        },
-      ],
-    },
-  ],
-  Functions: [
-    {
-      Input: 'data from previous step',
-      Output: 'processed data',
-    },
-  ],
-  ExecutionOrder: [
-    {
-      Type: 'Condition',
-      Name: 'Check Input Length',
-      Input: 'user_input',
-      EvaluationFunction: 'lengthCheck',
-    },
-    {
-      Type: 'API Request',
-      Name: 'Fetch Data',
-      Input: 'Query Params',
-      EvaluationFunction: 'fetchData',
-    },
-  ],
-};
-const blankData = {
-  Question: {
-    content: '',
-  },
-  Conditions: {
-    PreCondition: '',
-    PreConditionError: '',
-    PostCondition: '',
-    PostConditionError: '',
-  },
-  NextNode: {
-    ValueCheck: '',
-    Next: '',
-  },
-  APIs: [
-    {
-      Name: '',
-      Endpoint: '',
-      Method: '',
-      Params: [],
-    },
-  ],
-  Functions: [
-    {
-      Input: '',
-      Output: '',
-    },
-  ],
-  ExecutionOrder: [
-    {
-      Type: '',
-      Name: '',
-      Input: '',
-      EvaluationFunction: '',
-    },
-  ],
 };
 
 interface Api {
