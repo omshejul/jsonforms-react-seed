@@ -3,223 +3,232 @@
   "elements": [
     {
       "type": "Control",
-      "scope": "#/properties/formName",
-      "label": "Form Name"
-    },
-    {
-      "type": "VerticalLayout",
-      "elements": [
-        {
-          "type": "Control",
-          "scope": "#/properties/formData/properties/question",
-          "label": "Question"
-        },
-        {
-          "type": "Group",
-          "label": "Conditions",
+      "scope": "#/properties/forms",
+      "options": {
+        "detail": {
+          "type": "VerticalLayout",
           "elements": [
             {
               "type": "Control",
-              "scope": "#/properties/formData/properties/Conditions/properties/PreCondition",
-              "label": "Pre Condition"
+              "scope": "#/properties/formName",
+              "label": "Form Name"
             },
-            {
-              "type": "Control",
-              "scope": "#/properties/formData/properties/Conditions/properties/PreConditionError",
-              "label": "Pre Condition Error"
-            },
-            {
-              "type": "Control",
-              "scope": "#/properties/formData/properties/Conditions/properties/PostCondition",
-              "label": "Post Condition"
-            },
-            {
-              "type": "Control",
-              "scope": "#/properties/formData/properties/Conditions/properties/PostConditionError",
-              "label": "Post Condition Error"
-            }
-          ]
-        },
-        {
-          "type": "Group",
-          "label": "Next Nodes",
-          "elements": [
-            {
-              "type": "Control",
-              "label": "Node",
-              "scope": "#/properties/formData/properties/NextNodes",
-              "options": {
-                "elementLabelProp": "next",
-                "detail": {
-                  "type": "VerticalLayout",
+
+                {
+                  "type": "Control",
+                  "scope": "#/properties/formData/properties/question",
+                  "label": "Question"
+                },
+
+                {
+                  "type": "Group",
+                  "label": "Conditions",
                   "elements": [
                     {
                       "type": "Control",
-                      "scope": "#/properties/valueCheck",
-                      "label": "Value Check Condition"
+                      "scope": "#/properties/formData/properties/Conditions/properties/preCondition",
+                      "label": "Pre Condition"
                     },
                     {
                       "type": "Control",
-                      "scope": "#/properties/next",
-                      "label": "Next Node"
+                      "scope": "#/properties/formData/properties/Conditions/properties/preConditionError",
+                      "label": "Pre Condition Error"
                     },
                     {
                       "type": "Control",
-                      "scope": "#/properties/condition",
-                      "label": "Condition",
+                      "scope": "#/properties/formData/properties/Conditions/properties/postCondition",
+                      "label": "Post Condition"
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/formData/properties/Conditions/properties/postConditionError",
+                      "label": "Post Condition Error"
+                    }
+                  ]
+                },
+                {
+                  "type": "Group",
+                  "label": "Next Nodes",
+                  "elements": [
+                    {
+                      "type": "Control",
+                      "label": "Node",
+                      "scope": "#/properties/formData/properties/NextNodes",
                       "options": {
-                        "showUnfocusedDescription": true
+                        "elementLabelProp": "next",
+                        "detail": {
+                          "type": "VerticalLayout",
+                          "elements": [
+                            {
+                              "type": "Control",
+                              "scope": "#/properties/valueCheck",
+                              "label": "Value Check Condition"
+                            },
+                            {
+                              "type": "Control",
+                              "scope": "#/properties/next",
+                              "label": "Next Node"
+                            },
+                            {
+                              "type": "Control",
+                              "scope": "#/properties/condition",
+                              "label": "Condition",
+                              "options": {
+                                "showUnfocusedDescription": true
+                              }
+                            }
+                          ]
+                        }
                       }
                     }
                   ]
-                }
-              }
-            }
-          ]
-        },
-        {
-          "type": "Group",
-          "label": "APIs",
-          "elements": [
-            {
-              "type": "Control",
-              "scope": "#/properties/formData/properties/APIs",
-              "label": "APIs",
-              "options": {
-                "detail": {
-                  "type": "VerticalLayout",
-                  "elements": [
-                    {
-                      "type": "Control",
-                      "scope": "#/properties/Name",
-                      "label": "Name"
-                    },
-                    {
-                      "type": "Control",
-                      "scope": "#/properties/Endpoint",
-                      "label": "Endpoint"
-                    },
-                    {
-                      "type": "Control",
-                      "scope": "#/properties/Method",
-                      "label": "Method"
-                    },
-                    {
-                      "type": "Control",
-                      "scope": "#/properties/Params",
-                      "label": "Params",
-                      "options": {
-                        "showSortButtons": false
+                },{
+                    "type": "Group",
+                    "label": "APIs",
+                    "elements": [
+                      {
+                        "type": "Control",
+                        "scope": "#/properties/formData/properties/APIs",
+                        "label": "APIs",
+                        "options": {
+                          "detail": {
+                            "type": "VerticalLayout",
+                            "elements": [
+                              {
+                                "type": "Control",
+                                "scope": "#/properties/name",
+                                "label": "Name"
+                              },
+                              {
+                                "type": "Control",
+                                "scope": "#/properties/endpoint",
+                                "label": "Endpoint"
+                              },
+                              {
+                                "type": "Control",
+                                "scope": "#/properties/method",
+                                "label": "Method"
+                              },
+                              {
+                                "type": "Control",
+                                "scope": "#/properties/params",
+                                "label": "Params",
+                                "options": {
+                                  "showSortButtons": false
+                                }
+                              },
+                              {
+                                "type": "Control",
+                                "scope": "#/properties/error",
+                                "label": "Error Message"
+                              }
+                            ]
+                          }
+                        }
                       }
-                    },
-                    {
-                      "type": "Control",
-                      "scope": "#/properties/error",
-                      "label": "Error Message"
-                    }
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        {
-          "type": "Group",
-          "label": "Functions",
-          "elements": [
-            {
-              "type": "Control",
-              "label": "Function",
-              "scope": "#/properties/formData/properties/Functions",
-              "options": {
-                "detail": {
-                  "type": "VerticalLayout",
-                  "elements": [
-                    {
-                      "type": "HorizontalLayout",
-                      "elements": [
-                        {
-                          "type": "Control",
-                          "scope": "#/properties/Input",
-                          "label": "Input"
-                        },
-                        {
-                          "type": "Control",
-                          "scope": "#/properties/Output",
-                          "label": "Output"
+                    ]
+                  },
+                  {
+                    "type": "Group",
+                    "label": "Functions",
+                    "elements": [
+                      {
+                        "type": "Control",
+                        "label": "Function",
+                        "scope": "#/properties/formData/properties/Functions",
+                        "options": {
+                          "detail": {
+                            "type": "VerticalLayout",
+                            "elements": [
+                              {
+                                "type": "HorizontalLayout",
+                                "elements": [
+                                  {
+                                    "type": "Control",
+                                    "scope": "#/properties/input",
+                                    "label": "Input"
+                                  },
+                                  {
+                                    "type": "Control",
+                                    "scope": "#/properties/output",
+                                    "label": "Output"
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "Control",
+                                "scope": "#/properties/description",
+                                "label": "Description"
+                              }
+                            ]
+                          }
                         }
-                      ]
-                    },
-                    {
-                      "type": "Control",
-                      "scope": "#/properties/Description",
-                      "label": "Description"
-                    }
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        {
-          "type": "Group",
-          "label": "Execution Order",
-          "elements": [
-            {
-              "type": "Control",
-              "label": "Order",
-              "scope": "#/properties/formData/properties/ExecutionOrder",
-              "options": {
-                "detail": {
-                  "type": "VerticalLayout",
-                  "elements": [
-                    {
-                      "type": "HorizontalLayout",
-                      "elements": [
-                        {
-                          "type": "Control",
-                          "scope": "#/properties/name",
-                          "label": "Name"
-                        },
-                        {
-                          "type": "Control",
-                          "scope": "#/properties/type",
-                          "label": "Type"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Group",
+                    "label": "Execution Order",
+                    "elements": [
+                      {
+                        "type": "Control",
+                        "label": "Order",
+                        "scope": "#/properties/formData/properties/ExecutionOrder",
+                        "options": {
+                          "detail": {
+                            "type": "VerticalLayout",
+                            "elements": [
+                              {
+                                "type": "HorizontalLayout",
+                                "elements": [
+                                  {
+                                    "type": "Control",
+                                    "scope": "#/properties/name",
+                                    "label": "Name"
+                                  },
+                                  {
+                                    "type": "Control",
+                                    "scope": "#/properties/type",
+                                    "label": "Type"
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "Control",
+                                "scope": "#/properties/input",
+                                "label": "Input"
+                              },
+                              {
+                                "type": "Control",
+                                "scope": "#/properties/evaluationFunction",
+                                "label": "Evaluation Function"
+                              },
+                              {
+                                "type": "Control",
+                                "scope": "#/properties/error",
+                                "label": "Error Message"
+                              }
+                            ]
+                          }
                         }
-                      ]
-                    },
-                    {
-                      "type": "Control",
-                      "scope": "#/properties/input",
-                      "label": "Input"
-                    },
-                    {
-                      "type": "Control",
-                      "scope": "#/properties/evaluationFunction",
-                      "label": "Evaluation Function"
-                    },
-                    {
-                      "type": "Control",
-                      "scope": "#/properties/error",
-                      "label": "Error Message"
-                    }
-                  ]
-                }
-              }
-            }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Control",
+                    "scope": "#/properties/formData/properties/closing_message",
+                    "label": "Closing Message"
+                  },
+                  {
+                    "type": "Control",
+                    "scope": "#/properties/formData/properties/error_message",
+                    "label": "Error Message"
+                  }
+              
+            
           ]
-        },
-        {
-          "type": "Control",
-          "scope": "#/properties/formData/properties/closing_message",
-          "label": "Closing Message"
-        },
-        {
-          "type": "Control",
-          "scope": "#/properties/formData/properties/error_message",
-          "label": "Error Message"
         }
-      ]
+      }
     }
   ]
 }

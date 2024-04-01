@@ -76,17 +76,6 @@ const App: React.FC = () => {
   };
 
   return (
-    <Accordion>
-      <AccordionSummary
-        expandIcon={<ExpandMoreIcon />}
-        aria-controls='panel1a-content'
-        id='panel1a-header'
-      >
-        <Typography className={classes.heading}>
-          {data.formName ? data.formName :"Form 1"}
-        </Typography>
-      </AccordionSummary>
-      <AccordionDetails>
         <Fragment>
           <Grid
             container
@@ -95,9 +84,9 @@ const App: React.FC = () => {
             className={classes.container}
           >
             <Grid item xs={12} lg={6}>
-              <Typography variant={'h4'} className={classes.title}>
+              {/* <Typography variant={'h4'} className={classes.title}>
                 Rendered form
-              </Typography>
+              </Typography> */}
               <div className={classes.demoform}>
                 {console.log(data)}
                 <JsonForms
@@ -193,8 +182,7 @@ const App: React.FC = () => {
             </Grid>
           </Grid>
         </Fragment>
-      </AccordionDetails>
-    </Accordion>
+
   );
 };
 
@@ -202,7 +190,7 @@ export default App;
 
 const useStyles = makeStyles({
   container: {
-    padding: '1em',
+    padding: '.0em',
     width: '100%',
   },
   title: {
@@ -241,58 +229,66 @@ const useStyles = makeStyles({
 });
 
 const initialData = {
-  formName: '',
-  formData: {
-    question: 'What is the capital of France?',
-    response: '',
-    Conditions: {
-      PreCondition: 'user_input.length > 0',
-      PreConditionError: 'Input cannot be empty',
-      PostCondition: "user_input === 'Paris'",
-      PostConditionError: 'Wrong answer. The correct answer is Paris.',
-    },
-    APIs: [
-      {
-        Name: 'Some Name',
-        Endpoint: 'https://httpbin.org/get',
-        Method: 'GET',
-        Params: [
+  forms: [
+    {
+      formName: 'Form 1',
+      formData: {
+        question: 'What is the capital of France?',
+        response: '',
+        Conditions: {
+          preCondition: 'user_input.length > 0',
+          preConditionError: 'Input cannot be empty',
+          postCondition: "user_input === 'Paris'",
+          postConditionError: 'Wrong answer. The correct answer is Paris.',
+        },
+        APIs: [
           {
-            key: 'param1',
-            value: 'value1',
+            name: 'Some Name',
+            endpoint: 'https://httpbin.org/get',
+            method: 'GET',
+            params: [
+              {
+                key: 'param1',
+                value: 'value1',
+              },
+            ],
           },
         ],
+        Functions: [
+          {
+            input: 'data from previous step',
+            output: 'processed data',
+            description: "Some Description"
+          },
+        ],
+        ExecutionOrder: [
+          {
+            type: 'Condition',
+            name: 'Check Input Length',
+            input: 'user_input',
+            evaluationFunction: 'lengthCheck',
+          },
+          {
+            type: 'API Request',
+            name: 'Fetch Data',
+            input: 'Query Params',
+            evaluationFunction: 'fetchData',
+          },
+        ],
+        NextNodes: [
+          {
+            valueCheck: "user_input.startsWith('P')",
+            next: 'If condition is true, navigate to the next node',
+            condition: '',
+          },
+        ],
+        closing_message: "TRUE",
+        error_message: "err"
       },
-    ],
-    Functions: [
-      {
-        Input: 'data from previous step',
-        Output: 'processed data',
-      },
-    ],
-    ExecutionOrder: [
-      {
-        Type: 'Condition',
-        Name: 'Check Input Length',
-        Input: 'user_input',
-        EvaluationFunction: 'lengthCheck',
-      },
-      {
-        Type: 'API Request',
-        Name: 'Fetch Data',
-        Input: 'Query Params',
-        EvaluationFunction: 'fetchData',
-      },
-    ],
-    NextNodes: [
-      {
-        valueCheck: "user_input.startsWith('P')",
-        next: 'If condition is true, navigate to the next node',
-        condition: '',
-      },
-    ],
-  },
+    },
+  ],
 };
+
 
 interface Api {
   Name: string;
