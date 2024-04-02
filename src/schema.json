@@ -4,33 +4,55 @@
   "properties": {
     "forms": {
       "type": "array",
-      "title": "Forms",
       "items": {
         "type": "object",
         "properties": {
-          "formName": {
+          "form_name": {
             "type": "string"
           },
-          "formData": {
+          "form_data": {
             "type": "object",
             "properties": {
               "question": { "type": "string" },
               "response": { "type": "string" },
-              "Conditions": {
+              "conditions": {
                 "type": "object",
                 "properties": {
-                  "preCondition": { "type": "string" },
-                  "preConditionError": { "type": "string" },
-                  "postCondition": { "type": "string" },
-                  "postConditionError": { "type": "string" }
+                  "pre_condition": { "type": "string" },
+                  "pre_condition_error": { "type": "string" },
+                  "post_condition": { "type": "string" },
+                  "post_condition_error": { "type": "string" }
                 },
-                "required": ["preCondition", "preConditionError"]
+                "required": ["pre_condition", "pre_condition_error"]
               },
-              "APIs": {
+              "apis": {
                 "type": "array",
-                "items": { "$ref": "#/definitions/apiItem" }
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": { "type": "string" },
+                    "endpoint": { "type": "string" },
+                    "method": {
+                      "type": "string",
+                      "enum": ["GET", "POST", "PUT", "DELETE"]
+                    },
+                    "params": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "key": { "type": "string" },
+                          "value": { "type": "string" }
+                        },
+                        "required": ["key", "value"]
+                      }
+                    },
+                    "error": { "type": "string" }
+                  },
+                  "required": ["name", "endpoint", "method"]
+                }
               },
-              "Functions": {
+              "functions": {
                 "type": "array",
                 "items": {
                   "type": "object",
@@ -42,63 +64,49 @@
                   "required": ["input", "output", "description"]
                 }
               },
-              "ExecutionOrder": {
+              "execution_order": {
                 "type": "array",
                 "items": {
                   "type": "object",
                   "properties": {
                     "name": { "type": "string" },
-                    "type": { "type": "string" },
+                    "type": {
+                      "type": "string",
+                      "enum": ["API","FUNCTION"]
+                    },
                     "input": { "type": "string" },
-                    "evaluationFunction": { "type": "string" },
+                    "evaluation_function": { "type": "string" },
                     "error": { "type": "string" }
                   },
                   "required": ["type", "name"]
                 }
               },
-              "NextNodes": {
+              "next_node": {
                 "type": "array",
                 "items": {
                   "type": "object",
                   "properties": {
-                    "valueCheck": { "type": "string" },
-                    "next": { "type": "string" },
-                    "condition": { "type": "string", "description": "EXACT | SIMILAR | PYTHON = ()" }
+                    "value_to_check": { "type": "string" },
+                    "next_node": { "type": "string" },
+                    "condition_type": {
+                      "type": "string",
+                      "description": "EXACT | SIMILAR | PYTHON = ()"
+                    }
                   },
-                  "required": ["valueCheck", "next", "condition"]
+                  "required": ["value_to_check", "next_node", "condition_type"]
                 }
               },
-              "closing_message": { "type": "string", "enum": ["TRUE", "FALSE"] },
+              "closing_message": {
+                "type": "string",
+                "enum": ["TRUE", "FALSE"]
+              },
               "error_message": { "type": "string" }
             },
             "required": ["closing_message", "error_message"]
           }
         },
-        "required": ["formName", "formData"]
+        "required": ["form_name", "form_data"]
       }
-    }
-  },
-  "definitions": {
-    "apiItem": {
-      "type": "object",
-      "properties": {
-        "name": { "type": "string" },
-        "endpoint": { "type": "string" },
-        "method": { "type": "string", "enum": ["GET", "POST", "PUT", "DELETE"] },
-        "params": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "key": { "type": "string" },
-              "value": { "type": "string" }
-            },
-            "required": ["key", "value"]
-          }
-        },
-        "error": { "type": "string" }
-      },
-      "required": ["name", "endpoint", "method"]
     }
   }
 }
