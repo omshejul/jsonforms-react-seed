@@ -128,6 +128,12 @@ const initialData = {
   forms: [
     {
       form_name: 'Form 1',
+      goal_name: "Eastman_bot",
+      client_id: "88",
+      language: "en",
+      message: "",
+      switch_language: true,
+  
       form_data: {
         question: 'What is the capital of France?',
         response: '',

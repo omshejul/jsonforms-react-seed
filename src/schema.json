@@ -7,6 +7,12 @@
       "items": {
         "type": "object",
         "properties": {
+          "goal_name": { "type": "string" },
+          "client_id": { "type": "string" },
+          "language": { "type": "string" },
+          "message": { "type": "string" },
+          "question": { "type": "string" },
+          "switch_language": {"type":"boolean"},
           "form_name": {
             "type": "string"
           },
@@ -72,7 +78,7 @@
                     "name": { "type": "string" },
                     "type": {
                       "type": "string",
-                      "enum": ["API","FUNCTION"]
+                      "enum": ["API", "FUNCTION"]
                     },
                     "input": { "type": "string" },
                     "evaluation_function": { "type": "string" },
@@ -96,10 +102,7 @@
                   "required": ["value_to_check", "next_node", "condition_type"]
                 }
               },
-              "closing_message": {
-                "type": "string",
-                "enum": ["TRUE", "FALSE"]
-              },
+              "closing_message": {"type":"boolean"},
               "error_message": { "type": "string" }
             },
             "required": ["closing_message", "error_message"]

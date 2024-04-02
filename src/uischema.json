@@ -13,6 +13,31 @@
               "scope": "#/properties/form_name",
               "label": "Form Name"
             },
+            {
+              "type": "Control",
+              "scope": "#/properties/goal_name",
+              "label": "Goal Name"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/client_id",
+              "label": "Client ID"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/language",
+              "label": "Language"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/message",
+              "label": "Message"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/switch_language",
+              "label": "Switch Language"
+            },
 
             {
               "type": "Control",
