@@ -133,7 +133,7 @@ const initialData = {
       language: "en",
       message: "",
       switch_language: true,
-  
+
       form_data: {
         question: 'What is the capital of France?',
         response: '',
@@ -184,7 +184,7 @@ const initialData = {
             condition_type: '',
           },
         ],
-        closing_message: 'TRUE',
+        closing_message: false,
         error_message: 'err',
       },
     },
