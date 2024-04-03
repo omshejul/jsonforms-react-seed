@@ -78,6 +78,7 @@ const App: React.FC = () => {
 
   const clearData = () => {
     setData({});
+    setTransformedData({});
   };
   const formatNextNodeKeys = (data: any): any => {
     if (Array.isArray(data)) {
