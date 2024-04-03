@@ -135,7 +135,52 @@
                 }
               ]
             },
-
+            {
+              "type": "Group",
+              "label": "APIs",
+              "elements": [
+                {
+                  "type": "Control",
+                  "scope": "#/properties/form_data/properties/apis",
+                  "label": "apis",
+                  "options": {
+                    "detail": {
+                      "type": "VerticalLayout",
+                      "elements": [
+                        {
+                          "type": "Control",
+                          "scope": "#/properties/name",
+                          "label": "Name"
+                        },
+                        {
+                          "type": "Control",
+                          "scope": "#/properties/endpoint",
+                          "label": "Endpoint"
+                        },
+                        {
+                          "type": "Control",
+                          "scope": "#/properties/method",
+                          "label": "Method"
+                        },
+                        {
+                          "type": "Control",
+                          "scope": "#/properties/params",
+                          "label": "Params",
+                          "options": {
+                            "showSortButtons": false
+                          }
+                        },
+                        {
+                          "type": "Control",
+                          "scope": "#/properties/error_message",
+                          "label": "Error Message"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
             {
               "type": "Group",
               "label": "Functions",
