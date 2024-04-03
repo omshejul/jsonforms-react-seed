@@ -7,7 +7,7 @@ import { JsonForms } from '@jsonforms/react';
 import { Box, Button, FormControlLabel, Grid } from '@mui/material';
 import Switch from '@mui/material/Switch';
 import { makeStyles } from '@mui/styles';
-import { Fragment, useState } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import './App.css';
 import ApiCustomRender from './Components/ApiCustomRender';
 import { customControlWithButtonTester } from './Components/testers';
@@ -27,11 +27,27 @@ const App: React.FC = () => {
   // USE STATES
   const [displayObjectSize, setDisplayObjectSize] = useState<boolean>(false);
   const [displayDataTypes, setDisplayDataTypes] = useState<boolean>(false);
-  const [theme, setTheme] = useState<boolean>(false);
+  const [theme, setTheme] = useState<boolean>(
+    window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches
+  );
   const classes = useStyles();
   const [data, setData] = useState<any>(initialData);
   const [transformedData, setTransformedData] = useState({});
 
+  //EFFECTS
+  useEffect(() => {
+    const themeListener = (e: MediaQueryListEvent) => {
+      setTheme(e.matches);
+    };
+
+    const matcher = window.matchMedia('(prefers-color-scheme: dark)');
+    matcher.addEventListener('change', themeListener);
+
+    return () => {
+      matcher.removeEventListener('change', themeListener);
+    };
+  }, []);
   // FUNCTIONS
   const themeProvider = createTheme({
     palette: {
