@@ -25,11 +25,6 @@
             },
             {
               "type": "Control",
-              "scope": "#/properties/message",
-              "label": "Message"
-            },
-            {
-              "type": "Control",
               "scope": "#/properties/switch_language",
               "label": "Switch Language"
             },
@@ -68,7 +63,10 @@
                 {
                   "type": "Control",
                   "scope": "#/properties/form_data/properties/conditions/properties/pre_condition",
-                  "label": "Pre Condition"
+                  "label": "Pre Condition",
+                  "options": {
+                    "showUnfocusedDescription": true
+                  }
                 },
                 {
                   "type": "Control",
@@ -78,7 +76,10 @@
                 {
                   "type": "Control",
                   "scope": "#/properties/form_data/properties/conditions/properties/post_condition",
-                  "label": "Post Condition"
+                  "label": "Post Condition",
+                  "options": {
+                    "showUnfocusedDescription": true
+                  }
                 },
                 {
                   "type": "Control",
@@ -129,52 +130,7 @@
                 }
               ]
             },
-            {
-              "type": "Group",
-              "label": "APIs",
-              "elements": [
-                {
-                  "type": "Control",
-                  "scope": "#/properties/form_data/properties/apis",
-                  "label": "apis",
-                  "options": {
-                    "detail": {
-                      "type": "VerticalLayout",
-                      "elements": [
-                        {
-                          "type": "Control",
-                          "scope": "#/properties/name",
-                          "label": "Name"
-                        },
-                        {
-                          "type": "Control",
-                          "scope": "#/properties/endpoint",
-                          "label": "Endpoint"
-                        },
-                        {
-                          "type": "Control",
-                          "scope": "#/properties/method",
-                          "label": "Method"
-                        },
-                        {
-                          "type": "Control",
-                          "scope": "#/properties/params",
-                          "label": "Params",
-                          "options": {
-                            "showSortButtons": false
-                          }
-                        },
-                        {
-                          "type": "Control",
-                          "scope": "#/properties/error",
-                          "label": "Error Message"
-                        }
-                      ]
-                    }
-                  }
-                }
-              ]
-            },
+
             {
               "type": "Group",
               "label": "Functions",

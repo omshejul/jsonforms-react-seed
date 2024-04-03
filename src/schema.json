@@ -24,9 +24,15 @@
               "conditions": {
                 "type": "object",
                 "properties": {
-                  "pre_condition": { "type": "string" },
+                  "pre_condition": {
+                    "type": "string",
+                    "description": "If condition is a python statement enclose with parentheses ()"
+                  },
                   "pre_condition_error": { "type": "string" },
-                  "post_condition": { "type": "string" },
+                  "post_condition": {
+                    "type": "string",
+                    "description": "If condition is a python statement enclose with parentheses ()"
+                  },
                   "post_condition_error": { "type": "string" }
                 },
                 "required": ["pre_condition", "pre_condition_error"]
@@ -53,7 +59,7 @@
                         "required": ["key", "value"]
                       }
                     },
-                    "error": { "type": "string" }
+                    "error_message": { "type": "string" }
                   },
                   "required": ["name", "endpoint", "method"]
                 }
@@ -106,11 +112,12 @@
               "closing_message": { "type": "boolean" },
               "error_message": { "type": "string" }
             },
-            "required": ["closing_message", "error_message"]
+            "required": ["question", "error_message"]
           }
         },
         "required": ["form_name", "form_data"]
       }
     }
-  }
+  },
+  "required": ["goal_name", "client_id", "question"]
 }

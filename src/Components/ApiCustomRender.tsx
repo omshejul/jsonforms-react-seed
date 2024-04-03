@@ -47,7 +47,7 @@ const ApiCustomRender: React.FC<ControlProps> = ({
             endpoint: '',
             method: 'GET',
             params: [],
-            error: '',
+            error_message: '',
         };
         const updatedApis = [...apis, newApi];
         setApis(updatedApis);
@@ -77,7 +77,7 @@ const ApiCustomRender: React.FC<ControlProps> = ({
                 ...prevResults,
                 [index]: { error: 'Not a valid URL', url: api.endpoint },
             }));
-            return;
+            return; 
         }
 
         let paramsOrData = api.params.reduce(
@@ -209,13 +209,7 @@ interface Param {
     value: string;
 }
 
-interface APIData {
-    name: string;
-    endpoint: string;
-    method: 'GET' | 'POST' | 'PUT' | 'DELETE';
-    params: Param[];
-    error: string;
-}
+
 type AxiosRequestConfigCustom = {
     method: string;
     url: string;
@@ -241,9 +235,9 @@ const apiSchema = {
                 required: ['key', 'value'],
             },
         },
-        error: { type: 'string' },
+        error_message: { type: 'string' },
     },
-    required: ['name', 'endpoint', 'method', 'params'],
+    required: ['name', 'endpoint', 'method', 'params','error_message'],
 };
 
 const apiUiSchema = {
@@ -258,7 +252,7 @@ const apiUiSchema = {
             label: 'Params',
             options: { showSortButtons: true },
         },
-        { type: 'Control', scope: '#/properties/error', label: 'Error Message' },
+        { type: 'Control', scope: '#/properties/error_message', label: 'Error Message' },
     ],
 };
 
@@ -266,12 +260,10 @@ interface Param {
     key: string;
     value: string;
 }
-
 interface APIData {
     name: string;
     endpoint: string;
     method: 'GET' | 'POST' | 'PUT' | 'DELETE';
     params: Param[];
-    error: string;
+    error_message: string;
 }
-
