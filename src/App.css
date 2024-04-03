@@ -1,5 +1,13 @@
+
+
 html {
   font-size: 16px;
+}
+*{
+  font-family: "Figtree", sans-serif !important;
+}
+.react-json-view *{
+  font-family: monospace !important;
 }
 
 .App {
@@ -34,12 +42,24 @@ html {
     transform: rotate(360deg);
   }
 }
-.MuiGrid-container span{
+.MuiGrid-container span {
   padding-left: 1rem;
 }
-body{
-  padding: 1rem;
-}
+
 .react-json-view span {
-  padding-left: 1px ;
+  padding-left: 1px;
+}
+@media screen and (max-width: 576px) {
+  :root {
+    font-size: 12px;
+  }
+  .MuiAvatar-root {
+    width: 2rem !important;
+    height: 2rem !important;
+  }
+  .MuiAccordionDetails-root {
+    padding: 4px 8px 8px !important;
+}.MuiCardContent-root {
+  padding: 8px !important;
+}
 }

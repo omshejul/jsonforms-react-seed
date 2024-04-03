@@ -126,7 +126,7 @@ const ApiCustomRender: React.FC<ControlProps> = ({
     return (
         <Grid container spacing={2}>
             <Grid item container justifyContent='start' alignItems='center'>
-                <Box display='flex' alignItems='center' justifyContent='center'>
+                <Box display='flex' fontSize={'1.2rem'} alignItems='center' justifyContent='center'>
                     Add APIs
                     <IconButton onClick={addApi} aria-label='add'>
                         <AddIcon />
@@ -250,7 +250,7 @@ const apiUiSchema = {
             type: 'Control',
             scope: '#/properties/params',
             label: 'Params',
-            options: { showSortButtons: true },
+            options: { showSortButtons: false },
         },
         { type: 'Control', scope: '#/properties/error_message', label: 'Error Message' },
     ],

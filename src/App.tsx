@@ -3,7 +3,7 @@ import {
   materialRenderers,
 } from '@jsonforms/material-renderers';
 import { JsonForms } from '@jsonforms/react';
-import { Box, Button, createTheme, CssBaseline, FormControlLabel, Grid, ThemeProvider } from '@mui/material';
+import { Box, Button, createTheme, CssBaseline, FormControlLabel, Grid, ThemeProvider, Typography } from '@mui/material';
 import Switch from '@mui/material/Switch';
 import { makeStyles } from '@mui/styles';
 import React, { Fragment, useEffect, useState } from 'react';
@@ -29,7 +29,7 @@ const App: React.FC = () => {
   const [displayDataTypes, setDisplayDataTypes] = useState<boolean>(false);
   const [theme, setTheme] = useState<boolean>(
     window.matchMedia &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches
+    window.matchMedia('(prefers-color-scheme: dark)').matches
   );
   const classes = useStyles();
   const [data, setData] = useState<any>(initialData);
@@ -99,7 +99,7 @@ const App: React.FC = () => {
   };
 
   const handleChanges = (updatedData: any) => {
-    setData(updatedData); 
+    setData(updatedData);
 
     console.log('Original data:', updatedData);
 
@@ -109,7 +109,7 @@ const App: React.FC = () => {
 
       const formattedFormData = formatNextNodeKeys(slot.form_data);
 
-    
+
       acc[transformedSlotName] = { ...formattedFormData };
 
       return acc;
@@ -120,7 +120,7 @@ const App: React.FC = () => {
       slots: transformedSlots,
     };
 
-    setTransformedData(tempTransformedData); 
+    setTransformedData(tempTransformedData);
     console.log('Transformed data:', tempTransformedData);
   };
 
@@ -128,96 +128,100 @@ const App: React.FC = () => {
     <ThemeProvider theme={themeProvider}>
       <CssBaseline />
       <Container>
-      <Fragment>
-        <Grid
-          container
-          justifyContent={'center'}
-          spacing={1}
-          className={classes.container}
-        >
-          <Grid item xs={12} lg={6}>
-            <div className={classes.demoform}>
-              {/* {console.log(data)} */}
-              <JsonForms
-                schema={schema}
-                uischema={uischema}
-                data={data}
-                renderers={renderers}
-                cells={materialCells}
-                onChange={({ errors, data }) => handleChanges(data)}
-              />
-            </div>
-          </Grid>
-          <Grid item xs={12} lg={6}>
-            <div className={classes.dataContent}>
-              <Box>
-                <FormControlLabel
-                  sx={formControlLabelStyle}
-                  control={
-                    <Switch
-                      checked={displayObjectSize}
-                      onChange={() => setDisplayObjectSize(!displayObjectSize)}
-                      name='displayObjectSize'
-                    />
-                  }
-                  label='Object Size'
+        <Fragment>
+          <Typography variant="h4" margin={"1rem"} marginTop={"2rem"} justifyContent={"center"} textAlign={"center"} component="h4">
+           Dialog Manager 💬
+          </Typography>
+ 
+          <Grid
+            container
+            justifyContent={'center'}
+            spacing={1}
+            className={classes.container}
+          >
+            <Grid item xs={12} lg={6}>
+              <div className={classes.form}>
+                {/* {console.log(data)} */}
+                <JsonForms
+                  schema={schema}
+                  uischema={uischema}
+                  data={data}
+                  renderers={renderers}
+                  cells={materialCells}
+                  onChange={({ errors, data }) => handleChanges(data)}
                 />
-                <FormControlLabel
-                  sx={formControlLabelStyle}
-                  control={
-                    <Switch
-                      checked={displayDataTypes}
-                      onChange={() => setDisplayDataTypes(!displayDataTypes)}
-                      name='displayDataTypes'
-                    />
-                  }
-                  label='Data Types'
-                />
-                <FormControlLabel
-                  sx={formControlLabelStyle}
-                  control={
-                    <Switch
-                      checked={theme}
-                      onChange={() => setTheme(!theme)}
-                      name='theme'
-                    />
-                  }
-                  label='Dark Theme'
-                />
-              </Box>
-              <Box
-                sx={{
-                  width: '100%',
-                  overflow: 'hidden',
-                  borderRadius: '8px',
-                  border: `1.7px solid ${theme ? '#545454' : '#CBCBCB'}`,
-                }}
+              </div>
+            </Grid>
+            <Grid item xs={12} lg={6}>
+              <div className={classes.dataContent}>
+                <Box>
+                  <FormControlLabel
+                    sx={formControlLabelStyle}
+                    control={
+                      <Switch
+                        checked={displayObjectSize}
+                        onChange={() => setDisplayObjectSize(!displayObjectSize)}
+                        name='displayObjectSize'
+                      />
+                    }
+                    label='Object Size'
+                  />
+                  <FormControlLabel
+                    sx={formControlLabelStyle}
+                    control={
+                      <Switch
+                        checked={displayDataTypes}
+                        onChange={() => setDisplayDataTypes(!displayDataTypes)}
+                        name='displayDataTypes'
+                      />
+                    }
+                    label='Data Types'
+                  />
+                  <FormControlLabel
+                    sx={formControlLabelStyle}
+                    control={
+                      <Switch
+                        checked={theme}
+                        onChange={() => setTheme(!theme)}
+                        name='theme'
+                      />
+                    }
+                    label='Dark Theme'
+                  />
+                </Box>
+                <Box
+                  sx={{
+                    width: '100%',
+                    overflowX: 'scroll',
+                    borderRadius: '8px',
+                    border: `1.7px solid ${theme ? '#545454' : '#CBCBCB'}`,
+                  }}
+                >
+                  <ReactJson
+                    style={{ backgroundColor: "hsla(0, 0%, 100%, 0.0000)", padding: '1rem', width: '100%' }}
+                    src={transformedData}
+                    iconStyle='square'
+                    collapseStringsAfterLength={50}
+                    displayObjectSize={displayObjectSize}
+                    theme={theme ? 'pop' : 'rjv-default'}
+                    name={null}
+                    enableClipboard={true}
+                    displayDataTypes={displayDataTypes}
+                    indentWidth={4}
+                  />
+                </Box>
+              </div>
+              <Button
+                className={classes.resetButton}
+                onClick={clearData}
+                color='primary'
+                variant='contained'
               >
-                <ReactJson
-                  style={{ padding: '1rem', width: '100%' }}
-                  src={transformedData}
-                  iconStyle='square'
-                  collapseStringsAfterLength={50}
-                  displayObjectSize={displayObjectSize}
-                  theme={theme ? 'google' : 'rjv-default'}
-                  name={null}
-                  enableClipboard={true}
-                  displayDataTypes={displayDataTypes}
-                  indentWidth={4}
-                />
-              </Box>
-            </div>
-            <Button
-              className={classes.resetButton}
-              onClick={clearData}
-              color='primary'
-              variant='contained'
-            >
-              Clear data
-            </Button>
+                Clear data
+              </Button>
+            </Grid>
           </Grid>
-        </Grid>
-      </Fragment></Container>
+        </Fragment></Container>
     </ThemeProvider>
   );
 };
@@ -227,7 +231,7 @@ export default App;
 const formControlLabelStyle = {
   border: '1px solid rgba(126, 126, 126, 0.239)',
   borderRadius: '6px',
-  margin: '16px 16px 16px 0px',
+  margin: '0px 16px 16px 0px',
   padding: '4px 16px 4px 4px',
 };
 
@@ -244,15 +248,17 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
+    maxWidth: "100vw",
+    padding: "1rem",
     justifyContent: 'start',
     marginBottom: '1rem',
   },
   resetButton: {
     margin: 'auto !important',
     display: 'block !important',
+    marginBottom: "1rem !important",
   },
-  demoform: {
-    margin: 'auto',
+  form: {
     padding: '1rem',
   },
   heading: {
