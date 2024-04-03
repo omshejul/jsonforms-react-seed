@@ -3,8 +3,9 @@ import {
   materialRenderers,
 } from '@jsonforms/material-renderers';
 import { JsonForms } from '@jsonforms/react';
-import { Box, Button, Checkbox, FormControlLabel, Grid } from '@mui/material';
+import { Box, Button, FormControlLabel, Grid } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import Switch from '@mui/material/Switch';
 import { Fragment, useMemo, useState } from 'react';
 import './App.css';
 import ApiCustomRender from './Components/ApiCustomRender';
@@ -16,7 +17,6 @@ import uischema from './uischema.json';
 // import schema from './schema copy.json';
 // import uischema from './uischema copy.json';
 import ReactJson from 'react-json-view';
-import { Padding } from '@mui/icons-material';
 const renderers = [
   ...materialRenderers,
   { tester: ratingControlTester, renderer: RatingControl },
@@ -70,8 +70,9 @@ const App: React.FC = () => {
           <div className={classes.dataContent}>
             <Box>
               <FormControlLabel
+                sx={formControlLabelStyle}
                 control={
-                  <Checkbox
+                  <Switch
                     checked={displayObjectSize}
                     onChange={() => setDisplayObjectSize(!displayObjectSize)}
                     name='displayObjectSize'
@@ -80,8 +81,9 @@ const App: React.FC = () => {
                 label='Object Size'
               />
               <FormControlLabel
+                sx={formControlLabelStyle}
                 control={
-                  <Checkbox
+                  <Switch
                     checked={displayDataTypes}
                     onChange={() => setDisplayDataTypes(!displayDataTypes)}
                     name='displayDataTypes'
@@ -89,26 +91,32 @@ const App: React.FC = () => {
                 }
                 label='Data Types'
               />
-              <Button
-                variant='outlined'
-                sx={{ m: 1 }}
-                onClick={() =>
-                  setTheme(theme === 'rjv-default' ? 'eighties' : 'rjv-default')
+              <FormControlLabel
+                sx={formControlLabelStyle}
+                control={
+                  <Switch
+                    checked={theme === 'eighties'}
+                    onChange={() =>
+                      setTheme(
+                        theme === 'rjv-default' ? 'eighties' : 'rjv-default'
+                      )
+                    }
+                    name='theme'
+                  />
                 }
-              >
-                Theme
-              </Button>
+                label='Dark Theme'
+              />
             </Box>
             <Box
               sx={{
                 width: '100%',
                 overflow: 'hidden',
-                borderRadius: '12px',
+                borderRadius: '8px',
                 border: '2px solid #9fabc4',
               }}
             >
               <ReactJson
-                style={{ padding: '1rem', width: '100%'}}
+                style={{ padding: '1rem', width: '100%' }}
                 src={JSON.parse(stringifiedData)}
                 iconStyle='square'
                 collapseStringsAfterLength={50}
@@ -136,6 +144,14 @@ const App: React.FC = () => {
 };
 
 export default App;
+
+const formControlLabelStyle = {
+  border: '1px solid #ccc',
+  borderRadius: '6px',
+  margin: '4px',
+  marginBottom: '16px',
+  padding: '4px 16px 4px 4px',
+};
 
 const useStyles = makeStyles({
   container: {
