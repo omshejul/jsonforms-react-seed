@@ -31,7 +31,7 @@ const renderers = [
     { tester: ratingControlTester, renderer: RatingControl },
 ];
 
-const CustomControlWithButton: React.FC<ControlProps> = ({
+const ApiCustomRender: React.FC<ControlProps> = ({
     data,
     handleChange,
     path,
@@ -202,7 +202,7 @@ const CustomControlWithButton: React.FC<ControlProps> = ({
     );
 };
 
-export default withJsonFormsControlProps(CustomControlWithButton);
+export default withJsonFormsControlProps(ApiCustomRender);
 
 interface Param {
     key: string;

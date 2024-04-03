@@ -3,25 +3,30 @@ import {
   materialRenderers,
 } from '@jsonforms/material-renderers';
 import { JsonForms } from '@jsonforms/react';
-import { Button, Grid, Typography } from '@mui/material';
+import { Box, Button, Checkbox, FormControlLabel, Grid } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import axios from 'axios';
 import { Fragment, useMemo, useState } from 'react';
 import './App.css';
-import CustomControlWithButton from './Components/CustomControlWithButton';
+import ApiCustomRender from './Components/ApiCustomRender';
 import { customControlWithButtonTester } from './Components/testers';
 import RatingControl from './RatingControl';
 import ratingControlTester from './ratingControlTester';
 import schema from './schema.json';
 import uischema from './uischema.json';
-
+// import schema from './schema copy.json';
+// import uischema from './uischema copy.json';
+import ReactJson from 'react-json-view';
+import { Padding } from '@mui/icons-material';
 const renderers = [
   ...materialRenderers,
   { tester: ratingControlTester, renderer: RatingControl },
-  { tester: customControlWithButtonTester, renderer: CustomControlWithButton },
+  { tester: customControlWithButtonTester, renderer: ApiCustomRender },
 ];
 
 const App: React.FC = () => {
+  const [displayObjectSize, setDisplayObjectSize] = useState<boolean>(false);
+  const [displayDataTypes, setDisplayDataTypes] = useState<boolean>(false);
+  const [theme, setTheme] = useState<any>('eighties');
   const classes = useStyles();
   const [data, setData] = useState<any>(initialData);
   const stringifiedData = useMemo(() => JSON.stringify(data, null, 2), [data]);
@@ -62,11 +67,59 @@ const App: React.FC = () => {
           </div>
         </Grid>
         <Grid item xs={12} lg={6}>
-          <Typography variant={'h4'} className={classes.title}>
-            Bound data
-          </Typography>
           <div className={classes.dataContent}>
-            <pre id='boundData'>{stringifiedData}</pre>
+            <Box>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={displayObjectSize}
+                    onChange={() => setDisplayObjectSize(!displayObjectSize)}
+                    name='displayObjectSize'
+                  />
+                }
+                label='Object Size'
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={displayDataTypes}
+                    onChange={() => setDisplayDataTypes(!displayDataTypes)}
+                    name='displayDataTypes'
+                  />
+                }
+                label='Data Types'
+              />
+              <Button
+                variant='outlined'
+                sx={{ m: 1 }}
+                onClick={() =>
+                  setTheme(theme === 'rjv-default' ? 'eighties' : 'rjv-default')
+                }
+              >
+                Theme
+              </Button>
+            </Box>
+            <Box
+              sx={{
+                width: '100%',
+                overflow: 'hidden',
+                borderRadius: '12px',
+                border: '2px solid #9fabc4',
+              }}
+            >
+              <ReactJson
+                style={{ padding: '1rem', width: '100%'}}
+                src={JSON.parse(stringifiedData)}
+                iconStyle='square'
+                collapseStringsAfterLength={50}
+                displayObjectSize={displayObjectSize}
+                theme={theme}
+                name={null}
+                enableClipboard={true}
+                displayDataTypes={displayDataTypes}
+                indentWidth={1}
+              />
+            </Box>
           </div>
           <Button
             className={classes.resetButton}
@@ -95,15 +148,10 @@ const useStyles = makeStyles({
   },
   dataContent: {
     display: 'flex',
-    padding: '1em',
+    flexDirection: 'column',
     width: '100%',
     justifyContent: 'start',
-    borderRadius: '5px',
-    color: '#202020',
-    backgroundColor: 'hsl(0, 0%, 98%)',
-    border: '1px solid #ccc',
     marginBottom: '1rem',
-    overflowX: 'scroll',
   },
   resetButton: {
     margin: 'auto !important',
@@ -125,14 +173,16 @@ const useStyles = makeStyles({
 });
 
 const initialData = {
+  goal_name: 'Eastman_bot',
+  client_id: '88',
+  language: 'en',
+  message: '',
+  question: 'What is the capital of France?',
+  switch_language: true,
+
   forms: [
     {
       form_name: 'Form 1',
-      goal_name: "Eastman_bot",
-      client_id: "88",
-      language: "en",
-      message: "",
-      switch_language: true,
 
       form_data: {
         question: 'What is the capital of France?',
@@ -180,8 +230,9 @@ const initialData = {
         next_node: [
           {
             value_to_check: "user_input.startsWith('P')",
-            next_node: 'If condition is true, navigate to the next_node node',
             condition_type: '',
+            value_match: 'sales',
+            next_node: 'If condition is true, navigate to the next_node node',
           },
         ],
         closing_message: false,
@@ -190,6 +241,7 @@ const initialData = {
     },
   ],
 };
+// const initialData = {};
 
 interface Api {
   Name: string;

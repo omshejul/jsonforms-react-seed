@@ -2,17 +2,17 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "properties": {
+    "goal_name": { "type": "string" },
+    "client_id": { "type": "string" },
+    "language": { "type": "string" },
+    "message": { "type": "string" },
+    "question": { "type": "string" },
+    "switch_language": {"type":"boolean"},
     "forms": {
       "type": "array",
       "items": {
         "type": "object",
         "properties": {
-          "goal_name": { "type": "string" },
-          "client_id": { "type": "string" },
-          "language": { "type": "string" },
-          "message": { "type": "string" },
-          "question": { "type": "string" },
-          "switch_language": {"type":"boolean"},
           "form_name": {
             "type": "string"
           },
@@ -94,6 +94,7 @@
                   "properties": {
                     "value_to_check": { "type": "string" },
                     "next_node": { "type": "string" },
+                    "value_match": { "type": "string" },
                     "condition_type": {
                       "type": "string",
                       "description": "EXACT | SIMILAR | PYTHON = ()"

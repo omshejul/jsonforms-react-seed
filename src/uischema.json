@@ -3,16 +3,11 @@
   "elements": [
     {
       "type": "Control",
-      "scope": "#/properties/forms",
+      "scope": "#",
       "options": {
         "detail": {
           "type": "VerticalLayout",
           "elements": [
-            {
-              "type": "Control",
-              "scope": "#/properties/form_name",
-              "label": "Form Name"
-            },
             {
               "type": "Control",
               "scope": "#/properties/goal_name",
@@ -39,6 +34,27 @@
               "label": "Switch Language"
             },
 
+            {
+              "type": "Control",
+              "scope": "#/properties/question",
+              "label": "Question"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/forms",
+      "options": {
+        "detail": {
+          "type": "VerticalLayout",
+          "elements": [
+            {
+              "type": "Control",
+              "scope": "#/properties/form_name",
+              "label": "Form Name"
+            },
             {
               "type": "Control",
               "scope": "#/properties/form_data/properties/question",
@@ -91,16 +107,21 @@
                         },
                         {
                           "type": "Control",
-                          "scope": "#/properties/next_node",
-                          "label": "Next Node"
-                        },
-                        {
-                          "type": "Control",
                           "scope": "#/properties/condition_type",
                           "label": "Condition",
                           "options": {
                             "showUnfocusedDescription": true
                           }
+                        },
+                        {
+                          "type": "Control",
+                          "scope": "#/properties/value_match",
+                          "label": "Value Match"
+                        },
+                        {
+                          "type": "Control",
+                          "scope": "#/properties/next_node",
+                          "label": "Next Node"
                         }
                       ]
                     }
