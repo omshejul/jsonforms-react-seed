@@ -70,6 +70,7 @@
                 "items": {
                   "type": "object",
                   "properties": {
+                    "name": { "type": "string" },
                     "input": { "type": "string" },
                     "output": { "type": "string" },
                     "description": { "type": "string" }

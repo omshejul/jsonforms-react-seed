@@ -81,23 +81,42 @@ const App: React.FC = () => {
   };
   const handleChanges = (updatedData: any) => {
     setData(updatedData);
-
-    const transformedSlots = updatedData.slots.reduce((acc: any, form: any) => {
-      // Check if form.form_name is specified; if not, default to "name-not-specified"
-      const formName = form.form_name || 'name-not-specified';
-      const transformedFormName = formName.toLowerCase().replace(/\s+/g, '-');
-      acc[transformedFormName] = { ...form.form_data };
-      return acc;
-    }, {});
-
+    console.log(updatedData);
+  
+    const transformedSlots = updatedData.slots.map((slot: any) => {
+      const slotName = slot.form_name || 'name-not-specified';
+      const transformedSlotName = slotName.toLowerCase().replace(/\s+/g, '-');
+      const functionsObject = slot.form_data.functions.reduce((acc: any, func: any) => {
+     
+        const funcNameKey = func.name.toLowerCase().replace(/\s+/g, '-');
+        acc[funcNameKey] = {
+          input: func.input,
+          output: func.output,
+          description: func.description,
+        };
+        return acc;
+      }, {});
+  
+    
+      return {
+        ...slot,
+        form_name: transformedSlotName,
+        form_data: {
+          ...slot.form_data,
+          functions: functionsObject,
+        },
+      };
+    });
+  
     const tempTransformedData = {
       ...updatedData,
       slots: transformedSlots,
     };
-
+  
     setTransformedData(tempTransformedData);
-    // console.log('Transformed data:', tempTransformedData);
+    console.log('Transformed data:', tempTransformedData);
   };
+  
 
   return (
     <ThemeProvider theme={themeProvider}>
@@ -279,6 +298,7 @@ const initialData = {
         ],
         functions: [
           {
+            name:"GetNumber",
             input: 'data from previous step',
             output: 'processed data',
             description: 'Some Description',
