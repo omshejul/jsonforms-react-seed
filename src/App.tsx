@@ -200,7 +200,7 @@ const App: React.FC = () => {
                   iconStyle='square'
                   collapseStringsAfterLength={50}
                   displayObjectSize={displayObjectSize}
-                  theme={theme ? 'eighties' : 'rjv-default'}
+                  theme={theme ? 'google' : 'rjv-default'}
                   name={null}
                   enableClipboard={true}
                   displayDataTypes={displayDataTypes}
