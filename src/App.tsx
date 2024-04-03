@@ -1,13 +1,12 @@
-import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import {
   materialCells,
   materialRenderers,
 } from '@jsonforms/material-renderers';
 import { JsonForms } from '@jsonforms/react';
-import { Box, Button, FormControlLabel, Grid } from '@mui/material';
+import { Box, Button, createTheme, CssBaseline, FormControlLabel, Grid, ThemeProvider } from '@mui/material';
 import Switch from '@mui/material/Switch';
 import { makeStyles } from '@mui/styles';
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import './App.css';
 import ApiCustomRender from './Components/ApiCustomRender';
 import { customControlWithButtonTester } from './Components/testers';
@@ -17,6 +16,7 @@ import schema from './schema.json';
 import uischema from './uischema.json';
 
 import ReactJson from 'react-json-view';
+import Container from './Components/Container';
 const renderers = [
   ...materialRenderers,
   { tester: ratingControlTester, renderer: RatingControl },
@@ -79,14 +79,39 @@ const App: React.FC = () => {
   const clearData = () => {
     setData({});
   };
-  const handleChanges = (updatedData: any) => {
-    setData(updatedData);
-console.log(updatedData);
+  const formatNextNodeKeys = (data: any): any => {
+    if (Array.isArray(data)) {
+      return data.map(formatNextNodeKeys);
+    } else if (typeof data === 'object' && data !== null) {
+      const formattedObject: any = {};
+      Object.keys(data).forEach((key) => {
+        if (key === 'next_node' && typeof data[key] === 'string') {
+          formattedObject[key] = data[key].toLowerCase().replace(/\s+/g, '-');
+        } else if (key === 'next_node' && Array.isArray(data[key])) {
+          formattedObject[key] = formatNextNodeKeys(data[key]);
+        } else {
+          formattedObject[key] = formatNextNodeKeys(data[key]);
+        }
+      });
+      return formattedObject;
+    }
+    return data;
+  };
 
-    const transformedSlots = updatedData.slots.reduce((acc: any, form: any) => {
-      const formName = form.form_name || 'name-not-specified';
-      const transformedFormName = formName.toLowerCase().replace(/\s+/g, '-');
-      acc[transformedFormName] = { ...form.form_data };
+  const handleChanges = (updatedData: any) => {
+    setData(updatedData); 
+
+    console.log('Original data:', updatedData);
+
+    const transformedSlots = updatedData.slots.reduce((acc: any, slot: any) => {
+      const slotName = slot.form_name || 'name-not-specified';
+      const transformedSlotName = slotName.toLowerCase().replace(/\s+/g, '-');
+
+      const formattedFormData = formatNextNodeKeys(slot.form_data);
+
+    
+      acc[transformedSlotName] = { ...formattedFormData };
+
       return acc;
     }, {});
 
@@ -95,14 +120,14 @@ console.log(updatedData);
       slots: transformedSlots,
     };
 
-    setTransformedData(tempTransformedData);
-    // console.log('Transformed data:', tempTransformedData);
+    setTransformedData(tempTransformedData); 
+    console.log('Transformed data:', tempTransformedData);
   };
-  
 
   return (
     <ThemeProvider theme={themeProvider}>
       <CssBaseline />
+      <Container>
       <Fragment>
         <Grid
           container
@@ -165,7 +190,7 @@ console.log(updatedData);
                   width: '100%',
                   overflow: 'hidden',
                   borderRadius: '6px',
-                  border: '1.5px solid #CBCBCB',
+                  border: '1.5px solid #8e8e8e57',
                   background: '#fff',
                 }}
               >
@@ -193,7 +218,7 @@ console.log(updatedData);
             </Button>
           </Grid>
         </Grid>
-      </Fragment>
+      </Fragment></Container>
     </ThemeProvider>
   );
 };
@@ -201,7 +226,7 @@ console.log(updatedData);
 export default App;
 
 const formControlLabelStyle = {
-  border: '1px solid #ccc',
+  border: '1px solid rgba(126, 126, 126, 0.239)',
   borderRadius: '6px',
   margin: '16px 16px 16px 0px',
   padding: '4px 16px 4px 4px',
@@ -280,7 +305,7 @@ const initialData = {
         ],
         functions: [
           {
-            name:"GetNumber",
+            name: 'GetNumber',
             input: 'data from previous step',
             output: 'processed data',
             description: 'Some Description',
@@ -300,6 +325,7 @@ const initialData = {
         ],
         next_node: [
           {
+            name: 'node 1',
             value_to_check: "user_input.startsWith('P')",
             condition_type: '',
             value_match: 'sales',

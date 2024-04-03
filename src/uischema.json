@@ -102,10 +102,15 @@
                   "label": "Node",
                   "scope": "#/properties/form_data/properties/next_node",
                   "options": {
-                    "elementLabelProp": "next_node",
+                    "elementLabelProp": "name",
                     "detail": {
                       "type": "VerticalLayout",
                       "elements": [
+                        {
+                          "type": "Control",
+                          "scope": "#/properties/name",
+                          "label": "Name"
+                        },
                         {
                           "type": "Control",
                           "scope": "#/properties/value_to_check",
