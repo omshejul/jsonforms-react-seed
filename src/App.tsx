@@ -81,40 +81,22 @@ const App: React.FC = () => {
   };
   const handleChanges = (updatedData: any) => {
     setData(updatedData);
-    console.log(updatedData);
-  
-    const transformedSlots = updatedData.slots.map((slot: any) => {
-      const slotName = slot.form_name || 'name-not-specified';
-      const transformedSlotName = slotName.toLowerCase().replace(/\s+/g, '-');
-      const functionsObject = slot.form_data.functions.reduce((acc: any, func: any) => {
-     
-        const funcNameKey = func.name.toLowerCase().replace(/\s+/g, '-');
-        acc[funcNameKey] = {
-          input: func.input,
-          output: func.output,
-          description: func.description,
-        };
-        return acc;
-      }, {});
-  
-    
-      return {
-        ...slot,
-        form_name: transformedSlotName,
-        form_data: {
-          ...slot.form_data,
-          functions: functionsObject,
-        },
-      };
-    });
-  
+console.log(updatedData);
+
+    const transformedSlots = updatedData.slots.reduce((acc: any, form: any) => {
+      const formName = form.form_name || 'name-not-specified';
+      const transformedFormName = formName.toLowerCase().replace(/\s+/g, '-');
+      acc[transformedFormName] = { ...form.form_data };
+      return acc;
+    }, {});
+
     const tempTransformedData = {
       ...updatedData,
       slots: transformedSlots,
     };
-  
+
     setTransformedData(tempTransformedData);
-    console.log('Transformed data:', tempTransformedData);
+    // console.log('Transformed data:', tempTransformedData);
   };
   
 
