@@ -20,6 +20,7 @@
             "type": "object",
             "properties": {
               "question": { "type": "string" },
+              "bot_message": { "type": "string" },
               "response": { "type": "string" },
               "conditions": {
                 "type": "object",
@@ -112,7 +113,7 @@
               "closing_message": { "type": "boolean" },
               "error_message": { "type": "string" }
             },
-            "required": ["question", "error_message"]
+            "required": ["question", "bot_message", "error_message"]
           }
         },
         "required": ["form_name", "form_data"]

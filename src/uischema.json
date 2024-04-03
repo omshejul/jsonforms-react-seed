@@ -55,6 +55,11 @@
               "scope": "#/properties/form_data/properties/question",
               "label": "Question"
             },
+            {
+              "type": "Control",
+              "scope": "#/properties/form_data/properties/bot_message",
+              "label": "Bot Message"
+            },
 
             {
               "type": "Group",

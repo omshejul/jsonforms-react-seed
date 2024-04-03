@@ -255,6 +255,7 @@ const initialData = {
 
       form_data: {
         question: 'What is the capital of France?',
+        bot_message: 'question',
         response: '',
         conditions: {
           pre_condition: 'user_input.length > 0',
