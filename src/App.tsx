@@ -189,9 +189,8 @@ const App: React.FC = () => {
                 sx={{
                   width: '100%',
                   overflow: 'hidden',
-                  borderRadius: '6px',
-                  border: '1.5px solid #8e8e8e57',
-                  background: '#fff',
+                  borderRadius: '8px',
+                  border: `1.7px solid ${theme ? '#545454' : '#CBCBCB'}`,
                 }}
               >
                 <ReactJson
