@@ -131,7 +131,7 @@ const App: React.FC = () => {
       <Container>
         <Fragment>
           <Typography variant="h4" margin={"1rem"} marginTop={"2rem"} justifyContent={"center"} textAlign={"center"} component="h4">
-           Dialog Manager 💬
+          Dialogue Manager 💬
           </Typography>
  
           <Grid
@@ -194,6 +194,7 @@ const App: React.FC = () => {
                   sx={{
                     width: '100%',
                     overflowX: 'scroll',
+                    scrollbarWidth:"none",
                     borderRadius: '8px',
                     border: `1.7px solid ${theme ? '#545454' : '#CBCBCB'}`,
                   }}
