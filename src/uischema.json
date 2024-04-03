@@ -45,7 +45,7 @@
     },
     {
       "type": "Control",
-      "scope": "#/properties/forms",
+      "scope": "#/properties/slots",
       "options": {
         "detail": {
           "type": "VerticalLayout",

@@ -274,4 +274,4 @@ interface APIData {
     params: Param[];
     error: string;
 }
-type APIsArray = APIData[];
+

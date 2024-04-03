@@ -4,9 +4,9 @@ import {
 } from '@jsonforms/material-renderers';
 import { JsonForms } from '@jsonforms/react';
 import { Box, Button, FormControlLabel, Grid } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import Switch from '@mui/material/Switch';
-import { Fragment, useMemo, useState } from 'react';
+import { makeStyles } from '@mui/styles';
+import { Fragment, useState } from 'react';
 import './App.css';
 import ApiCustomRender from './Components/ApiCustomRender';
 import { customControlWithButtonTester } from './Components/testers';
@@ -14,8 +14,7 @@ import RatingControl from './RatingControl';
 import ratingControlTester from './ratingControlTester';
 import schema from './schema.json';
 import uischema from './uischema.json';
-// import schema from './schema copy.json';
-// import uischema from './uischema copy.json';
+
 import ReactJson from 'react-json-view';
 const renderers = [
   ...materialRenderers,
@@ -29,21 +28,31 @@ const App: React.FC = () => {
   const [theme, setTheme] = useState<any>('eighties');
   const classes = useStyles();
   const [data, setData] = useState<any>(initialData);
-  const stringifiedData = useMemo(() => JSON.stringify(data, null, 2), [data]);
   const [transformedData, setTransformedData] = useState({});
 
   const clearData = () => {
     setData({});
   };
-  const handleChanges = (updatedData: any) => {
+  const handleChanges = (updatedData:any) => {
     setData(updatedData);
-    const tempTransformedData = updatedData.forms.map((form: any) => ({
-      [form.formName]: form.formData,
-    }));
-
-    setTransformedData({ forms: tempTransformedData });
-    console.log('Transformed data where formName is key:', transformedData);
+  
+    const transformedSlots = updatedData.slots.reduce((acc:any, form:any) => {
+      // Check if form.form_name is specified; if not, default to "name-not-specified"
+      const formName = form.form_name || "name-not-specified";
+      const transformedFormName = formName.toLowerCase().replace(/\s+/g, '-');
+      acc[transformedFormName] = { ...form.form_data };
+      return acc;
+    }, {});
+  
+    const tempTransformedData = {
+      ...updatedData,
+      slots: transformedSlots,
+    };
+  
+    setTransformedData(tempTransformedData);
+    // console.log('Transformed data:', tempTransformedData);
   };
+  
 
   return (
     <Fragment>
@@ -55,7 +64,7 @@ const App: React.FC = () => {
       >
         <Grid item xs={12} lg={6}>
           <div className={classes.demoform}>
-            {console.log(data)}
+            {/* {console.log(data)} */}
             <JsonForms
               schema={schema}
               uischema={uischema}
@@ -111,13 +120,13 @@ const App: React.FC = () => {
               sx={{
                 width: '100%',
                 overflow: 'hidden',
-                borderRadius: '8px',
-                border: '2px solid #9fabc4',
+                borderRadius: '6px',
+                border: '1.5px solid #CBCBCB',
               }}
             >
               <ReactJson
                 style={{ padding: '1rem', width: '100%' }}
-                src={JSON.parse(stringifiedData)}
+                src={transformedData}
                 iconStyle='square'
                 collapseStringsAfterLength={50}
                 displayObjectSize={displayObjectSize}
@@ -125,7 +134,7 @@ const App: React.FC = () => {
                 name={null}
                 enableClipboard={true}
                 displayDataTypes={displayDataTypes}
-                indentWidth={1}
+                indentWidth={4}
               />
             </Box>
           </div>
@@ -196,7 +205,7 @@ const initialData = {
   question: 'What is the capital of France?',
   switch_language: true,
 
-  forms: [
+  slots: [
     {
       form_name: 'Form 1',
 
@@ -239,8 +248,6 @@ const initialData = {
           {
             type: 'FUNCTION',
             name: 'Fetch Data',
-            input: 'Query Params',
-            evaluation_function: 'fetchData',
           },
         ],
         next_node: [
@@ -257,12 +264,4 @@ const initialData = {
     },
   ],
 };
-// const initialData = {};
 
-interface Api {
-  Name: string;
-  Endpoint: string;
-  Method: 'GET' | 'POST' | 'PUT' | 'DELETE';
-  Params?: { [key: string]: any };
-  Headers?: Record<string, string>;
-}

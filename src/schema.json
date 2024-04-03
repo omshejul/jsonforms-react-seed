@@ -7,8 +7,8 @@
     "language": { "type": "string" },
     "message": { "type": "string" },
     "question": { "type": "string" },
-    "switch_language": {"type":"boolean"},
-    "forms": {
+    "switch_language": { "type": "boolean" },
+    "slots": {
       "type": "array",
       "items": {
         "type": "object",
@@ -103,7 +103,7 @@
                   "required": ["value_to_check", "next_node", "condition_type"]
                 }
               },
-              "closing_message": {"type":"boolean"},
+              "closing_message": { "type": "boolean" },
               "error_message": { "type": "string" }
             },
             "required": ["closing_message", "error_message"]
