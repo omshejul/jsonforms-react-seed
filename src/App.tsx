@@ -3,7 +3,16 @@ import {
   materialRenderers,
 } from '@jsonforms/material-renderers';
 import { JsonForms } from '@jsonforms/react';
-import { Box, Button, createTheme, CssBaseline, FormControlLabel, Grid, ThemeProvider, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  createTheme,
+  CssBaseline,
+  FormControlLabel,
+  Grid,
+  ThemeProvider,
+  Typography,
+} from '@mui/material';
 import Switch from '@mui/material/Switch';
 import { makeStyles } from '@mui/styles';
 import React, { Fragment, useEffect, useState } from 'react';
@@ -14,7 +23,7 @@ import RatingControl from './RatingControl';
 import ratingControlTester from './ratingControlTester';
 import schema from './schema.json';
 import uischema from './uischema.json';
-
+import DeleteIcon from '@mui/icons-material/Delete';
 import ReactJson from 'react-json-view';
 import Container from './Components/Container';
 const renderers = [
@@ -29,7 +38,7 @@ const App: React.FC = () => {
   const [displayDataTypes, setDisplayDataTypes] = useState<boolean>(false);
   const [theme, setTheme] = useState<boolean>(
     window.matchMedia &&
-    window.matchMedia('(prefers-color-scheme: dark)').matches
+      window.matchMedia('(prefers-color-scheme: dark)').matches
   );
   const classes = useStyles();
   const [data, setData] = useState<any>(initialData);
@@ -101,28 +110,34 @@ const App: React.FC = () => {
 
   const handleChanges = (updatedData: any) => {
     setData(updatedData);
-
+    setTransformedData(updatedData);
     console.log('Original data:', updatedData);
+    if (updatedData.slots) {
+      const transformedSlots = updatedData.slots.reduce(
+        (acc: any, slot: any) => {
+          const slotName = slot.form_name || 'name-not-specified';
+          const transformedSlotName = slotName
+            .toLowerCase()
+            .replace(/\s+/g, '-');
 
-    const transformedSlots = updatedData.slots.reduce((acc: any, slot: any) => {
-      const slotName = slot.form_name || 'name-not-specified';
-      const transformedSlotName = slotName.toLowerCase().replace(/\s+/g, '-');
+          const formattedFormData = formatNextNodeKeys(slot.form_data);
 
-      const formattedFormData = formatNextNodeKeys(slot.form_data);
+          acc[transformedSlotName] = { ...formattedFormData };
 
+          return acc;
+        },
+        {}
+      );
 
-      acc[transformedSlotName] = { ...formattedFormData };
+      const tempTransformedData = {
+        ...updatedData,
+        slots: transformedSlots,
+      };
 
-      return acc;
-    }, {});
+      setTransformedData(tempTransformedData);
+      console.log('Transformed data:', tempTransformedData);
+    }
 
-    const tempTransformedData = {
-      ...updatedData,
-      slots: transformedSlots,
-    };
-
-    setTransformedData(tempTransformedData);
-    console.log('Transformed data:', tempTransformedData);
   };
 
   return (
@@ -130,10 +145,17 @@ const App: React.FC = () => {
       <CssBaseline />
       <Container>
         <Fragment>
-          <Typography variant="h4" margin={"1rem"} marginTop={"2rem"} justifyContent={"center"} textAlign={"center"} component="h4">
-          Dialogue Manager 💬
+          <Typography
+            variant='h4'
+            margin={'1rem'}
+            marginTop={'2rem'}
+            justifyContent={'center'}
+            textAlign={'center'}
+            component='h4'
+          >
+            Dialogue Manager 💬
           </Typography>
- 
+
           <Grid
             container
             justifyContent={'center'}
@@ -161,7 +183,9 @@ const App: React.FC = () => {
                     control={
                       <Switch
                         checked={displayObjectSize}
-                        onChange={() => setDisplayObjectSize(!displayObjectSize)}
+                        onChange={() =>
+                          setDisplayObjectSize(!displayObjectSize)
+                        }
                         name='displayObjectSize'
                       />
                     }
@@ -194,13 +218,17 @@ const App: React.FC = () => {
                   sx={{
                     width: '100%',
                     overflowX: 'scroll',
-                    scrollbarWidth:"none",
+                    scrollbarWidth: 'none',
                     borderRadius: '8px',
                     border: `1.7px solid ${theme ? '#545454' : '#CBCBCB'}`,
                   }}
                 >
                   <ReactJson
-                    style={{ backgroundColor: "hsla(0, 0%, 100%, 0.0000)", padding: '1rem', width: '100%' }}
+                    style={{
+                      backgroundColor: 'hsla(0, 0%, 100%, 0.0000)',
+                      padding: '1rem',
+                      width: '100%',
+                    }}
                     src={transformedData}
                     iconStyle='square'
                     collapseStringsAfterLength={50}
@@ -213,17 +241,21 @@ const App: React.FC = () => {
                   />
                 </Box>
               </div>
-              <Button
-                className={classes.resetButton}
-                onClick={clearData}
-                color='primary'
-                variant='contained'
-              >
-                Clear data
-              </Button>
+              <Grid container justifyContent={'center'} alignContent={'center'}>
+                <Button
+                  className={classes.resetButton}
+                  onClick={clearData}
+                  color='primary'
+                  variant='contained'
+                  endIcon={<DeleteIcon />}
+                >
+                  Clear data
+                </Button>
+              </Grid>
             </Grid>
           </Grid>
-        </Fragment></Container>
+        </Fragment>
+      </Container>
     </ThemeProvider>
   );
 };
@@ -250,15 +282,15 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
-    maxWidth: "100vw",
-    padding: "1rem",
+    maxWidth: '100vw',
+    padding: '1rem',
     justifyContent: 'start',
     marginBottom: '1rem',
   },
   resetButton: {
     margin: 'auto !important',
-    display: 'block !important',
-    marginBottom: "1rem !important",
+    // display: 'block !important',
+    marginBottom: '1rem !important',
   },
   form: {
     padding: '1rem',
