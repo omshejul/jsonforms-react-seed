@@ -17,7 +17,7 @@ html {
   font-style: italic !important;
 }
 
-.MuiGrid-container span {
+.MuiAccordionSummary-content .MuiGrid-container span {
   padding-left: 1rem;
 }
 
