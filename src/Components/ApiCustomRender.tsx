@@ -63,6 +63,11 @@ const ApiCustomRender: React.FC<ControlProps> = ({
     delete updatedResults[index];
     setApiResults(updatedResults);
   };
+  const deleteApiResult = (index: number) => {
+    const updatedResults = { ...apiResults };
+    delete updatedResults[index];
+    setApiResults(updatedResults);
+  };
 
   const runApi = async (api: APIData, index: number) => {
     setLoadingStates((prev: any) => ({ ...prev, [apis[index].name]: true }));
@@ -199,19 +204,19 @@ const ApiCustomRender: React.FC<ControlProps> = ({
                 {apiResults[index] && (
                   <Card style={{ marginTop: '10px' }}>
                     <CardContent>
-                      <div className="flex">
-                          <Grid item>
-                            <Tooltip title='Delete Results'>
-                              <IconButton onClick={() => deleteApi(index)}>
-                                <DeleteIcon />
-                              </IconButton>
-                            </Tooltip>
-                          </Grid>
+                      <div className="flex justify-between">
                           <Typography variant='h6'>
                             {apis[index].name
                               ? `Results from API: ${apis[index].name}`
                               : `Results from API: ${index + 1}`}
                           </Typography>
+                          <Grid item>
+                            <Tooltip title='Delete Results'>
+                              <IconButton onClick={() => deleteApiResult(index)}>
+                                <DeleteIcon />
+                              </IconButton>
+                            </Tooltip>
+                          </Grid>
                       </div>
                       {RenderButton(apiResults[index])}
                     </CardContent>
