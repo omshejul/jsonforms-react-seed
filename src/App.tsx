@@ -3,6 +3,9 @@ import {
   materialRenderers,
 } from '@jsonforms/material-renderers';
 import { JsonForms } from '@jsonforms/react';
+import DeleteIcon from '@mui/icons-material/Delete';
+import SendIcon from '@mui/icons-material/Send';
+import LoadingButton from '@mui/lab/LoadingButton';
 import {
   Box,
   Button,
@@ -13,21 +16,19 @@ import {
   ThemeProvider,
   Typography,
 } from '@mui/material';
+import Axios from 'axios';
 import Switch from '@mui/material/Switch';
 import { makeStyles } from '@mui/styles';
 import React, { Fragment, useEffect, useState } from 'react';
+import ReactJson from 'react-json-view';
 import './App.css';
 import ApiCustomRender from './Components/ApiCustomRender';
+import Container from './Components/Container';
 import { customControlWithButtonTester } from './Components/testers';
 import RatingControl from './RatingControl';
 import ratingControlTester from './ratingControlTester';
 import schema from './schema.json';
 import uischema from './uischema.json';
-import LoadingButton from '@mui/lab/LoadingButton';
-import DeleteIcon from '@mui/icons-material/Delete';
-import SendIcon from '@mui/icons-material/Send';
-import ReactJson from 'react-json-view';
-import Container from './Components/Container';
 const renderers = [
   ...materialRenderers,
   { tester: ratingControlTester, renderer: RatingControl },
@@ -40,10 +41,12 @@ const App: React.FC = () => {
   const [displayDataTypes, setDisplayDataTypes] = useState<boolean>(false);
   const [theme, setTheme] = useState<boolean>(
     window.matchMedia &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches
+    window.matchMedia('(prefers-color-scheme: dark)').matches
   );
   const classes = useStyles();
-  const [loadingStates, setLoadingStates] = useState<any>({});
+  const [loadingStates, setLoadingStates] = React.useState<{
+    [key: string]: boolean;
+  }>({});
   const [data, setData] = useState<any>(initialData);
   const [transformedData, setTransformedData] = useState({});
 
@@ -72,8 +75,8 @@ const App: React.FC = () => {
           main: 'rgb(255, 118, 111)',
         },
         background: {
-          default: '#1f252a',
-          paper: '#1f252a',
+          default: '#22272E',
+          paper: '#181f27',
         },
       }),
     },
@@ -93,7 +96,7 @@ const App: React.FC = () => {
       MuiPaper: {
         styleOverrides: {
           root: {
-            boxShadow: '0px 0px 0rem 1px hsla(0, 0%, 50%, 0.3)',
+            boxShadow: '0px 0px 0px 1px hsla(0, 0%, 50%, 0.3)',
           },
         },
       },
@@ -154,8 +157,18 @@ const App: React.FC = () => {
     }
   };
 
-  const runApi = async (data: string) => {
-    console.log('sending json');
+  const sendJson = async () => {
+    setLoadingStates((prev) => ({ ...prev, sendJsonLoading: true }));
+    console.log('sending json', loadingStates);
+    try {
+      const response = await Axios.post('http://localhost:3030/data', transformedData);
+      console.log('Response:', response.data);
+    } catch (error) {
+      console.error('Error sending JSON:', error);
+    }
+    setTimeout(() => {
+      setLoadingStates((prev) => ({ ...prev, sendJsonLoading: false }));
+    }, 1000)
   };
 
   return (
@@ -272,9 +285,9 @@ const App: React.FC = () => {
                 <LoadingButton
                   variant='contained'
                   color='primary'
-                  // loading={loadingStates[apis[index].name] as any}
+                  loading={loadingStates.sendJsonLoading}
                   loadingPosition='end'
-                  onClick={() => runApi("fedf")}
+                  onClick={() => sendJson()}
                   endIcon={<SendIcon />}
                   className={classes.resetButton}
                 >
