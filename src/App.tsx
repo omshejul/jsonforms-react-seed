@@ -23,7 +23,9 @@ import RatingControl from './RatingControl';
 import ratingControlTester from './ratingControlTester';
 import schema from './schema.json';
 import uischema from './uischema.json';
+import LoadingButton from '@mui/lab/LoadingButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import SendIcon from '@mui/icons-material/Send';
 import ReactJson from 'react-json-view';
 import Container from './Components/Container';
 const renderers = [
@@ -41,6 +43,7 @@ const App: React.FC = () => {
       window.matchMedia('(prefers-color-scheme: dark)').matches
   );
   const classes = useStyles();
+  const [loadingStates, setLoadingStates] = useState<any>({});
   const [data, setData] = useState<any>(initialData);
   const [transformedData, setTransformedData] = useState({});
 
@@ -61,6 +64,18 @@ const App: React.FC = () => {
   const themeProvider = createTheme({
     palette: {
       mode: theme ? 'dark' : 'light',
+      ...(theme && {
+        primary: {
+          main: '#65baff',
+        },
+        error: {
+          main: 'rgb(255, 118, 111)',
+        },
+        background: {
+          default: '#1f252a',
+          paper: '#1f252a',
+        },
+      }),
     },
     components: {
       MuiFormControl: {
@@ -137,7 +152,10 @@ const App: React.FC = () => {
       setTransformedData(tempTransformedData);
       console.log('Transformed data:', tempTransformedData);
     }
+  };
 
+  const runApi = async (data: string) => {
+    console.log('sending json');
   };
 
   return (
@@ -225,7 +243,7 @@ const App: React.FC = () => {
                 >
                   <ReactJson
                     style={{
-                      backgroundColor: 'hsla(0, 0%, 100%, 0.0000)',
+                      backgroundColor: 'hsla(0, 0, 0, 0)',
                       padding: '1rem',
                       width: '100%',
                     }}
@@ -241,16 +259,27 @@ const App: React.FC = () => {
                   />
                 </Box>
               </div>
-              <Grid container justifyContent={'center'} alignContent={'center'}>
+              <Grid container>
                 <Button
                   className={classes.resetButton}
                   onClick={clearData}
-                  color='primary'
+                  color='error'
                   variant='contained'
                   endIcon={<DeleteIcon />}
                 >
                   Clear data
                 </Button>
+                <LoadingButton
+                  variant='contained'
+                  color='primary'
+                  // loading={loadingStates[apis[index].name] as any}
+                  loadingPosition='end'
+                  onClick={() => runApi("fedf")}
+                  endIcon={<SendIcon />}
+                  className={classes.resetButton}
+                >
+                  Send data
+                </LoadingButton>
               </Grid>
             </Grid>
           </Grid>
@@ -290,7 +319,7 @@ const useStyles = makeStyles({
   resetButton: {
     margin: 'auto !important',
     // display: 'block !important',
-    marginBottom: '1rem !important',
+    marginBottom: '2rem !important',
   },
   form: {
     padding: '1rem',
