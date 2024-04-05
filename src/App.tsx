@@ -75,8 +75,8 @@ const App: React.FC = () => {
           main: 'rgb(255, 118, 111)',
         },
         background: {
-          default: '#22272E',
-          paper: '#181f27',
+          default: '#212121',
+          paper: '#212121',
         },
       }),
     },
