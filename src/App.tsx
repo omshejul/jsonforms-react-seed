@@ -364,6 +364,7 @@ const initialData = {
         question: 'What is the capital of France?',
         bot_message: 'question',
         response: '',
+        choices: false,
         conditions: {
           pre_condition: 'user_input.length > 0',
           pre_condition_error: 'Input cannot be empty',

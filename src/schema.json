@@ -21,6 +21,7 @@
             "properties": {
               "question": { "type": "string" },
               "bot_message": { "type": "string" },
+              "choices": { "type": "boolean" },
               "response": { "type": "string" },
               "conditions": {
                 "type": "object",

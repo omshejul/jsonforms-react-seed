@@ -60,6 +60,11 @@
               "scope": "#/properties/form_data/properties/bot_message",
               "label": "Bot Message"
             },
+            {
+              "type": "Control",
+              "scope": "#/properties/form_data/properties/choices",
+              "label": "Choices"
+            },
 
             {
               "type": "Group",
