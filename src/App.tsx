@@ -41,7 +41,7 @@ const App: React.FC = () => {
   const [displayDataTypes, setDisplayDataTypes] = useState<boolean>(false);
   const [theme, setTheme] = useState<boolean>(
     window.matchMedia &&
-    window.matchMedia('(prefers-color-scheme: dark)').matches
+      window.matchMedia('(prefers-color-scheme: dark)').matches
   );
   const classes = useStyles();
   const [loadingStates, setLoadingStates] = React.useState<{
@@ -104,8 +104,38 @@ const App: React.FC = () => {
   });
 
   const clearData = () => {
-    setData({});
-    setTransformedData({});
+    setData({
+      goal_name: '',
+      client_id: '',
+      language: '',
+      message: '',
+      question: '',
+      switch_language: true,
+
+      slots: [
+        {
+          form_name: '',
+
+          form_data: {
+            question: '',
+            bot_message: '',
+            response: '',
+            choices: false,
+            conditions: {
+              pre_condition: '',
+              pre_condition_error: '',
+            },
+            apis: [],
+            functions: [],
+            execution_order: [],
+            next_node: [],
+            closing_message: false,
+            error_message: '',
+          },
+        },
+      ],
+    });
+    // setTransformedData({});
   };
   const formatNextNodeKeys = (data: any): any => {
     if (Array.isArray(data)) {
@@ -161,14 +191,17 @@ const App: React.FC = () => {
     setLoadingStates((prev) => ({ ...prev, sendJsonLoading: true }));
     console.log('sending json', loadingStates);
     try {
-      const response = await Axios.post('http://localhost:3030/data', transformedData);
+      const response = await Axios.post(
+        'http://localhost:3030/data',
+        transformedData
+      );
       console.log('Response:', response.data);
     } catch (error) {
       console.error('Error sending JSON:', error);
     }
     setTimeout(() => {
       setLoadingStates((prev) => ({ ...prev, sendJsonLoading: false }));
-    }, 1000)
+    }, 1000);
   };
 
   return (
