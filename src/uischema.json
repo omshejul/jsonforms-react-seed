@@ -111,11 +111,7 @@
                     "detail": {
                       "type": "VerticalLayout",
                       "elements": [
-                        {
-                          "type": "Control",
-                          "scope": "#/properties/name",
-                          "label": "Name"
-                        },
+ 
                         {
                           "type": "Control",
                           "scope": "#/properties/value_to_check",

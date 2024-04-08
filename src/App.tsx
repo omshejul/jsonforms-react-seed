@@ -407,7 +407,6 @@ const initialData = {
         ],
         next_node: [
           {
-            name: 'node 1',
             value_to_check: "user_input.startsWith('P')",
             condition_type: '',
             value_match: 'sales',

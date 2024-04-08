@@ -101,7 +101,7 @@
                 "items": {
                   "type": "object",
                   "properties": {
-                    "name": { "type": "string" },
+
                     "value_to_check": { "type": "string" },
                     "next_node": { "type": "string" },
                     "value_match": { "type": "string" },
