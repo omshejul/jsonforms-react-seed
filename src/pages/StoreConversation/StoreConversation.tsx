@@ -28,7 +28,7 @@ const renderers = [
   ...materialRenderers,
   { tester: ratingControlTester, renderer: RatingControl },
 ];
- 
+
 const App: React.FC = () => {
   // USE STATES
   const theme = useTheme();
@@ -249,7 +249,7 @@ const App: React.FC = () => {
                   <ResponseModal>
                     <h2>Response</h2>
                     <h3>
-                      Endpoint: <code>{apiEndpoint}</code>
+                      Endpoint: <code className='blue'>{apiEndpoint}</code>
                     </h3>
 
                     <ReactJson

@@ -84,206 +84,209 @@
             }
           ]
         },
-        {"type":"Group",
-      "label":"Renewal",
-      "elements":[
         {
-          "type":"Categorization",
-          "elements":[
+          "type": "Group",
+          "label": "Renewal",
+          "elements": [
             {
-              "type": "Category",
-              "label": "Renewal",
+              "type": "Categorization",
               "elements": [
                 {
-                  "type": "Control",
-                  "scope": "#/properties/slots/properties/renewal/properties/question",
-                  "label": "Question"
+                  "type": "Category",
+                  "label": "Renewal",
+                  "elements": [
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/slots/properties/renewal/properties/question",
+                      "label": "Question"
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/slots/properties/renewal/properties/response",
+                      "label": "Response"
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/slots/properties/renewal/properties/required",
+                      "label": "Required"
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/slots/properties/renewal/properties/datatype",
+                      "label": "Data Type"
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/slots/properties/renewal/properties/required_format",
+                      "label": "Required Format"
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/slots/properties/renewal/properties/sample",
+                      "label": "Sample Responses",
+                      "options": {
+                        "enum": ["yes", "no"]
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/slots/properties/renewal/properties/next_node",
+                      "label": "Next Node"
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/slots/properties/renewal/properties/conditional_closing",
+                      "label": "Conditional Closing"
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/slots/properties/renewal/properties/reward",
+                      "label": "Reward"
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/slots/properties/renewal/properties/error_message",
+                      "label": "Error Message"
+                    }
+                  ]
                 },
                 {
-                  "type": "Control",
-                  "scope": "#/properties/slots/properties/renewal/properties/response",
-                  "label": "Response"
+                  "type": "Category",
+                  "label": "Renewal Due Soon",
+                  "elements": [
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/slots/properties/renewal_due_soon/properties/question",
+                      "label": "Question"
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/slots/properties/renewal_due_soon/properties/response",
+                      "label": "Response"
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/slots/properties/renewal_due_soon/properties/required",
+                      "label": "Required"
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/slots/properties/renewal_due_soon/properties/datatype",
+                      "label": "Data Type"
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/slots/properties/renewal_due_soon/properties/required_format",
+                      "label": "Required Format"
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/slots/properties/renewal_due_soon/properties/sample",
+                      "label": "Sample Responses",
+                      "options": {
+                        "enum": ["yes", "no"]
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/slots/properties/renewal_due_soon/properties/next_node",
+                      "label": "Next Node"
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/slots/properties/renewal_due_soon/properties/conditional_closing",
+                      "label": "Conditional Closing"
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/slots/properties/renewal_due_soon/properties/reward",
+                      "label": "Reward"
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/slots/properties/renewal_due_soon/properties/error_message",
+                      "label": "Error Message"
+                    }
+                  ]
                 },
                 {
-                  "type": "Control",
-                  "scope": "#/properties/slots/properties/renewal/properties/required",
-                  "label": "Required"
-                },
-                {
-                  "type": "Control",
-                  "scope": "#/properties/slots/properties/renewal/properties/datatype",
-                  "label": "Data Type"
-                },
-                {
-                  "type": "Control",
-                  "scope": "#/properties/slots/properties/renewal/properties/required_format",
-                  "label": "Required Format"
-                },
-                {
-                  "type": "Control",
-                  "scope": "#/properties/slots/properties/renewal/properties/sample",
-                  "label": "Sample Responses",
-                  "options": {
-                    "enum": ["yes", "no"]
-                  }
-                },
-                {
-                  "type": "Control",
-                  "scope": "#/properties/slots/properties/renewal/properties/next_node",
-                  "label": "Next Node"
-                },
-                {
-                  "type": "Control",
-                  "scope": "#/properties/slots/properties/renewal/properties/conditional_closing",
-                  "label": "Conditional Closing"
-                },
-                {
-                  "type": "Control",
-                  "scope": "#/properties/slots/properties/renewal/properties/reward",
-                  "label": "Reward"
-                },
-                {
-                  "type": "Control",
-                  "scope": "#/properties/slots/properties/renewal/properties/error_message",
-                  "label": "Error Message"
+                  "type": "Category",
+                  "label": "Renewal Options",
+                  "elements": [
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/slots/properties/renewal_options/properties/question",
+                      "label": "Question"
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/slots/properties/renewal_options/properties/response",
+                      "label": "Response",
+                      "options": {
+                        "enum": ["yes", "no"]
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/slots/properties/renewal_options/properties/required",
+                      "label": "Required"
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/slots/properties/renewal_options/properties/datatype",
+                      "label": "Data Type"
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/slots/properties/renewal_options/properties/exhaustive",
+                      "label": "Exhaustive"
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/slots/properties/renewal_options/properties/exhaustive_data",
+                      "label": "Exhaustive Data",
+                      "options": {
+                        "enum": ["yes", "no"]
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/slots/properties/renewal_options/properties/sample",
+                      "label": "Sample Responses",
+                      "options": {
+                        "enum": ["yes", "no"]
+                      }
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/slots/properties/renewal_options/properties/next_node",
+                      "label": "Next Node"
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/slots/properties/renewal_options/properties/conditional_closing",
+                      "label": "Conditional Closing"
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/slots/properties/renewal_options/properties/reward",
+                      "label": "Reward"
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/slots/properties/renewal_options/properties/error_message",
+                      "label": "Error Message"
+                    }
+                  ]
                 }
-              ]
-            },
-            {
-              "type": "Category",
-              "label": "Renewal Due Soon",
-              "elements": [
-                {
-                  "type": "Control",
-                  "scope": "#/properties/slots/properties/renewal_due_soon/properties/question",
-                  "label": "Question"
-                },
-                {
-                  "type": "Control",
-                  "scope": "#/properties/slots/properties/renewal_due_soon/properties/response",
-                  "label": "Response"
-                },
-                {
-                  "type": "Control",
-                  "scope": "#/properties/slots/properties/renewal_due_soon/properties/required",
-                  "label": "Required"
-                },
-                {
-                  "type": "Control",
-                  "scope": "#/properties/slots/properties/renewal_due_soon/properties/datatype",
-                  "label": "Data Type"
-                },
-                {
-                  "type": "Control",
-                  "scope": "#/properties/slots/properties/renewal_due_soon/properties/required_format",
-                  "label": "Required Format"
-                },
-                {
-                  "type": "Control",
-                  "scope": "#/properties/slots/properties/renewal_due_soon/properties/sample",
-                  "label": "Sample Responses",
-                  "options": {
-                    "enum": ["yes", "no"]
-                  }
-                },
-                {
-                  "type": "Control",
-                  "scope": "#/properties/slots/properties/renewal_due_soon/properties/next_node",
-                  "label": "Next Node"
-                },
-                {
-                  "type": "Control",
-                  "scope": "#/properties/slots/properties/renewal_due_soon/properties/conditional_closing",
-                  "label": "Conditional Closing"
-                },
-                {
-                  "type": "Control",
-                  "scope": "#/properties/slots/properties/renewal_due_soon/properties/reward",
-                  "label": "Reward"
-                },
-                {
-                  "type": "Control",
-                  "scope": "#/properties/slots/properties/renewal_due_soon/properties/error_message",
-                  "label": "Error Message"
-                }
-              ]
-            },
-            {
-              "type": "Category",
-              "label": "Renewal Options",
-              "elements": [
-                {
-                  "type": "Control",
-                  "scope": "#/properties/slots/properties/renewal_options/properties/question",
-                  "label": "Question"
-                },
-                {
-                  "type": "Control",
-                  "scope": "#/properties/slots/properties/renewal_options/properties/response",
-                  "label": "Response",
-                  "options": {
-                    "enum": ["yes", "no"]
-                  }
-                },
-                {
-                  "type": "Control",
-                  "scope": "#/properties/slots/properties/renewal_options/properties/required",
-                  "label": "Required"
-                },
-                {
-                  "type": "Control",
-                  "scope": "#/properties/slots/properties/renewal_options/properties/datatype",
-                  "label": "Data Type"
-                },
-                {
-                  "type": "Control",
-                  "scope": "#/properties/slots/properties/renewal_options/properties/exhaustive",
-                  "label": "Exhaustive"
-                },
-                {
-                  "type": "Control",
-                  "scope": "#/properties/slots/properties/renewal_options/properties/exhaustive_data",
-                  "label": "Exhaustive Data",
-                  "options": {
-                    "enum": ["yes", "no"]
-                  }
-                },
-                {
-                  "type": "Control",
-                  "scope": "#/properties/slots/properties/renewal_options/properties/sample",
-                  "label": "Sample Responses",
-                  "options": {
-                    "enum": ["yes", "no"]
-                  }
-                },
-                {
-                  "type": "Control",
-                  "scope": "#/properties/slots/properties/renewal_options/properties/next_node",
-                  "label": "Next Node"
-                },
-                {
-                  "type": "Control",
-                  "scope": "#/properties/slots/properties/renewal_options/properties/conditional_closing",
-                  "label": "Conditional Closing"
-                },
-                {
-                  "type": "Control",
-                  "scope": "#/properties/slots/properties/renewal_options/properties/reward",
-                  "label": "Reward"
-                },
-                {
-                  "type": "Control",
-                  "scope": "#/properties/slots/properties/renewal_options/properties/error_message",
-                  "label": "Error Message"
-                }
-              ]
+              ],
+              "options": {
+                "variant": "stepper",
+                "showNavButtons": true
+              }
             }
-          ],  "options": {
-            "variant": "stepper",
-            "showNavButtons": true
-          }
-        }
-      ]},
+          ]
+        },
 
         {
           "type": "Group",
@@ -399,13 +402,8 @@
             }
           ]
         }
-        
-        
-
-        
-        
-        
-      ],  "options": {
+      ],
+      "options": {
         "variant": "stepper",
         "showNavButtons": true
       }

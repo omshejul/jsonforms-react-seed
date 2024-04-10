@@ -9,13 +9,13 @@ const style = {
   top: '50%',
   left: '50%',
   maxHeight: '80%',
- overflowY: 'scroll',
+  overflowY: 'scroll',
   transform: 'translate(-50%, -50%)',
   maxWidth: '90%',
-  borderRadius:"12px",
+  borderRadius: '12px',
   bgcolor: 'background.paper',
   boxShadow: 24,
-  p: 4, 
+  p: 4,
 };
 
 const ResponseModal = ({ children }: { children: React.ReactNode }) => {
@@ -28,12 +28,12 @@ const ResponseModal = ({ children }: { children: React.ReactNode }) => {
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="modal-title"
-        aria-describedby="modal-description"
+        aria-labelledby='modal-title'
+        aria-describedby='modal-description'
       >
         <Box sx={style}>
           <IconButton
-            aria-label="close"
+            aria-label='close'
             onClick={handleClose}
             sx={{
               position: 'absolute',

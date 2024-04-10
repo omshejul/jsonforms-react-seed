@@ -1,25 +1,28 @@
-
-
 html {
   font-size: 16px;
   scroll-behavior: smooth;
   scrollbar-color: hsla(0, 0%, 50%, 0.5) transparent;
 }
-body{
+body {
   margin: 0;
   padding: 0;
 }
 
-code{
-  font-family: Courier, monospace ;
+code {
+  font-family: Courier, monospace;
 }
-.react-json-view *{
-  font-family: "Space Mono", monospace ;
-    font-weight: 700 ;
+.blue {
+  color: #007bff;
+  text-decoration: underline;
 }
-.react-json-view .string-value{  
+
+.react-json-view * {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+}
+.react-json-view .string-value {
   color: inherit;
-  font-style: italic ;
+  font-style: italic;
 }
 
 .MuiAccordionSummary-content .MuiGrid-container span {
@@ -39,13 +42,14 @@ code{
   }
   .MuiAccordionDetails-root {
     padding: 4px 8px 8px !important;
-}.MuiCardContent-root {
-  padding: 8px !important;
+  }
+  .MuiCardContent-root {
+    padding: 8px !important;
+  }
 }
-}
-.flex{
+.flex {
   display: flex;
 }
-.justify-between{
+.justify-between {
   justify-content: space-between;
 }

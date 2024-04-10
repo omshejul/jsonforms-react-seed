@@ -262,7 +262,7 @@ const App: React.FC = () => {
                 <ResponseModal>
                   <h2>Response</h2>
                   <h3>
-                    Endpoint: <code>{apiEndpoint}</code>
+                    Endpoint: <code className='blue'>{apiEndpoint}</code>
                   </h3>
 
                   <ReactJson
