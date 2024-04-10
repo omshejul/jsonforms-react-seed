@@ -13,10 +13,11 @@ import { makeStyles } from '@mui/styles';
 import Axios from 'axios';
 import React, { Fragment, useState } from 'react';
 import ReactJson from 'react-json-view';
+import UpdateIcon from '@mui/icons-material/Update';
 
-import ApiCustomRender from '../../Components/ApiComponents/ApiCustomRender';
-import { customControlWithButtonTester } from '../../Components/ApiComponents/testers';
 import Container from '../../Components/Container/Container';
+import ApiCustomRender from '../../Components/CustomRenders/ApiComponents/ApiCustomRender';
+import { customControlWithButtonTester } from '../../Components/CustomRenders/ApiComponents/testers';
 import ResponseModal from '../../Components/Modal/Modal';
 import RatingControl from '../../Components/RatingControl/RatingControl';
 import ratingControlTester from '../../Components/RatingControl/ratingControlTester';
@@ -29,6 +30,8 @@ const renderers = [
   { tester: ratingControlTester, renderer: RatingControl },
   { tester: customControlWithButtonTester, renderer: ApiCustomRender },
 ];
+
+const apiEndpoint = 'https://dev.assisto.tech/utility/update_and_encode';
 
 const App: React.FC = () => {
   // USE STATES
@@ -106,7 +109,6 @@ const App: React.FC = () => {
     setLoadingStates((prev) => ({ ...prev, sendJsonLoading: true }));
     try {
       const useProxyForKnownCorsIssues = false;
-      const apiEndpoint = 'https://jsonplaceholder.typicode.com/posts';
       const corsProxyUrl = 'https://cors-anywhere.herokuapp.com/';
       const apiUrl = useProxyForKnownCorsIssues
         ? `${corsProxyUrl}${apiEndpoint}`
@@ -115,12 +117,13 @@ const App: React.FC = () => {
       setApiResponse(response.data);
 
       console.log('Response:', response.data);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error sending JSON:', error);
+      setApiResponse(error);
     }
     setTimeout(() => {
       setLoadingStates((prev) => ({ ...prev, sendJsonLoading: false }));
-    }, 1000);
+    }, 0);
   };
 
   return (
@@ -131,10 +134,13 @@ const App: React.FC = () => {
           margin={'1rem'}
           marginTop={'2rem'}
           justifyContent={'center'}
+          alignItems={'center'}
+          display={'flex'}
           textAlign={'center'}
           component='h4'
         >
-          Update and Encode 🎛️
+          <UpdateIcon fontSize='large' style={{ marginInlineEnd: '1rem' }} />
+          Update and Encode
         </Typography>
 
         <Grid
@@ -199,8 +205,9 @@ const App: React.FC = () => {
                   overflowX: 'scroll',
                   scrollbarWidth: 'none',
                   borderRadius: '8px',
-                  border: `1.7px solid ${theme.palette.mode === 'dark' ? '#545454' : '#CBCBCB'
-                    }`,
+                  border: `1.7px solid ${
+                    theme.palette.mode === 'dark' ? '#545454' : '#CBCBCB'
+                  }`,
                 }}
               >
                 <ReactJson
@@ -254,12 +261,18 @@ const App: React.FC = () => {
               {apiResponse && (
                 <ResponseModal>
                   <h2>Response</h2>
+                  <h3>Endpoint: <code>{apiEndpoint}</code></h3>
                   <ReactJson
                     src={apiResponse}
+                    style={{
+                      backgroundColor: 'hsla(0, 0, 0, 0)',
+                    }}
                     iconStyle='square'
                     collapseStringsAfterLength={50}
                     displayObjectSize={displayObjectSize}
-                    theme={theme.palette.mode === 'dark' ? 'pop' : 'rjv-default'}
+                    theme={
+                      theme.palette.mode === 'dark' ? 'pop' : 'rjv-default'
+                    }
                     name={null}
                     enableClipboard={true}
                     displayDataTypes={displayDataTypes}

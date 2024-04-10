@@ -23,8 +23,8 @@ import {
 } from '@mui/material';
 import axios from 'axios';
 import React, { useState } from 'react';
-import RatingControl from '../RatingControl/RatingControl';
-import ratingControlTester from '../RatingControl/ratingControlTester';
+import RatingControl from '../../RatingControl/RatingControl';
+import ratingControlTester from '../../RatingControl/ratingControlTester';
 import RenderButton from './RenderButton';
 
 const renderers = [

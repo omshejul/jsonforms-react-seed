@@ -3,30 +3,412 @@
   "elements": [
     {
       "type": "Control",
-      "scope": "#/properties/client_id",
-      "label": "Client ID"
+      "scope": "#/properties/goal_name"
     },
     {
       "type": "Control",
-      "scope": "#/properties/language",
-      "label": "Language",
-      "options": {
-        "detail": {
-          "type": "Control",
-          "scope": "#/properties/language"
+      "scope": "#/properties/client_id"
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/language"
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/message"
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/question"
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/switch_language"
+    },
+    {
+      "type": "Group",
+      "label": "Slots",
+      "scope": "#/properties/slots",
+      "elements": [
+        {
+          "type": "Group",
+          "label": "Greetings",
+          "elements": [
+            {
+              "type": "Control",
+              "scope": "#/properties/slots/properties/greetings/properties/question"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/slots/properties/greetings/properties/response"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/slots/properties/greetings/properties/required"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/slots/properties/greetings/properties/datatype"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/slots/properties/greetings/properties/required_format"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/slots/properties/greetings/properties/exhaustive"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/slots/properties/greetings/properties/exhaustive_data"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/slots/properties/greetings/properties/sample"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/slots/properties/greetings/properties/next_node"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/slots/properties/greetings/properties/conditional_closing"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/slots/properties/greetings/properties/reward"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/slots/properties/greetings/properties/error_message"
+            }
+          ]
+        },
+        {"type":"Group",
+      "label":"Renewal",
+      "elements":[
+        {
+          "type":"Categorization",
+          "elements":[
+            {
+              "type": "Category",
+              "label": "Renewal",
+              "elements": [
+                {
+                  "type": "Control",
+                  "scope": "#/properties/slots/properties/renewal/properties/question",
+                  "label": "Question"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/slots/properties/renewal/properties/response",
+                  "label": "Response"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/slots/properties/renewal/properties/required",
+                  "label": "Required"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/slots/properties/renewal/properties/datatype",
+                  "label": "Data Type"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/slots/properties/renewal/properties/required_format",
+                  "label": "Required Format"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/slots/properties/renewal/properties/sample",
+                  "label": "Sample Responses",
+                  "options": {
+                    "enum": ["yes", "no"]
+                  }
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/slots/properties/renewal/properties/next_node",
+                  "label": "Next Node"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/slots/properties/renewal/properties/conditional_closing",
+                  "label": "Conditional Closing"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/slots/properties/renewal/properties/reward",
+                  "label": "Reward"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/slots/properties/renewal/properties/error_message",
+                  "label": "Error Message"
+                }
+              ]
+            },
+            {
+              "type": "Category",
+              "label": "Renewal Due Soon",
+              "elements": [
+                {
+                  "type": "Control",
+                  "scope": "#/properties/slots/properties/renewal_due_soon/properties/question",
+                  "label": "Question"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/slots/properties/renewal_due_soon/properties/response",
+                  "label": "Response"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/slots/properties/renewal_due_soon/properties/required",
+                  "label": "Required"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/slots/properties/renewal_due_soon/properties/datatype",
+                  "label": "Data Type"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/slots/properties/renewal_due_soon/properties/required_format",
+                  "label": "Required Format"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/slots/properties/renewal_due_soon/properties/sample",
+                  "label": "Sample Responses",
+                  "options": {
+                    "enum": ["yes", "no"]
+                  }
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/slots/properties/renewal_due_soon/properties/next_node",
+                  "label": "Next Node"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/slots/properties/renewal_due_soon/properties/conditional_closing",
+                  "label": "Conditional Closing"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/slots/properties/renewal_due_soon/properties/reward",
+                  "label": "Reward"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/slots/properties/renewal_due_soon/properties/error_message",
+                  "label": "Error Message"
+                }
+              ]
+            },
+            {
+              "type": "Category",
+              "label": "Renewal Options",
+              "elements": [
+                {
+                  "type": "Control",
+                  "scope": "#/properties/slots/properties/renewal_options/properties/question",
+                  "label": "Question"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/slots/properties/renewal_options/properties/response",
+                  "label": "Response",
+                  "options": {
+                    "enum": ["yes", "no"]
+                  }
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/slots/properties/renewal_options/properties/required",
+                  "label": "Required"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/slots/properties/renewal_options/properties/datatype",
+                  "label": "Data Type"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/slots/properties/renewal_options/properties/exhaustive",
+                  "label": "Exhaustive"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/slots/properties/renewal_options/properties/exhaustive_data",
+                  "label": "Exhaustive Data",
+                  "options": {
+                    "enum": ["yes", "no"]
+                  }
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/slots/properties/renewal_options/properties/sample",
+                  "label": "Sample Responses",
+                  "options": {
+                    "enum": ["yes", "no"]
+                  }
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/slots/properties/renewal_options/properties/next_node",
+                  "label": "Next Node"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/slots/properties/renewal_options/properties/conditional_closing",
+                  "label": "Conditional Closing"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/slots/properties/renewal_options/properties/reward",
+                  "label": "Reward"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/slots/properties/renewal_options/properties/error_message",
+                  "label": "Error Message"
+                }
+              ]
+            }
+          ],  "options": {
+            "variant": "stepper",
+            "showNavButtons": true
+          }
         }
+      ]},
+
+        {
+          "type": "Group",
+          "label": "Contact Preferences",
+          "elements": [
+            {
+              "type": "Control",
+              "scope": "#/properties/slots/properties/contact_preferences/properties/question",
+              "label": "Question"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/slots/properties/contact_preferences/properties/response",
+              "label": "Preferred Contact Method",
+              "options": {
+                "enum": ["email", "SMS", "phone call", "whatsapp"]
+              }
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/slots/properties/contact_preferences/properties/required",
+              "label": "Required"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/slots/properties/contact_preferences/properties/datatype",
+              "label": "Data Type"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/slots/properties/contact_preferences/properties/exhaustive",
+              "label": "Exhaustive"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/slots/properties/contact_preferences/properties/exhaustive_data",
+              "label": "Exhaustive Data",
+              "options": {
+                "enum": ["email", "SMS", "phone call", "whatsapp"]
+              }
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/slots/properties/contact_preferences/properties/sample",
+              "label": "Sample Contact Methods",
+              "options": {
+                "enum": ["email", "SMS", "phone call", "whatsapp"]
+              }
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/slots/properties/contact_preferences/properties/next_node",
+              "label": "Next Node"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/slots/properties/contact_preferences/properties/conditional_closing",
+              "label": "Conditional Closing"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/slots/properties/contact_preferences/properties/reward",
+              "label": "Reward"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/slots/properties/contact_preferences/properties/error_message",
+              "label": "Error Message"
+            }
+          ]
+        },
+        {
+          "type": "Group",
+          "label": "Confirm Schedule",
+          "elements": [
+            {
+              "type": "Control",
+              "scope": "#/properties/slots/properties/confirm_schedule/properties/question",
+              "label": "Confirmation Message"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/slots/properties/confirm_schedule/properties/response",
+              "label": "Your Response",
+              "options": {
+                "enum": ["thank you"]
+              }
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/slots/properties/confirm_schedule/properties/required",
+              "label": "Required"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/slots/properties/confirm_schedule/properties/datatype",
+              "label": "Data Type"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/slots/properties/confirm_schedule/properties/conditional_closing",
+              "label": "Conditional Closing"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/slots/properties/confirm_schedule/properties/reward",
+              "label": "Reward"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/slots/properties/confirm_schedule/properties/error_message",
+              "label": "Error Message"
+            }
+          ]
+        }
+        
+        
+
+        
+        
+        
+      ],  "options": {
+        "variant": "stepper",
+        "showNavButtons": true
       }
-    },
-    {
-      "type": "Control",
-      "scope": "#/properties/ner_key",
-      "label": "NER Key"
-    },
-    {
-      
-      "type": "Control",
-      "scope": "#/properties/values",
-      "label": "Values"
     }
   ]
 }

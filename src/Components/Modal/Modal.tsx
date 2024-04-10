@@ -4,17 +4,18 @@ import Modal from '@mui/material/Modal';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
-
 const style = {
   position: 'absolute',
   top: '50%',
   left: '50%',
+  maxHeight: '80%',
+ overflowY: 'scroll',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  maxWidth: '90%',
   borderRadius:"12px",
   bgcolor: 'background.paper',
   boxShadow: 24,
-  p: 4,
+  p: 4, 
 };
 
 const ResponseModal = ({ children }: { children: React.ReactNode }) => {

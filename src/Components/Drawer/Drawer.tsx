@@ -10,7 +10,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import DrawerItems from './Drawer.json';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import { Divider, Grid, Switch } from '@mui/material';
+import { Divider, Grid } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { ThemeContext } from '../../contexts/themeContext';
 import { useContext } from 'react';
@@ -22,6 +22,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import TryIcon from '@mui/icons-material/Try';
 import UpdateIcon from '@mui/icons-material/Update';
+import AllInboxIcon from '@mui/icons-material/AllInbox';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 // ICONS <<
@@ -37,6 +38,7 @@ const iconMap: IconMapType = {
   MenuIcon: MenuIcon,
   TryIcon: TryIcon,
   UpdateIcon:UpdateIcon,
+  AllInboxIcon:AllInboxIcon
 };
 // TYPES <<
 

@@ -1,6 +1,6 @@
 import { Button } from '@mui/material';
 import axios from 'axios';
-import Arrow from '../Assets/Arrow';
+import Arrow from '../../Assets/Arrow';
 
 type DataValue = string | number | boolean | Array<any> | { [key: string]: any };
 

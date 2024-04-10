@@ -8,5 +8,10 @@
     "text": "Update and Encode",
     "icon": "UpdateIcon",
     "path": "/update-and-encode"
+  },
+  {
+    "text": "Store Conversation",
+    "icon": "AllInboxIcon",
+    "path": "/store-conversation"
   }
 ]
