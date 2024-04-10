@@ -7,22 +7,23 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { Box, Button, FormControlLabel, Grid, Typography } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
 import { makeStyles } from '@mui/styles';
 import Axios from 'axios';
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import ReactJson from 'react-json-view';
-import { useTheme } from '@mui/material/styles';
 
 import ApiCustomRender from '../../Components/ApiComponents/ApiCustomRender';
 import { customControlWithButtonTester } from '../../Components/ApiComponents/testers';
 import Container from '../../Components/Container/Container';
+import ResponseModal from '../../Components/Modal/Modal';
 import RatingControl from '../../Components/RatingControl/RatingControl';
 import ratingControlTester from '../../Components/RatingControl/ratingControlTester';
-import schema from './schema.json';
-import uischema from './uischema.json';
 import clearJsonData from './clearJsonData.json';
 import initialJsonData from './initialJsonData.json';
+import schema from './schema.json';
+import uischema from './uischema.json';
 const renderers = [
   ...materialRenderers,
   { tester: ratingControlTester, renderer: RatingControl },
@@ -35,6 +36,7 @@ const App: React.FC = () => {
   const [displayObjectSize, setDisplayObjectSize] = useState<boolean>(false);
   const [displayDataTypes, setDisplayDataTypes] = useState<boolean>(false);
   const [displayRaw, setDisplayRaw] = useState<boolean>(false);
+  const [apiResponse, setApiResponse] = useState(null);
   const classes = useStyles();
   const [loadingStates, setLoadingStates] = React.useState<{
     [key: string]: boolean;
@@ -99,13 +101,19 @@ const App: React.FC = () => {
   };
 
   const sendJson = async () => {
+    setApiResponse(null);
+
     setLoadingStates((prev) => ({ ...prev, sendJsonLoading: true }));
-    console.log('sending json', loadingStates);
     try {
-      const response = await Axios.post(
-        'http://localhost:3030/data',
-        transformedData
-      );
+      const useProxyForKnownCorsIssues = false;
+      const apiEndpoint = 'https://jsonplaceholder.typicode.com/posts';
+      const corsProxyUrl = 'https://cors-anywhere.herokuapp.com/';
+      const apiUrl = useProxyForKnownCorsIssues
+        ? `${corsProxyUrl}${apiEndpoint}`
+        : apiEndpoint;
+      const response = await Axios.post(apiUrl, transformedData);
+      setApiResponse(response.data);
+
       console.log('Response:', response.data);
     } catch (error) {
       console.error('Error sending JSON:', error);
@@ -191,9 +199,8 @@ const App: React.FC = () => {
                   overflowX: 'scroll',
                   scrollbarWidth: 'none',
                   borderRadius: '8px',
-                  border: `1.7px solid ${
-                    theme.palette.mode === 'dark' ? '#545454' : '#CBCBCB'
-                  }`,
+                  border: `1.7px solid ${theme.palette.mode === 'dark' ? '#545454' : '#CBCBCB'
+                    }`,
                 }}
               >
                 <ReactJson
@@ -213,9 +220,13 @@ const App: React.FC = () => {
                   displayDataTypes={displayDataTypes}
                   indentWidth={4}
                 />
-                <code style={{display: `${!displayRaw ? 'none' : 'block'}`, padding:"1rem"}}>
-
-                {JSON.stringify(transformedData, null, 2)}
+                <code
+                  style={{
+                    display: `${!displayRaw ? 'none' : 'block'}`,
+                    padding: '1rem',
+                  }}
+                >
+                  {JSON.stringify(transformedData, null, 2)}
                 </code>
               </Box>
             </div>
@@ -240,6 +251,22 @@ const App: React.FC = () => {
               >
                 Send data
               </LoadingButton>
+              {apiResponse && (
+                <ResponseModal>
+                  <h2>Response</h2>
+                  <ReactJson
+                    src={apiResponse}
+                    iconStyle='square'
+                    collapseStringsAfterLength={50}
+                    displayObjectSize={displayObjectSize}
+                    theme={theme.palette.mode === 'dark' ? 'pop' : 'rjv-default'}
+                    name={null}
+                    enableClipboard={true}
+                    displayDataTypes={displayDataTypes}
+                    indentWidth={4}
+                  />
+                </ResponseModal>
+              )}
             </Grid>
           </Grid>
         </Grid>

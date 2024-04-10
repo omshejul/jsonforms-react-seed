@@ -1,0 +1,104 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "goal_name": {
+      "type": "string"
+    },
+    "client_id": {
+      "type": "string"
+    },
+    "language": {
+      "type": "string"
+    },
+    "message": {
+      "type": "string"
+    },
+    "question": {
+      "type": "string"
+    },
+    "switch_language": {
+      "type": "boolean"
+    },
+    "slots": {
+      "type": "object",
+      "properties": {
+        "greetings": {
+          "$ref": "#/definitions/slot"
+        },
+        "renewal": {
+          "$ref": "#/definitions/slot"
+        },
+        "renewal_due_soon": {
+          "$ref": "#/definitions/slot"
+        },
+        "renewal_options": {
+          "$ref": "#/definitions/slot"
+        },
+        "contact_preferences": {
+          "$ref": "#/definitions/slot"
+        },
+        "confirm_schedule": {
+          "$ref": "#/definitions/slot"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "slot": {
+      "type": "object",
+      "properties": {
+        "question": {
+          "type": "string"
+        },
+        "response": {
+          "type": "string"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "datatype": {
+          "type": "string"
+        },
+        "required_format": {
+          "type": "string"
+        },
+        "exhaustive": {
+          "type": "boolean",
+          "default": false
+        },
+        "exhaustive_data": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sample": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "next_node": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "conditional_closing": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "reward": {
+          "type": "number"
+        },
+        "error_message": {
+          "type": "string"
+        }
+      },
+      "required": ["question"]
+    }
+  }
+}

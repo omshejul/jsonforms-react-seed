@@ -21,6 +21,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import TryIcon from '@mui/icons-material/Try';
+import UpdateIcon from '@mui/icons-material/Update';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 // ICONS <<
@@ -35,6 +36,7 @@ const iconMap: IconMapType = {
   MailIcon: MailIcon,
   MenuIcon: MenuIcon,
   TryIcon: TryIcon,
+  UpdateIcon:UpdateIcon,
 };
 // TYPES <<
 
@@ -74,14 +76,14 @@ export default function DrawerMenu() {
             </ListItemButton>
           </ListItem>
         ))}
-        <ListItem disablePadding>
+        {/* <ListItem disablePadding>
           <ListItemButton onClick={colorMode.toggleColorMode}>
             <ListItemIcon>
               {isDarkMode ? <Brightness7Icon /> : <Brightness4Icon />}
             </ListItemIcon>
             <ListItemText primary='Toggle Theme' />
           </ListItemButton>
-        </ListItem>
+        </ListItem> */}
       </List>
     </Box>
   );
@@ -95,10 +97,12 @@ export default function DrawerMenu() {
         <MenuIcon />
       </StyledButton>
 
-      <ListItemButton onClick={colorMode.toggleColorMode}>
+
+      <Button style={{aspectRatio:"1", borderRadius:"50vw", padding:"0"}} color="inherit" onClick={colorMode.toggleColorMode}>
 
               {isDarkMode ? <Brightness7Icon /> : <Brightness4Icon />}
-          </ListItemButton>
+          </Button>
+
 
       <Drawer open={open} onClose={toggleDrawer(false)}>
         {DrawerList}
