@@ -50,24 +50,6 @@ const App: React.FC = () => {
     setData(clearJsonData);
     // setTransformedData({});
   };
-  const formatNextNodeKeys = (data: any): any => {
-    if (Array.isArray(data)) {
-      return data.map(formatNextNodeKeys);
-    } else if (typeof data === 'object' && data !== null) {
-      const formattedObject: any = {};
-      Object.keys(data).forEach((key) => {
-        if (key === 'next_node' && typeof data[key] === 'string') {
-          formattedObject[key] = data[key].toLowerCase().replace(/\s+/g, '-');
-        } else if (key === 'next_node' && Array.isArray(data[key])) {
-          formattedObject[key] = formatNextNodeKeys(data[key]);
-        } else {
-          formattedObject[key] = formatNextNodeKeys(data[key]);
-        }
-      });
-      return formattedObject;
-    }
-    return data;
-  };
 
   const handleChanges = (updatedData: any) => {
     setData(updatedData);
