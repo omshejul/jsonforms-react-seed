@@ -6,9 +6,9 @@ import {
 import { JsonForms, withJsonFormsControlProps } from '@jsonforms/react';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SendIcon from '@mui/icons-material/Send';
 import LoadingButton from '@mui/lab/LoadingButton';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
   Accordion,
   AccordionDetails,
@@ -23,8 +23,8 @@ import {
 } from '@mui/material';
 import axios from 'axios';
 import React, { useState } from 'react';
-import RatingControl from '../RatingControl';
-import ratingControlTester from '../ratingControlTester';
+import RatingControl from '../RatingControl/RatingControl';
+import ratingControlTester from '../RatingControl/ratingControlTester';
 import RenderButton from './RenderButton';
 
 const renderers = [
@@ -204,18 +204,18 @@ const ApiCustomRender: React.FC<ControlProps> = ({
                   <Card style={{ marginTop: '10px' }}>
                     <CardContent>
                       <div className="flex justify-between">
-                          <Typography variant='h6'>
-                            {apis[index].name
-                              ? `Results from API: ${apis[index].name}`
-                              : `Results from API: ${index + 1}`}
-                          </Typography>
-                          <Grid item>
-                            <Tooltip title='Delete Results'>
-                              <IconButton onClick={() => deleteApiResult(index)}>
-                                <DeleteIcon />
-                              </IconButton>
-                            </Tooltip>
-                          </Grid>
+                        <Typography variant='h6'>
+                          {apis[index].name
+                            ? `Results from API: ${apis[index].name}`
+                            : `Results from API: ${index + 1}`}
+                        </Typography>
+                        <Grid item>
+                          <Tooltip title='Delete Results'>
+                            <IconButton onClick={() => deleteApiResult(index)}>
+                              <DeleteIcon />
+                            </IconButton>
+                          </Tooltip>
+                        </Grid>
                       </div>
                       {RenderButton(apiResults[index])}
                     </CardContent>

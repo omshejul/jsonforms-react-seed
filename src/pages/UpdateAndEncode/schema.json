@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string",
+      "title": "Client ID"
+    },
+    "language": {
+      "type": "string",
+      "oneOf": [
+        { "title": "Assamese অসমীয়া", "const": "as" },
+        { "title": "Bengali বাংলা", "const": "bn" },
+        { "title": "English", "const": "en" },
+        { "title": "Gujarati ગુજરાતી", "const": "gu" },
+        { "title": "Hindi हिंदी", "const": "hi" },
+        { "title": "Kannada ಕನ್ನಡ", "const": "kn" },
+        { "title": "Maithili मैथिली", "const": "mai" },
+        { "title": "Malayalam മലയാളം", "const": "ml" },
+        { "title": "Marathi मराठी", "const": "mr" },
+        { "title": "Meitei মৈতৈলোন্", "const": "mni" },
+        { "title": "Odia ଓଡ଼ିଆ", "const": "or" },
+        { "title": "Punjabi ਪੰਜਾਬੀ", "const": "pa" },
+        { "title": "Sanskrit संस्कृतम्", "const": "sa" },
+        { "title": "Tamil தமிழ்", "const": "ta" },
+        { "title": "Telugu తెలుగు", "const": "te" },
+        { "title": "Urdu اُردُو", "const": "ur" }
+      ]
+    },
+    "ner_key": {
+      "type": "string",
+      "title": "NER Key"
+    },
+    "values": {
+      "type": "array",
+      "title": "Values",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": ["client_id", "language", "ner_key", "values"]
+}

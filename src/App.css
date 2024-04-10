@@ -3,18 +3,20 @@
 html {
   font-size: 16px;
 }
-*{
-  font-family: "Figtree", sans-serif !important;
+body{
+  margin: 0;
+  padding: 0;
+}
+
+code{
+  font-family: Courier, monospace ;
 }
 .react-json-view *{
-  font-family: "Space Mono", monospace !important;
-    font-weight: 700 !important;
-  font-style: normal !important;
+  font-family: "Space Mono", monospace ;
+    font-weight: 700 ;
 }
 .react-json-view .string-value{  
-  font-family: "Space Mono", monospace !important;
-  font-weight: 700 !important;
-  font-style: italic !important;
+  font-style: italic ;
 }
 
 .MuiAccordionSummary-content .MuiGrid-container span {

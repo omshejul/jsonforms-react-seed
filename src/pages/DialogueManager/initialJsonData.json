@@ -1,0 +1,71 @@
+{
+  "goal_name": "Eastman_bot",
+  "client_id": "88",
+  "language": "en",
+  "message": "",
+  "question": "What is the capital of France?",
+  "switch_language": true,
+
+  "slots": [
+    {
+      "form_name": "Form 1",
+
+      "form_data": {
+        "question": "What is the capital of France?",
+        "bot_message": "question",
+        "response": "",
+        "choices": false,
+        "conditions": {
+          "pre_condition": "user_input.length > 0",
+          "pre_condition_error": "Input cannot be empty",
+          "post_condition": "user_input === 'Paris'",
+          "post_condition_error": "Wrong answer. The correct answer is Paris."
+        },
+        "apis": [
+          {
+            "name": "Some Name",
+            "endpoint": "https://httpbin.org/get",
+            "method": "GET",
+            "params": [
+              {
+                "key": "param1",
+                "value": "value1"
+              }
+            ],
+            "error_message": ""
+          }
+        ],
+        "functions": [
+          {
+            "name": "GetNumber",
+            "input": "data from previous step",
+            "output": "processed data",
+            "description": "Some Description"
+          }
+        ],
+        "execution_order": [
+          {
+            "type": "API",
+            "name": "Check Input Length",
+            "input": "user_input",
+            "evaluation_function": "lengthCheck"
+          },
+          {
+            "type": "FUNCTION",
+            "name": "Fetch Data"
+          }
+        ],
+        "next_node": [
+          {
+            "value_to_check": "user_input.startsWith('P')",
+            "condition_type": "",
+            "value_match": "sales",
+            "next_node": "If condition is true, navigate to the next_node node"
+          }
+        ],
+        "closing_message": false,
+        "error_message": "err"
+      }
+    }
+  ]
+}

@@ -4,7 +4,28 @@
   "properties": {
     "goal_name": { "type": "string" },
     "client_id": { "type": "string" },
-    "language": { "type": "string" },
+    "language": {
+      "type": "string",
+      "oneOf": [
+        { "title": "Assamese অসমীয়া", "const": "as" },
+        { "title": "Bengali বাংলা", "const": "bn" },
+        { "title": "English", "const": "en" },
+        { "title": "Gujarati ગુજરાતી", "const": "gu" },
+        { "title": "Hindi हिंदी", "const": "hi" },
+        { "title": "Kannada ಕನ್ನಡ", "const": "kn" },
+        { "title": "Maithili मैथिली", "const": "mai" },
+        { "title": "Malayalam മലയാളം", "const": "ml" },
+        { "title": "Marathi मराठी", "const": "mr" },
+        { "title": "Meitei মৈতৈলোন্", "const": "mni" },
+        { "title": "Odia ଓଡ଼ିଆ", "const": "or" },
+        { "title": "Punjabi ਪੰਜਾਬੀ", "const": "pa" },
+        { "title": "Sanskrit संस्कृतम्", "const": "sa" },
+        { "title": "Tamil தமிழ்", "const": "ta" },
+        { "title": "Telugu తెలుగు", "const": "te" },
+        { "title": "Urdu اُردُو", "const": "ur" }
+      ]
+      
+    },
     "message": { "type": "string" },
     "question": { "type": "string" },
     "switch_language": { "type": "boolean" },
@@ -101,7 +122,6 @@
                 "items": {
                   "type": "object",
                   "properties": {
-
                     "value_to_check": { "type": "string" },
                     "next_node": { "type": "string" },
                     "value_match": { "type": "string" },

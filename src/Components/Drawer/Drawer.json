@@ -1,0 +1,12 @@
+[
+  {
+    "text": "Dialogue Manager",
+    "icon": "TryIcon",
+    "path": "/dialogue-manager"
+  },
+  {
+    "text": "Update and Encode",
+    "icon": "MailIcon",
+    "path": "/update-and-encode"
+  }
+]

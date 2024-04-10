@@ -1,0 +1,31 @@
+{
+  "goal_name": "",
+  "client_id": "",
+  "language": "",
+  "message": "",
+  "question": "",
+  "switch_language": true,
+
+  "slots": [
+    {
+      "form_name": "",
+
+      "form_data": {
+        "question": "",
+        "bot_message": "",
+        "response": "",
+        "choices": false,
+        "conditions": {
+          "pre_condition": "",
+          "pre_condition_error": ""
+        },
+        "apis": [],
+        "functions": [],
+        "execution_order": [],
+        "next_node": [],
+        "closing_message": false,
+        "error_message": ""
+      }
+    }
+  ]
+}

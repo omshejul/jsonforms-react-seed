@@ -1,0 +1,17 @@
+{
+  "client_id": "22",
+  "language": "en",
+  "ner_key": "name",
+  "values": [
+    "My name is Aakash Sharma.",
+    "I go by Priya Gupta.",
+    "Call me Rahul Patel.",
+    "I'm known as Nisha Singh.",
+    "You can address me as Deepak Verma.",
+    "The name I respond to is Pooja Sharma.",
+    "People call me Rajesh Kumar.",
+    "In formal situations, I introduce myself as Anjali Yadav.",
+    "I use Suresh Dubey as my name.",
+    "Radhika Tiwari is what they call me."
+  ]
+}
