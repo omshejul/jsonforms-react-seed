@@ -4,7 +4,6 @@ import {
 } from '@jsonforms/material-renderers';
 import { JsonForms } from '@jsonforms/react';
 import DeleteIcon from '@mui/icons-material/Delete';
-import SendIcon from '@mui/icons-material/Send';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { Box, Button, FormControlLabel, Grid, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
@@ -13,7 +12,8 @@ import { makeStyles } from '@mui/styles';
 import Axios from 'axios';
 import React, { Fragment, useState } from 'react';
 import ReactJson from 'react-json-view';
-
+import SpellcheckIcon from '@mui/icons-material/Spellcheck';
+import SaveIcon from '@mui/icons-material/Save';
 import Container from '../../Components/Container/Container';
 import ResponseModal from '../../Components/Modal/Modal';
 import RatingControl from '../../Components/RatingControl/RatingControl';
@@ -28,7 +28,7 @@ const renderers = [
   ...materialRenderers,
   { tester: ratingControlTester, renderer: RatingControl },
 ];
-
+ 
 const App: React.FC = () => {
   // USE STATES
   const theme = useTheme();
@@ -36,7 +36,9 @@ const App: React.FC = () => {
   const [displayDataTypes, setDisplayDataTypes] = useState<boolean>(false);
   const [displayRaw, setDisplayRaw] = useState<boolean>(false);
   const [apiResponse, setApiResponse] = useState(null);
-  const [apiEndpoint, setApiEndpoint] = useState("https://jsonplaceholder.typicode.com/posts");
+  const [apiEndpoint, setApiEndpoint] = useState(
+    'https://jsonplaceholder.typicode.com/posts'
+  );
   const classes = useStyles();
   const [loadingStates, setLoadingStates] = React.useState<{
     [key: string]: boolean;
@@ -56,8 +58,14 @@ const App: React.FC = () => {
     setTransformedData(updatedData);
   };
 
-  const sendJson = async ({api, loadingState}: {api: string, loadingState: string}) => {
-    if (api) {  
+  const sendJson = async ({
+    api,
+    loadingState,
+  }: {
+    api: string;
+    loadingState: string;
+  }) => {
+    if (api) {
       setApiEndpoint(api);
     }
     setApiResponse(null);
@@ -209,8 +217,13 @@ const App: React.FC = () => {
                 color='primary'
                 loading={loadingStates.sendJsonLoading1}
                 loadingPosition='end'
-                onClick={() => sendJson({api:"https://dev.assisto.tech/utility/store_conversation",loadingState:"sendJsonLoading1"})}
-                endIcon={<SendIcon />}
+                onClick={() =>
+                  sendJson({
+                    api: 'https://dev.assisto.tech/utility/store_conversation',
+                    loadingState: 'sendJsonLoading1',
+                  })
+                }
+                endIcon={<SaveIcon />}
                 className={classes.resetButton}
               >
                 Store Conversation
@@ -220,36 +233,43 @@ const App: React.FC = () => {
                 color='primary'
                 loading={loadingStates.sendJsonLoading2}
                 loadingPosition='end'
-                onClick={() => sendJson({api:"https://dev.assisto.tech/utility/process_text",loadingState:"sendJsonLoading2"})}
-                endIcon={<SendIcon />}
+                onClick={() =>
+                  sendJson({
+                    api: 'https://dev.assisto.tech/utility/process_text',
+                    loadingState: 'sendJsonLoading2',
+                  })
+                }
+                endIcon={<SpellcheckIcon />}
                 className={classes.resetButton}
               >
                 Process Text
               </LoadingButton>
               {apiResponse && (
-                <ResponseModal>
-                  <h2>Response</h2>
-                  <h3>
-                    Endpoint: <code>{apiEndpoint}</code>
-                  </h3>
+                <>
+                  <ResponseModal>
+                    <h2>Response</h2>
+                    <h3>
+                      Endpoint: <code>{apiEndpoint}</code>
+                    </h3>
 
-                  <ReactJson
-                    style={{
-                      backgroundColor: 'hsla(0, 0, 0, 0)',
-                    }}
-                    src={apiResponse}
-                    iconStyle='square'
-                    collapseStringsAfterLength={50}
-                    displayObjectSize={displayObjectSize}
-                    theme={
-                      theme.palette.mode === 'dark' ? 'pop' : 'rjv-default'
-                    }
-                    name={null}
-                    enableClipboard={true}
-                    displayDataTypes={displayDataTypes}
-                    indentWidth={4}
-                  />
-                </ResponseModal>
+                    <ReactJson
+                      style={{
+                        backgroundColor: 'hsla(0, 0, 0, 0)',
+                      }}
+                      src={apiResponse}
+                      iconStyle='square'
+                      collapseStringsAfterLength={50}
+                      displayObjectSize={displayObjectSize}
+                      theme={
+                        theme.palette.mode === 'dark' ? 'pop' : 'rjv-default'
+                      }
+                      name={null}
+                      enableClipboard={true}
+                      displayDataTypes={displayDataTypes}
+                      indentWidth={4}
+                    />
+                  </ResponseModal>
+                </>
               )}
             </Grid>
           </Grid>
