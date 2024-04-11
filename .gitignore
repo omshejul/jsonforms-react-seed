@@ -63,3 +63,4 @@ build
 .yalc
 yalc.lock
 .DS_Store
+.env.development

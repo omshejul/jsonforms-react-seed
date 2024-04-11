@@ -108,7 +108,8 @@ const App: React.FC = () => {
 
     setLoadingStates((prev) => ({ ...prev, sendJsonLoading: true }));
     try {
-      const useProxyForKnownCorsIssues = false;
+      const useProxyForKnownCorsIssues = process.env.REACT_APP_ENV?"true":"false";
+      console.log('useProxy:', useProxyForKnownCorsIssues);
       const corsProxyUrl = 'https://cors-anywhere.herokuapp.com/';
       const apiUrl = useProxyForKnownCorsIssues
         ? `${corsProxyUrl}${apiEndpoint}`

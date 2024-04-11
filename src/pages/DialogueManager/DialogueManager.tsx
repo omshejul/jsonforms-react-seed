@@ -48,6 +48,7 @@ const App: React.FC = () => {
 
   // FUNCTIONS
 
+
   const clearData = () => {
     setData(clearJsonData);
     // setTransformedData({});
@@ -107,7 +108,8 @@ const App: React.FC = () => {
     setLoadingStates((prev) => ({ ...prev, sendJsonLoading: true }));
     console.log('sending json', loadingStates);
     try {
-      const useProxyForKnownCorsIssues = true;
+      const useProxyForKnownCorsIssues = process.env.REACT_APP_ENV?"true":"false";
+      console.log('useProxy:', useProxyForKnownCorsIssues);
       // const apiEndpoint = 'https://jsonplaceholder.typicode.com/posts';
       const corsProxyUrl = 'https://cors-anywhere.herokuapp.com/';
       const apiUrl = useProxyForKnownCorsIssues
