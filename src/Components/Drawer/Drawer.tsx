@@ -135,19 +135,34 @@ export default function DrawerMenu() {
         sx={{
           '& .MuiDrawer-paper': {
             borderRadius: '1rem',
-            backgroundColor: `${isDarkMode ? "rgba(24, 27, 34, 0.6)" : "rgba(255, 255, 255, 0.9)"}`,
+            backgroundColor: `${
+              isDarkMode ? 'rgba(24, 27, 34, 0.6)' : 'rgba(255, 255, 255, 0.9)'
+            }`,
             margin: '1rem',
             padding: '1rem',
-            maxHeight: '90%',
-            border:"1px solid hsla(0, 0%, 100%, 0.2)",
-            backgroundBlendMode: 'darken', 
-            backdropFilter: 'blur(5px)',
+            maxHeight: 'calc(100% - 2rem)',
+            border: '1px solid hsla(0, 0%, 100%, 0.2)',
+            backgroundBlendMode: 'darken',
+            backdropFilter: 'blur(10px)',
           },
         }}
         open={open}
         onClose={toggleDrawer(false)}
       >
-        {DrawerList}
+        <MenuItems className='justify-between'>
+          <div>{DrawerList}</div>
+          <div>
+            <Divider />
+            <ListItem disablePadding>
+              <ListItemButton onClick={colorMode.toggleColorMode}>
+                <ListItemIcon>
+                  {isDarkMode ? <Brightness7Icon /> : <Brightness4Icon />}
+                </ListItemIcon>
+                <ListItemText primary='Toggle Theme' />
+              </ListItemButton>
+            </ListItem>
+          </div>
+        </MenuItems>
       </Drawer>
     </NavBar>
   );
@@ -165,5 +180,12 @@ const NavBar = styled.nav`
 
 const StyledButton = styled(Button)`
   aspect-ratio: 1;
+`;
+// menuitems
+const MenuItems = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 `;
 // STYLES <<
