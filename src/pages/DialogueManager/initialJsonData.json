@@ -17,15 +17,16 @@
         "choices": false,
         "conditions": {
           "pre_condition": ["user_input.length > 0"],
-          "pre_condition": ["Input cannot be empty"],
-          "post_condition": "user_input === 'Paris'",
-          "post_condition_error": "Wrong answer. The correct answer is Paris."
+          "pre_condition_error": ["Input cannot be empty"],
+          "post_condition": ["user_input === 'Paris'"],
+          "post_condition_error": ["Wrong answer. The correct answer is Paris."]
         },
         "apis": [
           {
             "name": "Some Name",
             "endpoint": "https://httpbin.org/get",
             "method": "GET",
+            "output": "",
             "params": [
               {
                 "key": "param1",

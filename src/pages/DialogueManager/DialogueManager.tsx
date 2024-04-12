@@ -24,7 +24,6 @@ import initialJsonData from './initialJsonData.json';
 import schema from './schema.json';
 import uischema from './uischema.json';
 import ResponseModal from '../../Components/Modal/Modal';
-import { rankWith, scopeEndsWith } from '@jsonforms/core';
 const renderers = [
   ...materialRenderers,
   { tester: ratingControlTester, renderer: RatingControl },

@@ -250,6 +250,7 @@ const apiSchema = {
   properties: {
     name: { type: 'string' },
     endpoint: { type: 'string' },
+    output: { type: 'string' },
     method: { type: 'string', enum: ['GET', 'POST', 'PUT', 'DELETE'] },
     params: {
       type: 'array',
@@ -264,7 +265,7 @@ const apiSchema = {
     },
     error_message: { type: 'string' },
   },
-  required: ['name', 'endpoint', 'method', 'params', 'error_message'],
+  required: ['name', 'endpoint','output', 'method', 'params', 'error_message'],
 };
 
 const apiUiSchema = {
@@ -272,7 +273,8 @@ const apiUiSchema = {
   elements: [
     { type: 'Control', scope: '#/properties/name', label: 'Name' },
     { type: 'Control', scope: '#/properties/endpoint', label: 'Endpoint' },
-    { type: 'Control', scope: '#/properties/method', label: 'Method' },
+    { type: 'Control', scope: '#/properties/endpoint', label: 'Endpoint' },
+    { type: 'Control', scope: '#/properties/output', label: 'Output' },
     {
       type: 'Control',
       scope: '#/properties/params',

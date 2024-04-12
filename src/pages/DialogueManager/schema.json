@@ -60,10 +60,18 @@
                     }
                   },
                   "post_condition": {
-                    "type": "string",
-                    "description": "If condition is a python statement enclose with parentheses ()"
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "description": "If condition is a Python statement enclose with parentheses ()"
+                    }
                   },
-                  "post_condition_error": { "type": "string" }
+                  "post_condition_error": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
                 },
                 "required": ["pre_condition", "pre_condition_error"]
               },
@@ -74,6 +82,7 @@
                   "properties": {
                     "name": { "type": "string" },
                     "endpoint": { "type": "string" },
+                    "output": { "type": "string" },
                     "method": {
                       "type": "string",
                       "enum": ["GET", "POST", "PUT", "DELETE"]

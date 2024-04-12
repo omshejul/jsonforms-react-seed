@@ -37,8 +37,9 @@ const ResponseModal = ({ children }: { children: React.ReactNode }) => {
             onClick={handleClose}
             sx={{
               position: 'absolute',
-              right: 8,
-              top: 8,
+              right: "0.5rem",
+              top: "1rem",
+              border: '1px solid #77777735',
               color: (theme) => theme.palette.grey[500],
             }}
           >

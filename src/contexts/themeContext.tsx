@@ -15,7 +15,7 @@ export const CustomThemeProvider: React.FC = ({ children }) => {
         localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light'
       );
           useEffect(() => {
-      document.body.className = theme ? 'dark-theme' : 'light-theme';
+            document.body.className = mode === 'dark' ? 'dark-theme' : 'light-theme';
     }, [mode]);
 
   const colorMode = useMemo(
@@ -44,13 +44,13 @@ export const CustomThemeProvider: React.FC = ({ children }) => {
             },
             background: {
               default: '#1E2129',
-              paper: 'rgba(24, 27, 34)',
+              paper: '#11151e',
             },
           }),
           ...(mode === 'light' && {
             background: {
               default: 'hsl(0, 0%, 98%)',
-              paper: 'rgba(255, 255, 255)',
+              paper: 'hsl(0, 0%, 98%)',
             },
           }),
         },
@@ -70,7 +70,10 @@ export const CustomThemeProvider: React.FC = ({ children }) => {
           MuiPaper: {
             styleOverrides: {
               root: {
-                boxShadow: '0px 0px 0px 1px hsla(0, 0%, 50%, 0.3)',
+                margin:"-1px",
+                border:"1px solid hsla(0, 0%, 50%, 0.3)",
+                boxShadow: 'none',
+                // boxShadow: '0px 0px 0px 1px hsla(0, 0%, 50%, 0.3)',
               },
             },
           },

@@ -32,13 +32,26 @@ code {
 .react-json-view span {
   padding-left: 1px;
 }
+.MuiAvatar-root {
+  background-color: transparent !important;
+  font-weight: bold;
+  width: 2rem !important;
+  height: 2rem !important;
+}
+.light-theme .MuiAvatar-root{
+  color: #1976D2 !important;
+  border:2px solid hsla(210, 79%, 46%, 0.3) !important;
+
+}
+.dark-theme .MuiAvatar-root{
+  color: #65BAFF !important;
+  border:2px solid hsla(207, 100%, 70%, 0.3) !important;
+
+}
+
 @media screen and (max-width: 576px) {
   :root {
     font-size: 12px;
-  }
-  .MuiAvatar-root {
-    width: 2rem !important;
-    height: 2rem !important;
   }
   .MuiAccordionDetails-root {
     padding: 4px 8px 8px !important;
@@ -52,4 +65,7 @@ code {
 }
 .justify-between {
   justify-content: space-between;
+}
+h2{
+  margin-top: 0;
 }

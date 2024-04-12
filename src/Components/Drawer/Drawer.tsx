@@ -136,7 +136,7 @@ export default function DrawerMenu() {
           '& .MuiDrawer-paper': {
             borderRadius: '1rem',
             backgroundColor: `${
-              isDarkMode ? 'rgba(24, 27, 34, 0.6)' : 'rgba(255, 255, 255, 0.9)'
+              isDarkMode ? 'rgba(17, 21, 30, 0.6)' : 'rgba(255, 255, 255, 0.8)'
             }`,
             margin: '1rem',
             padding: '1rem',

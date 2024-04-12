@@ -95,13 +95,20 @@
                   "scope": "#/properties/form_data/properties/conditions/properties/post_condition",
                   "label": "Post Condition",
                   "options": {
-                    "showUnfocusedDescription": true
+                    "showUnfocusedDescription": true,
+                    "description": "If condition is a Python statement enclose with parentheses ()",
+                    "showSortButtons": true
                   }
                 },
                 {
                   "type": "Control",
                   "scope": "#/properties/form_data/properties/conditions/properties/post_condition_error",
-                  "label": "Post Condition Error"
+                  "label": "Post Condition Error",
+                  "options": {
+                    "showUnfocusedDescription": true,
+                    "description": "If condition is a Python statement enclose with parentheses ()",
+                    "showSortButtons": true
+                  }
                 }
               ]
             },
@@ -114,7 +121,7 @@
                   "label": "Node",
                   "scope": "#/properties/form_data/properties/next_node",
                   "options": {
-                    "elementLabelProp": "name",
+                    "elementLabelProp": "value_to_check",
                     "detail": {
                       "type": "VerticalLayout",
                       "elements": [
