@@ -75,13 +75,20 @@
                   "scope": "#/properties/form_data/properties/conditions/properties/pre_condition",
                   "label": "Pre Condition",
                   "options": {
-                    "showUnfocusedDescription": true
+                    "showUnfocusedDescription": true,
+                    "description": "If condition is a Python statement enclose with parentheses ()",
+                    "showSortButtons": true
                   }
                 },
                 {
                   "type": "Control",
                   "scope": "#/properties/form_data/properties/conditions/properties/pre_condition_error",
-                  "label": "Pre Condition Error"
+                  "label": "Pre Condition Error",
+                  "options": {
+                    "showUnfocusedDescription": true,
+                    "description": "If condition is a Python statement enclose with parentheses ()",
+                    "showSortButtons": true
+                  }
                 },
                 {
                   "type": "Control",

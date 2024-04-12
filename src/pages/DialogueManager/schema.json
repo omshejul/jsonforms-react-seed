@@ -24,7 +24,6 @@
         { "title": "Telugu తెలుగు", "const": "te" },
         { "title": "Urdu اُردُو", "const": "ur" }
       ]
-      
     },
     "message": { "type": "string" },
     "question": { "type": "string" },
@@ -48,10 +47,18 @@
                 "type": "object",
                 "properties": {
                   "pre_condition": {
-                    "type": "string",
-                    "description": "If condition is a python statement enclose with parentheses ()"
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "description": "If condition is a Python statement enclose with parentheses ()"
+                    }
                   },
-                  "pre_condition_error": { "type": "string" },
+                  "pre_condition_error": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
                   "post_condition": {
                     "type": "string",
                     "description": "If condition is a python statement enclose with parentheses ()"
