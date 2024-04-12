@@ -11,9 +11,9 @@ import styled from 'styled-components';
 import DrawerItems from './Drawer.json';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import { Divider, Grid } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { ThemeContext } from '../../contexts/themeContext';
-import { useContext } from 'react';
+import { useContext, useMemo } from 'react';
 import { useTheme } from '@mui/material/styles';
 
 // ICONS >>
@@ -37,23 +37,37 @@ const iconMap: IconMapType = {
   MailIcon: MailIcon,
   MenuIcon: MenuIcon,
   TryIcon: TryIcon,
-  UpdateIcon:UpdateIcon,
-  AllInboxIcon:AllInboxIcon
+  UpdateIcon: UpdateIcon,
+  AllInboxIcon: AllInboxIcon,
 };
 // TYPES <<
 
 // COMPONENT >>
 export default function DrawerMenu() {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   const navigate = useNavigate();
   const colorMode = useContext(ThemeContext);
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
   };
   const isDarkMode = theme.palette.mode === 'dark';
-  
-  
+
+  const location = useLocation();
+  const currentPage = useMemo(() => {
+    const currentItem = DrawerItems.find(
+      (item) => item.path === location.pathname
+    );
+    return {
+      title: currentItem ? currentItem.text : 'Default Title',
+      icon: currentItem
+        ? React.createElement(iconMap[currentItem.icon]! as any, {
+            fontSize: 'large',
+            style: { marginInlineEnd: '1rem' }, // Add your style here
+          })
+        : null,
+    };
+  }, [location.pathname]);
 
   const DrawerList = (
     <Box sx={{ width: 250 }} role='presentation' onClick={toggleDrawer(false)}>
@@ -99,14 +113,40 @@ export default function DrawerMenu() {
         <MenuIcon />
       </StyledButton>
 
+      <Typography
+        justifyContent={'center'}
+        alignItems={'center'}
+        display={'flex'}
+        textAlign={'center'}
+        variant='h4'
+      >
+        {currentPage.icon}
+        {currentPage.title}
+      </Typography>
+      <Button
+        style={{ aspectRatio: '1', borderRadius: '50vw', padding: '0' }}
+        color='inherit'
+        onClick={colorMode.toggleColorMode}
+      >
+        {isDarkMode ? <Brightness7Icon /> : <Brightness4Icon />}
+      </Button>
 
-      <Button style={{aspectRatio:"1", borderRadius:"50vw", padding:"0"}} color="inherit" onClick={colorMode.toggleColorMode}>
-
-              {isDarkMode ? <Brightness7Icon /> : <Brightness4Icon />}
-          </Button>
-
-
-      <Drawer open={open} onClose={toggleDrawer(false)}>
+      <Drawer
+        sx={{
+          '& .MuiDrawer-paper': {
+            borderRadius: '1rem',
+            backgroundColor: `${isDarkMode ? "rgba(24, 27, 34, 0.6)" : "rgba(255, 255, 255, 0.9)"}`,
+            margin: '1rem',
+            padding: '1rem',
+            maxHeight: '90%',
+            border:"1px solid hsla(0, 0%, 100%, 0.2)",
+            backgroundBlendMode: 'darken', 
+            backdropFilter: 'blur(5px)',
+          },
+        }}
+        open={open}
+        onClose={toggleDrawer(false)}
+      >
         {DrawerList}
       </Drawer>
     </NavBar>

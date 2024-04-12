@@ -72,7 +72,7 @@ const App: React.FC = () => {
 
     setLoadingStates((prev) => ({ ...prev, [loadingState]: true }));
     try {
-      const useProxyForKnownCorsIssues = process.env.REACT_APP_ENV?"true":"false";
+      const useProxyForKnownCorsIssues = process.env.REACT_APP_ENV?true:false;
       console.log('useProxy:', useProxyForKnownCorsIssues);
       // const apiEndpoint = 'https://jsonplaceholder.typicode.com/posts';
       const corsProxyUrl = 'https://cors-anywhere.herokuapp.com/';
@@ -95,20 +95,6 @@ const App: React.FC = () => {
   return (
     <Container>
       <Fragment>
-        <Typography
-          variant='h4'
-          margin={'1rem'}
-          marginTop={'2rem'}
-          justifyContent={'center'}
-          alignItems={'center'}
-          display={'flex'}
-          textAlign={'center'}
-          component='h4'
-        >
-          <AllInboxIcon fontSize='large' style={{ marginInlineEnd: '1rem' }} />{' '}
-          Store Conversation
-        </Typography>
-
         <Grid
           container
           justifyContent={'center'}

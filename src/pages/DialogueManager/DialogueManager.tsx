@@ -24,6 +24,7 @@ import initialJsonData from './initialJsonData.json';
 import schema from './schema.json';
 import uischema from './uischema.json';
 import ResponseModal from '../../Components/Modal/Modal';
+import { rankWith, scopeEndsWith } from '@jsonforms/core';
 const renderers = [
   ...materialRenderers,
   { tester: ratingControlTester, renderer: RatingControl },
@@ -108,7 +109,7 @@ const App: React.FC = () => {
     setLoadingStates((prev) => ({ ...prev, sendJsonLoading: true }));
     console.log('sending json', loadingStates);
     try {
-      const useProxyForKnownCorsIssues = process.env.REACT_APP_ENV?"true":"false";
+      const useProxyForKnownCorsIssues = process.env.REACT_APP_ENV?true:false;
       console.log('useProxy:', useProxyForKnownCorsIssues);
       // const apiEndpoint = 'https://jsonplaceholder.typicode.com/posts';
       const corsProxyUrl = 'https://cors-anywhere.herokuapp.com/';
@@ -131,20 +132,6 @@ const App: React.FC = () => {
   return (
     <Container>
       <Fragment>
-        <Typography
-          variant='h4'
-          margin={'1rem'}
-          marginTop={'2rem'}
-          justifyContent={'center'}
-          alignItems={'center'}
-          display={'flex'}
-          textAlign={'center'}
-          component='h4'
-        >
-          <TryIcon fontSize='large' style={{ marginInlineEnd: '1rem' }} />{' '}
-          Dialogue Manager
-        </Typography>
-
         <Grid
           container
           justifyContent={'center'}

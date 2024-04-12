@@ -108,7 +108,7 @@ const App: React.FC = () => {
 
     setLoadingStates((prev) => ({ ...prev, sendJsonLoading: true }));
     try {
-      const useProxyForKnownCorsIssues = process.env.REACT_APP_ENV?"true":"false";
+      const useProxyForKnownCorsIssues = process.env.REACT_APP_ENV?true:false;
       console.log('useProxy:', useProxyForKnownCorsIssues);
       const corsProxyUrl = 'https://cors-anywhere.herokuapp.com/';
       const apiUrl = useProxyForKnownCorsIssues
@@ -130,20 +130,6 @@ const App: React.FC = () => {
   return (
     <Container>
       <Fragment>
-        <Typography
-          variant='h4'
-          margin={'1rem'}
-          marginTop={'2rem'}
-          justifyContent={'center'}
-          alignItems={'center'}
-          display={'flex'}
-          textAlign={'center'}
-          component='h4'
-        >
-          <UpdateIcon fontSize='large' style={{ marginInlineEnd: '1rem' }} />
-          Update and Encode
-        </Typography>
-
         <Grid
           container
           justifyContent={'center'}

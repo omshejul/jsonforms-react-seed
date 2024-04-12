@@ -43,8 +43,14 @@ export const CustomThemeProvider: React.FC = ({ children }) => {
               main: 'rgb(255, 118, 111)',
             },
             background: {
-              default: '#212121',
-              paper: '#212121',
+              default: '#1E2129',
+              paper: 'rgba(24, 27, 34)',
+            },
+          }),
+          ...(mode === 'light' && {
+            background: {
+              default: 'hsl(0, 0%, 98%)',
+              paper: 'rgba(255, 255, 255)',
             },
           }),
         },
