@@ -40,7 +40,7 @@ code {
 }
 .light-theme .MuiAvatar-root{
   color: #1976D2 !important;
-  border:2px solid hsla(210, 79%, 46%, 0.3) !important;
+  border:2px solid hsla(210, 79%, 46%, 1) !important;
 
 }
 .dark-theme .MuiAvatar-root{

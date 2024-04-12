@@ -65,14 +65,16 @@ const App: React.FC = () => {
     api: string;
     loadingState: string;
   }) => {
+    setApiResponse(null);
     if (api) {
       setApiEndpoint(api);
     }
-    setApiResponse(null);
 
     setLoadingStates((prev) => ({ ...prev, [loadingState]: true }));
     try {
-      const useProxyForKnownCorsIssues = process.env.REACT_APP_ENV?true:false;
+      const useProxyForKnownCorsIssues = process.env.REACT_APP_ENV
+        ? true
+        : false;
       console.log('useProxy:', useProxyForKnownCorsIssues);
       // const apiEndpoint = 'https://jsonplaceholder.typicode.com/posts';
       const corsProxyUrl = 'https://cors-anywhere.herokuapp.com/';

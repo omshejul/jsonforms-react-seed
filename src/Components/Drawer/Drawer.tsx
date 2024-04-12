@@ -82,7 +82,7 @@ export default function DrawerMenu() {
             disablePadding
             onClick={() => navigate(item.path)}
           >
-            <ListItemButton>
+            <ListItemButton sx={{ borderRadius: '12px' }}>
               <ListItemIcon>
                 {iconMap[item.icon]
                   ? React.createElement(iconMap[item.icon]!)
@@ -154,7 +154,10 @@ export default function DrawerMenu() {
           <div>
             <Divider />
             <ListItem disablePadding>
-              <ListItemButton onClick={colorMode.toggleColorMode}>
+              <ListItemButton
+                sx={{ borderRadius: '12px' }}
+                onClick={colorMode.toggleColorMode}
+              >
                 <ListItemIcon>
                   {isDarkMode ? <Brightness7Icon /> : <Brightness4Icon />}
                 </ListItemIcon>
