@@ -6,14 +6,13 @@ import { JsonForms } from '@jsonforms/react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
 import LoadingButton from '@mui/lab/LoadingButton';
-import { Box, Button, FormControlLabel, Grid, Typography } from '@mui/material';
+import { Box, Button, FormControlLabel, Grid } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
 import { makeStyles } from '@mui/styles';
 import Axios from 'axios';
 import React, { Fragment, useState } from 'react';
 import ReactJson from 'react-json-view';
-import UpdateIcon from '@mui/icons-material/Update';
 
 import Container from '../../Components/Container/Container';
 import ApiCustomRender from '../../Components/CustomRenders/ApiComponents/ApiCustomRender';

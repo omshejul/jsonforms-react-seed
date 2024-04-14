@@ -5,7 +5,7 @@ import {
 import { JsonForms } from '@jsonforms/react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import LoadingButton from '@mui/lab/LoadingButton';
-import { Box, Button, FormControlLabel, Grid, Typography } from '@mui/material';
+import { Box, Button, FormControlLabel, Grid } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
 import { makeStyles } from '@mui/styles';
@@ -22,7 +22,7 @@ import clearJsonData from './clearJsonData.json';
 import initialJsonData from './initialJsonData.json';
 import schema from './schema.json';
 import uischema from './uischema.json';
-import AllInboxIcon from '@mui/icons-material/AllInbox';
+
 
 const renderers = [
   ...materialRenderers,

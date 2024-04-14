@@ -25,6 +25,51 @@
         { "title": "Urdu اُردُو", "const": "ur" }
       ]
     },
+    "source_language": {
+      "type": "string",
+      "oneOf": [
+        { "title": "", "const": "" },
+        { "title": "Assamese অসমীয়া", "const": "as" },
+        { "title": "Bengali বাংলা", "const": "bn" },
+        { "title": "English", "const": "en" },
+        { "title": "Gujarati ગુજરાતી", "const": "gu" },
+        { "title": "Hindi हिंदी", "const": "hi" },
+        { "title": "Kannada ಕನ್ನಡ", "const": "kn" },
+        { "title": "Maithili मैथिली", "const": "mai" },
+        { "title": "Malayalam മലയാളം", "const": "ml" },
+        { "title": "Marathi मराठी", "const": "mr" },
+        { "title": "Meitei মৈতৈলোন্", "const": "mni" },
+        { "title": "Odia ଓଡ଼ିଆ", "const": "or" },
+        { "title": "Punjabi ਪੰਜਾਬੀ", "const": "pa" },
+        { "title": "Sanskrit संस्कृतम्", "const": "sa" },
+        { "title": "Tamil தமிழ்", "const": "ta" },
+        { "title": "Telugu తెలుగు", "const": "te" },
+        { "title": "Urdu اُردُو", "const": "ur" }
+      ]
+    },
+    "traget_language": {
+      "type": "string",
+      "oneOf": [
+        { "title": "", "const": "" },
+        { "title": "Assamese অসমীয়া", "const": "as" },
+        { "title": "Bengali বাংলা", "const": "bn" },
+        { "title": "English", "const": "en" },
+        { "title": "Gujarati ગુજરાતી", "const": "gu" },
+        { "title": "Hindi हिंदी", "const": "hi" },
+        { "title": "Kannada ಕನ್ನಡ", "const": "kn" },
+        { "title": "Maithili मैथिली", "const": "mai" },
+        { "title": "Malayalam മലയാളം", "const": "ml" },
+        { "title": "Marathi मराठी", "const": "mr" },
+        { "title": "Meitei মৈতৈলোন্", "const": "mni" },
+        { "title": "Odia ଓଡ଼ିଆ", "const": "or" },
+        { "title": "Punjabi ਪੰਜਾਬੀ", "const": "pa" },
+        { "title": "Sanskrit संस्कृतम्", "const": "sa" },
+        { "title": "Tamil தமிழ்", "const": "ta" },
+        { "title": "Telugu తెలుగు", "const": "te" },
+        { "title": "Urdu اُردُو", "const": "ur" }
+      ]
+    },
+    "translated_output": { "type": "string" },
     "message": { "type": "string" },
     "question": { "type": "string" },
     "switch_language": { "type": "boolean" },

@@ -5,9 +5,8 @@ import {
 import { JsonForms } from '@jsonforms/react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
-import TryIcon from '@mui/icons-material/Try';
 import LoadingButton from '@mui/lab/LoadingButton';
-import { Box, Button, FormControlLabel, Grid, Typography } from '@mui/material';
+import { Box, Button, FormControlLabel, Grid } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
 import { makeStyles } from '@mui/styles';
@@ -48,10 +47,14 @@ const App: React.FC = () => {
 
   // FUNCTIONS
 
-
   const clearData = () => {
     setData(clearJsonData);
     // setTransformedData({});
+  };
+  const toggleDisplayRaw = () => {
+    setDisplayRaw(!displayRaw);
+    setDisplayDataTypes(false);
+    setDisplayObjectSize(false);
   };
   const formatNextNodeKeys = (data: any): any => {
     if (Array.isArray(data)) {
@@ -108,7 +111,9 @@ const App: React.FC = () => {
     setLoadingStates((prev) => ({ ...prev, sendJsonLoading: true }));
     console.log('sending json', loadingStates);
     try {
-      const useProxyForKnownCorsIssues = process.env.REACT_APP_ENV?true:false;
+      const useProxyForKnownCorsIssues = process.env.REACT_APP_ENV
+        ? true
+        : false;
       console.log('useProxy:', useProxyForKnownCorsIssues);
       // const apiEndpoint = 'https://jsonplaceholder.typicode.com/posts';
       const corsProxyUrl = 'https://cors-anywhere.herokuapp.com/';
@@ -157,6 +162,7 @@ const App: React.FC = () => {
                   sx={formControlLabelStyle}
                   control={
                     <Switch
+                      disabled={displayRaw}
                       checked={displayObjectSize}
                       onChange={() => setDisplayObjectSize(!displayObjectSize)}
                       name='displayObjectSize'
@@ -168,6 +174,7 @@ const App: React.FC = () => {
                   sx={formControlLabelStyle}
                   control={
                     <Switch
+                      disabled={displayRaw}
                       checked={displayDataTypes}
                       onChange={() => setDisplayDataTypes(!displayDataTypes)}
                       name='displayDataTypes'
@@ -180,7 +187,7 @@ const App: React.FC = () => {
                   control={
                     <Switch
                       checked={displayRaw}
-                      onChange={() => setDisplayRaw(!displayRaw)}
+                      onChange={toggleDisplayRaw}
                       name='displayRaw'
                     />
                   }

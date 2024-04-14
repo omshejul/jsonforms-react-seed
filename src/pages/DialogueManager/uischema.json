@@ -25,6 +25,21 @@
             },
             {
               "type": "Control",
+              "scope": "#/properties/source_language",
+              "label": "Source Language"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/traget_language",
+              "label": "Traget Language"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/translated_output",
+              "label": "Translated Output"
+            },
+            {
+              "type": "Control",
               "scope": "#/properties/switch_language",
               "label": "Switch Language"
             },

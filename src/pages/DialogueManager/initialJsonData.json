@@ -3,8 +3,11 @@
   "client_id": "88",
   "language": "en",
   "message": "",
-  "question": "What is the capital of France?",
+  "source_language": "",
+  "traget_language": "",
+  "translated output": "",
   "switch_language": true,
+  "question": "What is the capital of Germany?",
 
   "slots": [
     {
