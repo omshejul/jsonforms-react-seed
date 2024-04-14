@@ -52,6 +52,11 @@ const App: React.FC = () => {
     setData(clearJsonData);
     // setTransformedData({});
   };
+  const toggleDisplayRaw = () => {
+    setDisplayRaw(!displayRaw);
+    setDisplayDataTypes(false);
+    setDisplayObjectSize(false);
+  };
 
   const handleChanges = (updatedData: any) => {
     setData(updatedData);
@@ -118,11 +123,12 @@ const App: React.FC = () => {
           </Grid>
           <Grid item xs={12} lg={6}>
             <div className={classes.dataContent}>
-              <Box>
+            <Box>
                 <FormControlLabel
                   sx={formControlLabelStyle}
                   control={
                     <Switch
+                      disabled={displayRaw}
                       checked={displayObjectSize}
                       onChange={() => setDisplayObjectSize(!displayObjectSize)}
                       name='displayObjectSize'
@@ -134,6 +140,7 @@ const App: React.FC = () => {
                   sx={formControlLabelStyle}
                   control={
                     <Switch
+                      disabled={displayRaw}
                       checked={displayDataTypes}
                       onChange={() => setDisplayDataTypes(!displayDataTypes)}
                       name='displayDataTypes'
@@ -146,7 +153,7 @@ const App: React.FC = () => {
                   control={
                     <Switch
                       checked={displayRaw}
-                      onChange={() => setDisplayRaw(!displayRaw)}
+                      onChange={toggleDisplayRaw}
                       name='displayRaw'
                     />
                   }
