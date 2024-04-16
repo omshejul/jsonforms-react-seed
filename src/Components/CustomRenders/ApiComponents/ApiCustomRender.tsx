@@ -273,7 +273,7 @@ const apiUiSchema = {
   elements: [
     { type: 'Control', scope: '#/properties/name', label: 'Name' },
     { type: 'Control', scope: '#/properties/endpoint', label: 'Endpoint' },
-    { type: 'Control', scope: '#/properties/endpoint', label: 'Endpoint' },
+    { type: 'Control', scope: '#/properties/method', label: 'Method' },
     { type: 'Control', scope: '#/properties/output', label: 'Output' },
     {
       type: 'Control',

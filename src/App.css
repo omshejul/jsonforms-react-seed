@@ -65,6 +65,12 @@ code {
 .flex {
   display: flex;
 }
+.flexCenter{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
 .justify-between {
   justify-content: space-between;
 }

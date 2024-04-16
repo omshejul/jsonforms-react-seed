@@ -9,9 +9,8 @@ const RenderButton = (data: { [key: string]: DataValue }, level: number = 0, pat
     console.log("Post Data to server:", fullPath, value);
 
     try {
-      const response = await axios.post('http://localhost:3030/data', {
-        key: fullPath,
-        value,
+      const response = await axios.post('http://127.0.0.1:1880/data', {
+        [fullPath]: value,
       });
       console.log(response.data);
     } catch (error) {

@@ -15,7 +15,9 @@ import React, { Fragment, useState } from 'react';
 import ReactJson from 'react-json-view';
 import Container from '../../Components/Container/Container';
 import ApiCustomRender from '../../Components/CustomRenders/ApiComponents/ApiCustomRender';
+import QueryBuilderCustomRender from '../../Components/CustomRenders/QueryBuilder/QueryBuilderCustomRender';
 import { customControlWithButtonTester } from '../../Components/CustomRenders/ApiComponents/testers';
+import { queryBuilder } from '../../Components/CustomRenders/QueryBuilder/testers';
 import RatingControl from '../../Components/RatingControl/RatingControl';
 import ratingControlTester from '../../Components/RatingControl/ratingControlTester';
 import clearJsonData from './clearJsonData.json';
@@ -27,6 +29,7 @@ const renderers = [
   ...materialRenderers,
   { tester: ratingControlTester, renderer: RatingControl },
   { tester: customControlWithButtonTester, renderer: ApiCustomRender },
+  { tester: queryBuilder, renderer: QueryBuilderCustomRender },
 ];
 
 const apiEndpoint = 'https://jsonplaceholder.typicode.com/posts';
@@ -36,6 +39,7 @@ const App: React.FC = () => {
   const [displayObjectSize, setDisplayObjectSize] = useState<boolean>(false);
   const [displayDataTypes, setDisplayDataTypes] = useState<boolean>(false);
   const [displayRaw, setDisplayRaw] = useState<boolean>(false);
+  const [singlePartition, setSinglePartition] = useState<boolean>(false);
   const [apiResponse, setApiResponse] = useState(null);
 
   const classes = useStyles();
@@ -142,7 +146,7 @@ const App: React.FC = () => {
           spacing={1}
           className={classes.container}
         >
-          <Grid item xs={12} lg={6}>
+          <Grid item xs={12} lg={singlePartition ? 12 : 6}>
             <div className={classes.form}>
               {/* {console.log(data)} */}
               <JsonForms
@@ -155,7 +159,7 @@ const App: React.FC = () => {
               />
             </div>
           </Grid>
-          <Grid item xs={12} lg={6}>
+          <Grid item xs={12} lg={singlePartition ? 12 : 6}>
             <div className={classes.dataContent}>
               <Box>
                 <FormControlLabel
@@ -192,6 +196,17 @@ const App: React.FC = () => {
                     />
                   }
                   label='Raw'
+                />
+                <FormControlLabel
+                  sx={formControlLabelStyle}
+                  control={
+                    <Switch
+                      checked={singlePartition}
+                      onChange={() => setSinglePartition(!singlePartition)}
+                      name='singlePartition'
+                    />
+                  }
+                  label='Single Partition'
                 />
               </Box>
               <Box

@@ -45,7 +45,7 @@ const iconMap: IconMapType = {
 // COMPONENT >>
 export default function DrawerMenu() {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
   const colorMode = useContext(ThemeContext);
   const toggleDrawer = (newOpen: boolean) => () => {
