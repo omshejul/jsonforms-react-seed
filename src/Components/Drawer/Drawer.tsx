@@ -25,6 +25,7 @@ import UpdateIcon from '@mui/icons-material/Update';
 import AllInboxIcon from '@mui/icons-material/AllInbox';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
+import NodeRedIcon from '../Icons/NodeRedIcon';
 // ICONS <<
 
 //TYPES >>
@@ -39,6 +40,7 @@ const iconMap: IconMapType = {
   TryIcon: TryIcon,
   UpdateIcon: UpdateIcon,
   AllInboxIcon: AllInboxIcon,
+  NodeRedIcon: NodeRedIcon,
 };
 // TYPES <<
 

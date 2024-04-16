@@ -13,5 +13,10 @@
     "text": "Store Conversation",
     "icon": "AllInboxIcon",
     "path": "/store-conversation"
+  },
+  {
+    "text": "Node Red",
+    "icon": "NodeRedIcon",
+    "path": "/node-red"
   }
 ]
