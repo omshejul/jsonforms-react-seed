@@ -118,51 +118,51 @@ const QueryBuilderCustomRender: React.FC<ControlProps> = ({
         <RemoveCircleOutlineIcon />
       </Button>
     ),
-    valueEditor: (props: any) => (
-      <TextField
-        fullWidth
-        sx={{ marginInlineEnd: '0.5rem' }}
-        label='Value'
-        value={props.value}
-        onChange={(e) => props.handleOnChange(e.target.value)}
-        type='text'
-      />
-    ),
-    fieldSelector: ({ field, handleOnChange }: any) => (
-      <FormControl fullWidth sx={{ marginInlineEnd: '0.5rem' }}>
-        <InputLabel id='field-selector-label'>Field</InputLabel>
-        <Select
-          labelId='field-selector-label'
-          value={field}
-          onChange={(e) => handleOnChange(e.target.value)}
-          label='Field'
-        >
-          {fields.map((f) => (
-            <MenuItem key={f.name} value={f.name}>
-              {f.label}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    ),
+    // valueEditor: (props: any) => (
+    //   <TextField
+    //     fullWidth
+    //     sx={{ marginInlineEnd: '0.5rem' }}
+    //     label='Value'
+    //     value={props.value}
+    //     onChange={(e) => props.handleOnChange(e.target.value)}
+    //     type='text'
+    //   />
+    // ),
+    // fieldSelector: ({ field, handleOnChange }: any) => (
+    //   <FormControl fullWidth sx={{ marginInlineEnd: '0.5rem' }}>
+    //     <InputLabel id='field-selector-label'>Field</InputLabel>
+    //     <Select
+    //       labelId='field-selector-label'
+    //       value={field}
+    //       onChange={(e) => handleOnChange(e.target.value)}
+    //       label='Field'
+    //     >
+    //       {fields.map((f) => (
+    //         <MenuItem key={f.name} value={f.name}>
+    //           {f.label}
+    //         </MenuItem>
+    //       ))}
+    //     </Select>
+    //   </FormControl>
+    // ),
 
-    operatorSelector: (props?: any) => (
-      <FormControl fullWidth sx={{ marginInlineEnd: '0.5rem' }}>
-        <InputLabel id='operator-selector-label'>Operator</InputLabel>
-        <Select
-          labelId='operator-selector-label'
-          value={props.value}
-          onChange={(e) => props.handleOnChange(e.target.value)}
-          label='Operator'
-        >
-          {operators.map((op: Operator) => (
-            <MenuItem key={op.name} value={op.name}>
-              {op.label}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    ),
+    // operatorSelector: (props?: any) => (
+    //   <FormControl fullWidth sx={{ marginInlineEnd: '0.5rem' }}>
+    //     <InputLabel id='operator-selector-label'>Operator</InputLabel>
+    //     <Select
+    //       labelId='operator-selector-label'
+    //       value={props.value}
+    //       onChange={(e) => props.handleOnChange(e.target.value)}
+    //       label='Operator'
+    //     >
+    //       {operators.map((op: Operator) => (
+    //         <MenuItem key={op.name} value={op.name}>
+    //           {op.label}
+    //         </MenuItem>
+    //       ))}
+    //     </Select>
+    //   </FormControl>
+    // ),
     // combinatorSelector : ({ combinator, handleOnChange }:any) => (
     //   <FormControl fullWidth sx={{ marginInlineEnd: '0.5rem' }}>
     //     <InputLabel id="combinator-selector-label">Combinator</InputLabel>
