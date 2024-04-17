@@ -16,7 +16,7 @@
         "response": "",
         "choices": false,
         "conditions": {
-          "pre_condition": "",
+          "pre_condition": {},
           "pre_condition_error": ""
         },
         "apis": [],
