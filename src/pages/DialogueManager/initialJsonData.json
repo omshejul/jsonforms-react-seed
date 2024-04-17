@@ -19,7 +19,36 @@
         "response": "",
         "choices": false,
         "conditions": {
-          "pre_condition": ["user_input.length > 0"],
+          "pre_condition": {
+            "rules": [
+              {
+                "field": "firstName",
+                "operator": "=",
+                "valueSource": "value",
+                "value": "Om"
+              },
+              {
+                "field": "age",
+                "operator": ">=",
+                "valueSource": "value",
+                "value": "10"
+              },
+              {
+                "rules": [
+                  {
+                    "field": "age",
+                    "operator": ">",
+                    "valueSource": "value",
+                    "value": "20"
+                  }
+                ],
+                "combinator": "or",
+                "not": false
+              }
+            ],
+            "combinator": "and",
+            "not": false
+          },
           "pre_condition_error": ["Input cannot be empty"],
           "post_condition": ["user_input === 'Paris'"],
           "post_condition_error": ["Wrong answer. The correct answer is Paris."]

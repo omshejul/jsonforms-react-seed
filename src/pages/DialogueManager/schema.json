@@ -92,11 +92,7 @@
                 "type": "object",
                 "properties": {
                   "pre_condition": {
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "description": "If condition is a Python statement enclose with parentheses ()"
-                    }
+                    "type": "object"
                   },
                   "pre_condition_error": {
                     "type": "array",
