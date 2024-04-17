@@ -182,15 +182,15 @@ const QueryBuilderCustomRender: React.FC<ControlProps> = ({
 
   return (
     <>
-      <Grid container >
+      <Grid container  >
         <Typography variant='h6'>Pre Condition</Typography>
-        <Box >
+        <Box sx={{display:"grid",maxWidth:"85vw", overflowX:"scroll"}}>
           <QueryBuilder
             fields={fields}
             // query={initialData}
             onQueryChange={onQueryChange}
             controlElements={controlElements}
-            // combinators={combinators}
+            combinators={combinators}
           />
         </Box>
       </Grid>

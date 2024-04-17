@@ -4,6 +4,7 @@
   padding: 10px;
   /* background-color: #f9f9f9; */
   border-radius: 8px; /* Softening edges */
+
 }
 
 .ruleGroup {
@@ -85,6 +86,6 @@ color:white
 .ruleGroup::before {
   content: '↳';
   position: absolute;
-  left: -20px;
+  left: -17px;
   top: 1rem;
 }
