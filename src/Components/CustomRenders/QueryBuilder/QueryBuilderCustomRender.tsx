@@ -3,17 +3,12 @@ import { withJsonFormsControlProps } from '@jsonforms/react';
 import {
   Box,
   Button,
-  FormControl,
   Grid,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
   Tooltip,
-  Typography,
+  Typography
 } from '@mui/material';
 import React, { useMemo } from 'react';
-import QueryBuilder, { Operator } from 'react-querybuilder';
+import QueryBuilder from 'react-querybuilder';
 
 // import 'react-querybuilder/dist/query-builder.css';
 import './default.css';
@@ -61,9 +56,6 @@ const QueryBuilderCustomRender: React.FC<ControlProps> = ({
     ],
     []
   );
-
-  const initialData = useMemo(() => (Array.isArray(data) ? data : []), [data]);
-
   const onQueryChange = (query: any) => {
     handleChange(path, query);
   };
@@ -76,7 +68,7 @@ const QueryBuilderCustomRender: React.FC<ControlProps> = ({
           onClick={props.handleOnClick}
           aria-label='add group'
         >
-          <AddCircleOutlineIcon  sx={{marginInlineEnd:"0.25rem"}}/>
+          <AddCircleOutlineIcon sx={{ marginInlineEnd: '0.25rem' }} />
           <span style={{ fontSize: 'small' }}>Group</span>
         </Button>
       </Tooltip>
@@ -88,7 +80,7 @@ const QueryBuilderCustomRender: React.FC<ControlProps> = ({
           onClick={props.handleOnClick}
           aria-label='add rule'
         >
-          <AddCircleOutlineIcon sx={{marginInlineEnd:"0.25rem"}} />
+          <AddCircleOutlineIcon sx={{ marginInlineEnd: '0.25rem' }} />
           <span style={{ fontSize: 'small' }}>Rule</span>
         </Button>
       </Tooltip>
@@ -102,7 +94,7 @@ const QueryBuilderCustomRender: React.FC<ControlProps> = ({
           onClick={props.handleOnClick}
           aria-label='remove group'
         >
-          <RemoveCircleOutlineIcon  sx={{marginInlineEnd:"0.25rem"}}/>
+          <RemoveCircleOutlineIcon sx={{ marginInlineEnd: '0.25rem' }} />
           <span style={{ fontSize: 'small' }}>Group</span>
         </Button>
       </Tooltip>
@@ -178,16 +170,23 @@ const QueryBuilderCustomRender: React.FC<ControlProps> = ({
     //     </Select>
     //   </FormControl>
     //   )
-  }
+  };
 
   return (
     <>
-      <Grid container  >
+      <Grid container sx={{ display: 'grid' }}>
         <Typography variant='h6'>Pre Condition</Typography>
-        <Box sx={{display:"grid",maxWidth:"85vw", overflowX:"scroll"}}>
+        <Box
+          sx={{
+            display: 'grid',
+            maxWidth: 'calc(100vw-3rem)',
+            overflowX: 'scroll',
+            scrollbarWidth: 'thin'
+          }}
+        >
           <QueryBuilder
             fields={fields}
-            // query={initialData}
+            query={data}
             onQueryChange={onQueryChange}
             controlElements={controlElements}
             combinators={combinators}
