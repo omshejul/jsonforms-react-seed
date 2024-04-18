@@ -50,6 +50,7 @@ const ApiCustomRender: React.FC<ControlProps> = ({
       params: [],
       error_message: '',
     };
+
     const updatedApis = [...apis, newApi];
     setApis(updatedApis);
     handleChange(path, updatedApis);
@@ -203,7 +204,7 @@ const ApiCustomRender: React.FC<ControlProps> = ({
                 {apiResults[index] && (
                   <Card style={{ marginTop: '10px' }}>
                     <CardContent>
-                      <div className="flex justify-between">
+                      <div className='flex justify-between'>
                         <Typography variant='h6'>
                           {apis[index].name
                             ? `Results from API: ${apis[index].name}`
@@ -250,8 +251,14 @@ const apiSchema = {
   properties: {
     name: { type: 'string' },
     endpoint: { type: 'string' },
-    output: { type: 'string' },
+    output: {
+      type: 'array',
+      items: {
+        type: 'string',
+      },
+    },
     method: { type: 'string', enum: ['GET', 'POST', 'PUT', 'DELETE'] },
+    post_api_variable: { type: 'string'},
     params: {
       type: 'array',
       items: {
@@ -263,9 +270,15 @@ const apiSchema = {
         required: ['key', 'value'],
       },
     },
+    headers: {
+      type: 'object',
+      default: {
+        'Content-Type': 'application/json',
+      },
+    },
     error_message: { type: 'string' },
   },
-  required: ['name', 'endpoint','output', 'method', 'params', 'error_message'],
+  required: ['name', 'endpoint', 'output', 'method', 'params', 'error_message'],
 };
 
 const apiUiSchema = {
@@ -275,6 +288,7 @@ const apiUiSchema = {
     { type: 'Control', scope: '#/properties/endpoint', label: 'Endpoint' },
     { type: 'Control', scope: '#/properties/method', label: 'Method' },
     { type: 'Control', scope: '#/properties/output', label: 'Output' },
+    { type: 'Control', scope: '#/properties/post_api_variable', label: 'Post Aapi Variable' },
     {
       type: 'Control',
       scope: '#/properties/params',
