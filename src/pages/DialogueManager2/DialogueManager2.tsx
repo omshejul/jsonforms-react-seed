@@ -21,7 +21,7 @@ import RatingControl from '../../Components/RatingControl/RatingControl';
 import ratingControlTester from '../../Components/RatingControl/ratingControlTester';
 import { ArrayToObject } from '../../Components/Utility/ArrToObj';
 import clearJsonData from './clearJsonData.json';
-import initialJsonData from './initialJsonData.json';
+import initialJsonData from './initialJsonData2.json';
 import initialSchema from './schema.json';
 import uischema from './uischema.json';
 
@@ -83,7 +83,7 @@ const App: React.FC = () => {
           if (slot.apis) {
             const transformedApis = slot.apis.map((api: any) => {
               api.headers = { 'Content-Type': 'application/json' };
-              const paramsObject = api.params.reduce(
+              const paramsObject = (Array.isArray(api.params) ? api.params : []).reduce(
                 (paramsAcc: any, param: any) => {
                   paramsAcc[param.key] = param.value;
                   return paramsAcc;
