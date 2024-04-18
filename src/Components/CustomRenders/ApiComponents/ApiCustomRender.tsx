@@ -288,7 +288,7 @@ const apiUiSchema = {
     { type: 'Control', scope: '#/properties/endpoint', label: 'Endpoint' },
     { type: 'Control', scope: '#/properties/method', label: 'Method' },
     { type: 'Control', scope: '#/properties/output', label: 'Output' },
-    { type: 'Control', scope: '#/properties/post_api_variable', label: 'Post Aapi Variable' },
+    { type: 'Control', scope: '#/properties/post_api_variable', label: 'Post Api Variable' },
     {
       type: 'Control',
       scope: '#/properties/params',

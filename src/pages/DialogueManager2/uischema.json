@@ -157,11 +157,6 @@
                   ]
                 },
                 {
-                  "type": "Control",
-                  "scope": "#/properties/data/properties/error_message",
-                  "label": "Error Message"
-                },
-                {
                   "type": "VerticalLayout",
                   "elements": [
                     {
@@ -222,9 +217,17 @@
                     {
                       "type": "Control",
                       "scope": "#/properties/data/properties/execution_order",
-                      "label": "Execution Order"
+                      "label": "Execution Order",
+                      "options":{
+                        "showSortButtons":true
+                      }
                     }
                   ]
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/data/properties/error_message",
+                  "label": "Error Message"
                 }
               ]
             }

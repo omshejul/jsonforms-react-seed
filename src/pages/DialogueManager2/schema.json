@@ -139,7 +139,7 @@
         },
         "response": {
           "type": "string",
-          "default": "test"
+          "default": ""
         },
         "pre_condition": {
           "type": "object",
@@ -290,8 +290,7 @@
                 "enum": ["api", "function"]
               },
               "name": {
-                "type": "string",
-                "enum": ["None"]
+                "type": "string"
               }
             }
           }
