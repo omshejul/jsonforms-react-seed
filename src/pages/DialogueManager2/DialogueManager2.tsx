@@ -11,21 +11,19 @@ import { useTheme } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
 import { makeStyles } from '@mui/styles';
 import Axios from 'axios';
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import ReactJson from 'react-json-view';
 import Container from '../../Components/Container/Container';
 import ApiCustomRender from '../../Components/CustomRenders/ApiComponents/ApiCustomRender';
-import QueryBuilderCustomRender from '../../Components/CustomRenders/QueryBuilder/QueryBuilderCustomRender';
 import { customControlWithButtonTester } from '../../Components/CustomRenders/ApiComponents/testers';
-import { queryBuilder } from '../../Components/CustomRenders/QueryBuilder/testers';
+import ResponseModal from '../../Components/Modal/Modal';
 import RatingControl from '../../Components/RatingControl/RatingControl';
 import ratingControlTester from '../../Components/RatingControl/ratingControlTester';
+import { ArrayToObject } from '../../Components/Utility/ArrToObj';
 import clearJsonData from './clearJsonData.json';
 import initialJsonData from './initialJsonData.json';
 import initialSchema from './schema.json';
 import uischema from './uischema.json';
-import ResponseModal from '../../Components/Modal/Modal';
-import { ArrayToObject } from '../../Components/Utility/ArrToObj';
 
 const renderers = [
   ...materialRenderers,
@@ -39,7 +37,6 @@ const App: React.FC = () => {
   // USE STATES
   const theme = useTheme();
   const [schema, setSchema] = useState(initialSchema);
-  const [schemaVersion, setSchemaVersion] = useState(0);
   const [displayObjectSize, setDisplayObjectSize] = useState<boolean>(false);
   const [displayDataTypes, setDisplayDataTypes] = useState<boolean>(false);
   const [displayRaw, setDisplayRaw] = useState<boolean>(false);
@@ -65,17 +62,12 @@ const App: React.FC = () => {
     setDisplayObjectSize(false);
   };
 
-  const updateSchema = (newSchema:any) => {
-    setSchema(newSchema);
-    setSchemaVersion(prevVersion => prevVersion + 1);
-  };
-
   const handleChanges = async (updatedData: any) => {
     setData(updatedData);
     console.log('Original data:', updatedData);
 
     let tempTransformedData = { ...updatedData };
-
+    // Slots 🔻
     if (updatedData.slots) {
       const transformedSlots = updatedData.slots.reduce(
         (acc: any, slot: any) => {
@@ -87,7 +79,7 @@ const App: React.FC = () => {
             .toLowerCase()
             .replace(/\s+/g, '-');
           acc[transformedSlotName] = { ...slot.data, response: '' };
-
+          // Apis 🔻
           if (slot.apis) {
             const transformedApis = slot.apis.map((api: any) => {
               api.headers = { 'Content-Type': 'application/json' };
@@ -101,25 +93,33 @@ const App: React.FC = () => {
               return { ...api, params: paramsObject };
             });
 
-            acc[transformedSlotName].apis = ArrayToObject(
-              transformedApis,
-              'apis'
-            );
+            acc[transformedSlotName].apis = ArrayToObject(transformedApis);
           }
-
-          if (slot.data.execution_order) {
-            slot.data.execution_order.map((order: any) => {
-              if (order.type === 'api') {
-                slot.apis.map((api: any) => {
-                  const newSchema = { ...schema };
-                  newSchema.$defs.commonFields.properties.execution_order.items.properties.name.enum.push(api.name);
-                  updateSchema(newSchema);
-                  console.log(newSchema);
-                });
-              }
-              if (order.type === 'function') {
-                console.log('Function:', order.function);
-              }
+          // Execution Order
+          if (slot.data && Array.isArray(slot.data.execution_order)) {
+            slot.data.execution_order.forEach((order: any) => {
+              // Add to list 🔻
+              // if (order.type === 'api') {
+              //   let arr: any[] = [];
+              //   if (Array.isArray(slot.apis)) {
+              //     slot.apis.forEach((api: any) => {
+              //       const newSchema = { ...schema };
+              //       arr =
+              //         newSchema.$defs.commonFields.properties.execution_order
+              //           .items.properties.name.enum;
+              //       if (!arr.includes(api.name) && api.name.trim() !== '') {
+              //         arr.push(api.name);
+              //         setSchema(newSchema);
+              //       }
+              //     });
+              //     console.log('new enum', arr);
+              //   }
+              // } else if (order.type === 'function') {
+              //   const newSchema = { ...schema };
+              //   newSchema.$defs.commonFields.properties.execution_order.items.properties.name.enum =
+              //     ['1', '3'];
+              //   setSchema(newSchema);
+              // }
             });
           }
 
@@ -371,5 +371,3 @@ const useStyles = makeStyles({
     overflowX: 'scroll',
   },
 });
-
-
