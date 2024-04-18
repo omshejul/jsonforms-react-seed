@@ -1,0 +1,236 @@
+{
+  "type": "VerticalLayout",
+  "elements": [
+    {
+      "type": "Control",
+      "scope": "#",
+      "options": {
+        "detail": {
+          "type": "VerticalLayout",
+          "elements": [
+            {
+              "type": "Control",
+              "scope": "#/properties/goal_name",
+              "label": "Goal Name"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/client_id",
+              "label": "Client ID"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/language",
+              "label": "Language"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/source_language",
+              "label": "Source Language"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/traget_language",
+              "label": "Traget Language"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/translated_output",
+              "label": "Translated Output"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/switch_language",
+              "label": "Switch Language"
+            },
+
+            {
+              "type": "Control",
+              "scope": "#/properties/question",
+              "label": "Question"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "Control",
+      "scope": "#/properties/slots",
+      "options": {
+        "detail": {
+          "type": "VerticalLayout",
+          "elements": [
+            {
+              "type": "Control",
+              "scope": "#/properties/type",
+              "label": "Type"
+            },
+            {
+              "type": "VerticalLayout",
+              "elements": [
+                {
+                  "type": "Control",
+                  "scope": "#/properties/data/properties/question",
+                  "label": "Question"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/data/properties/choices",
+                  "label": "Choices"
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/data/properties/bot_message",
+                  "label": "Bot Message"
+                },
+                {
+                  "type": "Control",
+                  "label": "Pre-condition",
+                  "scope": "#/properties/data/properties/pre_condition",
+                  "elements": [
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/condition_type",
+                      "label": "Condition Type"
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/value_to_check",
+                      "label": "Value to Check"
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/condition",
+                      "label": "Condition"
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/error_message",
+                      "label": "Error Message"
+                    }
+                  ]
+                },
+                {
+                  "type": "Group",
+                  "label": "APIs",
+                  "elements": [
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/apis",
+                      "label": "apis",
+                      "options": {
+                        "detail": {
+                          "type": "VerticalLayout",
+                          "elements": [
+                            {
+                              "type": "Control",
+                              "scope": "#/properties/name",
+                              "label": "Name"
+                            },
+                            {
+                              "type": "Control",
+                              "scope": "#/properties/endpoint",
+                              "label": "Endpoint"
+                            },
+                            {
+                              "type": "Control",
+                              "scope": "#/properties/method",
+                              "label": "Method"
+                            },
+                            {
+                              "type": "Control",
+                              "scope": "#/properties/params",
+                              "label": "Params",
+                              "options": {
+                                "showSortButtons": false
+                              }
+                            },
+                            {
+                              "type": "Control",
+                              "scope": "#/properties/error_message",
+                              "label": "Error Message"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "Control",
+                  "scope": "#/properties/data/properties/error_message",
+                  "label": "Error Message"
+                },
+                {
+                  "type": "VerticalLayout",
+                  "elements": [
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/data/properties/functions",
+                      "label": "Functions",
+                      "options": {
+                        "detail": {
+                          "type": "VerticalLayout",
+                          "elements": [
+                            {
+                              "type": "Control",
+                              "scope": "#/properties/name",
+                              "label": "Name"
+                            },
+                            {
+                              "type": "Control",
+                              "scope": "#/properties/input",
+                              "label": "Input",
+                              "options": {
+                                "multi": true
+                              }
+                            },
+                            {
+                              "type": "Control",
+                              "scope": "#/properties/output",
+                              "label": "Output",
+                              "options": {
+                                "multi": true
+                              }
+                            },
+                            {
+                              "type": "Control",
+                              "scope": "#/properties/description",
+                              "label": "Description"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "VerticalLayout",
+                  "label": "Next Node Conditions",
+                  "elements": [
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/data/properties/next_node",
+                      "label": "Next Node"
+                    }
+                  ]
+                },
+                {
+                  "type": "VerticalLayout",
+                  "label": "Execution Order",
+                  "elements": [
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/data/properties/execution_order",
+                      "label": "Execution Order"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

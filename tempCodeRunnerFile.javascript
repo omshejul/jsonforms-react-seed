@@ -1,4 +1,4 @@
-{
+const json = {
     "goal_name": "eastman",//string
     "client_id": "88",//string
     "language": "en",//drop
@@ -44,8 +44,8 @@
             "error_message": "Invalid selection please select from above options only."//str
         },
         "service-segment": {
-            "question": "Please choose from the following options",str
-            "choices": true,bool
+            "question": "Please choose from the following options",//str
+            "choices": true,//bool
             "bot_message": "question",
             "response": "",
             "pre_condition": {
@@ -1149,3 +1149,9 @@
         }
     }
 }
+console.log(Object.keys(json.slots));
+
+Object.entries(json.slots).forEach(([key, value]) => {
+    console.log(key);
+    console.log(Object.keys(value));
+})

@@ -15,13 +15,18 @@
 
 .ruleGroup-header {
   display: flex;
-  justify-content: space-between;
+  margin-bottom: 0.5rem;
+
+  justify-content: space-between; 
   align-items: center;
   /* background-color: #e9ecef; */
   padding: 5px;
   border-bottom: 1px solid #ddd;
   border-top-left-radius: 6px; /* Rounded top corners */
   border-top-right-radius: 6px; /* Rounded top corners */
+}
+.ruleGroup-header select {
+  margin-right: auto; 
 }
 
 .ruleGroup-combinators {
@@ -42,11 +47,7 @@ color:white
 
 .rule {
   display: flex;
-  padding-top: 5px;
   margin-bottom: 0.5rem;
-  /* border: 1px solid hsla(0, 0%, 50%, 0.3); */
-  /* background-color: #fff; */
-  border-radius: 4px; /* Rounded corners for each rule */
   height: 3rem;
 }
 
@@ -58,11 +59,12 @@ color:white
   border: 1px solid hsla(0, 0%, 50%, 0.3);
   margin-right: 10px;
   background: transparent;
+  width: 100%;
 }
 
 .dark-theme .rule-fields,
-.rule-operators,
-.rule-value{
+.dark-theme .rule-operators,
+.dark-theme .rule-value{
   color:white
   }
 

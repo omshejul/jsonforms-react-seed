@@ -26,6 +26,7 @@ import AllInboxIcon from '@mui/icons-material/AllInbox';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import NodeRedIcon from '../Icons/NodeRedIcon';
+import ForumIcon from '@mui/icons-material/Forum';
 // ICONS <<
 
 //TYPES >>
@@ -33,7 +34,7 @@ type IconMapType = {
   [key: string]: React.ComponentType | undefined;
 };
 
-const iconMap: IconMapType = {
+const iconMap: any = {
   InboxIcon: InboxIcon,
   MailIcon: MailIcon,
   MenuIcon: MenuIcon,
@@ -41,6 +42,7 @@ const iconMap: IconMapType = {
   UpdateIcon: UpdateIcon,
   AllInboxIcon: AllInboxIcon,
   NodeRedIcon: NodeRedIcon,
+  ForumIcon:ForumIcon
 };
 // TYPES <<
 

@@ -5,6 +5,11 @@
     "path": "/dialogue-manager"
   },
   {
+    "text": "Dialogue Manager v2",
+    "icon": "ForumIcon",
+    "path": "/dialogue-manager-v2"
+  },
+  {
     "text": "Update and Encode",
     "icon": "UpdateIcon",
     "path": "/update-and-encode"

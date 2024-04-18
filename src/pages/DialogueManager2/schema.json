@@ -1,0 +1,306 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "goal_name": { "type": "string" },
+    "client_id": { "type": "string" },
+    "language": {
+      "type": "string",
+      "oneOf": [
+        { "title": "Assamese অসমীয়া", "const": "as" },
+        { "title": "Bengali বাংলা", "const": "bn" },
+        { "title": "English", "const": "en" },
+        { "title": "Gujarati ગુજરાતી", "const": "gu" },
+        { "title": "Hindi हिंदी", "const": "hi" },
+        { "title": "Kannada ಕನ್ನಡ", "const": "kn" },
+        { "title": "Maithili मैथिली", "const": "mai" },
+        { "title": "Malayalam മലയാളം", "const": "ml" },
+        { "title": "Marathi मराठी", "const": "mr" },
+        { "title": "Meitei মৈতৈলোন্", "const": "mni" },
+        { "title": "Odia ଓଡ଼ିଆ", "const": "or" },
+        { "title": "Punjabi ਪੰਜਾਬੀ", "const": "pa" },
+        { "title": "Sanskrit संस्कृतम्", "const": "sa" },
+        { "title": "Tamil தமிழ்", "const": "ta" },
+        { "title": "Telugu తెలుగు", "const": "te" },
+        { "title": "Urdu اُردُو", "const": "ur" }
+      ]
+    },
+    "source_language": {
+      "type": "string",
+      "oneOf": [
+        { "title": "", "const": "" },
+        { "title": "Assamese অসমীয়া", "const": "as" },
+        { "title": "Bengali বাংলা", "const": "bn" },
+        { "title": "English", "const": "en" },
+        { "title": "Gujarati ગુજરાતી", "const": "gu" },
+        { "title": "Hindi हिंदी", "const": "hi" },
+        { "title": "Kannada ಕನ್ನಡ", "const": "kn" },
+        { "title": "Maithili मैथिली", "const": "mai" },
+        { "title": "Malayalam മലയാളം", "const": "ml" },
+        { "title": "Marathi मराठी", "const": "mr" },
+        { "title": "Meitei মৈতৈলোন্", "const": "mni" },
+        { "title": "Odia ଓଡ଼ିଆ", "const": "or" },
+        { "title": "Punjabi ਪੰਜਾਬੀ", "const": "pa" },
+        { "title": "Sanskrit संस्कृतम्", "const": "sa" },
+        { "title": "Tamil தமிழ்", "const": "ta" },
+        { "title": "Telugu తెలుగు", "const": "te" },
+        { "title": "Urdu اُردُو", "const": "ur" }
+      ]
+    },
+    "traget_language": {
+      "type": "string",
+      "oneOf": [
+        { "title": "", "const": "" },
+        { "title": "Assamese অসমীয়া", "const": "as" },
+        { "title": "Bengali বাংলা", "const": "bn" },
+        { "title": "English", "const": "en" },
+        { "title": "Gujarati ગુજરાતી", "const": "gu" },
+        { "title": "Hindi हिंदी", "const": "hi" },
+        { "title": "Kannada ಕನ್ನಡ", "const": "kn" },
+        { "title": "Maithili मैथिली", "const": "mai" },
+        { "title": "Malayalam മലയാളം", "const": "ml" },
+        { "title": "Marathi मराठी", "const": "mr" },
+        { "title": "Meitei মৈতৈলোন্", "const": "mni" },
+        { "title": "Odia ଓଡ଼ିଆ", "const": "or" },
+        { "title": "Punjabi ਪੰਜਾਬੀ", "const": "pa" },
+        { "title": "Sanskrit संस्कृतम्", "const": "sa" },
+        { "title": "Tamil தமிழ்", "const": "ta" },
+        { "title": "Telugu తెలుగు", "const": "te" },
+        { "title": "Urdu اُردُو", "const": "ur" }
+      ]
+    },
+    "translated_output": { "type": "string" },
+    "message": { "type": "string" },
+    "question": { "type": "string" },
+    "switch_language": { "type": "boolean" },
+
+    "slots": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "greetings",
+              "service-segment",
+              "check-complaint-status-1",
+              "check-complaint-status-2",
+              "customer-number",
+              "customer-name",
+              "customer-pincode",
+              "customer-address",
+              "product-id",
+              "problem-id",
+              "serial-number-method",
+              "scan-serial-number",
+              "enter-serial-number",
+              "purchase-date",
+              "complaint-registration-confirm",
+              "complaint-registration-success",
+              "upload-bill",
+              "upload-warranty",
+              "product-registration-confirm",
+              "product-registration-success",
+              "query-1",
+              "query-2",
+              "sales-segment",
+              "sales-products-1",
+              "sales-products-2",
+              "sales-products-3",
+              "final-node",
+              "thanks"
+            ]
+          },
+          "data": {
+            "$ref": "#/$defs/commonFields"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "commonFields": {
+      "type": "object",
+      "properties": {
+        "question": {
+          "type": "string",
+          "description": "A prompt or question presented to the user."
+        },
+        "choices": {
+          "type": "boolean",
+          "description": "Indicates if there are choices available for the user."
+        },
+        "bot_message": {
+          "type": "string",
+          "default": "test",
+
+          "description": "A message from the bot, typically the question to display."
+        },
+        "response": {
+          "type": "string",
+          "default": "test"
+        },
+        "pre_condition": {
+          "type": "object",
+          "properties": {
+            "condition_type": {
+              "type": "string",
+              "enum": ["exact", "python", "polars", "similarity"],
+              "description": "The type of condition to evaluate the input."
+            },
+            "value_to_check": {
+              "type": "string",
+              "description": "The variable to be checked, usually user input."
+            },
+            "condition": {
+              "type": "string",
+              "description": "The specific condition to match against the input."
+            },
+            "error_message": {
+              "type": "string",
+              "description": "Message displayed on error."
+            }
+          }
+        },
+        "apis": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "endpoint": { "type": "string" },
+              "output": { "type": "string" },
+              "method": {
+                "type": "string",
+                "enum": ["GET", "POST", "PUT", "DELETE"]
+              },
+              "params": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "key": { "type": "string" },
+                    "value": { "type": "string" }
+                  },
+                  "required": ["key", "value"]
+                }
+              },
+              "error_message": { "type": "string" }
+            },
+            "required": ["name", "endpoint", "method"]
+          }
+        },
+        "functions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The name of the function, it will be used ad the key in the functions dictionary."
+              },
+              "input": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "description": "References to data outputs from APIs"
+                }
+              },
+              "output": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "description": "Names of the outputs this function produces"
+                }
+              },
+              "description": {
+                "type": "string",
+                "description": "A description of what the function does"
+              }
+            },
+            "required": ["name", "input", "output", "description"]
+          }
+        },
+        "next_node": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "condition_type": {
+                "type": "string",
+                "enum": ["exact", "python", "polars", "similarity"]
+              },
+              "value_to_check": {
+                "type": "string"
+              },
+              "condition": {
+                "type": "string"
+              },
+              "value_match": {
+                "type": "string"
+              },
+              "next_node": {
+                "type": "array",
+                "maxItems": 1,
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "greetings",
+                    "service-segment",
+                    "check-complaint-status-1",
+                    "check-complaint-status-2",
+                    "customer-number",
+                    "customer-name",
+                    "customer-pincode",
+                    "customer-address",
+                    "product-id",
+                    "problem-id",
+                    "serial-number-method",
+                    "scan-serial-number",
+                    "enter-serial-number",
+                    "purchase-date",
+                    "complaint-registration-confirm",
+                    "complaint-registration-success",
+                    "upload-bill",
+                    "upload-warranty",
+                    "product-registration-confirm",
+                    "product-registration-success",
+                    "query-1",
+                    "query-2",
+                    "sales-segment",
+                    "sales-products-1",
+                    "sales-products-2",
+                    "sales-products-3",
+                    "final-node",
+                    "thanks"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "execution_order": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": ["api", "function"]
+              },
+              "name": {
+                "type": "string",
+                "enum": ["None"]
+              }
+            }
+          }
+        },
+        "error_message": {
+          "type": "string",
+          "description": "Error message when the selection is invalid."
+        }
+      }
+    }
+  }
+}
