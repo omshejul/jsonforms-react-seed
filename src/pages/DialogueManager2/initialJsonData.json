@@ -1,1 +1,70 @@
-{}
+{
+    "goal_name": "eastman",
+    "client_id": "22",
+    "language": "en",
+    "source_language": "en",
+    "traget_language": "en",
+    "switch_language": true,
+    "question": "Hi, Hello, hi, hello, hey, Hey",
+    "slots": [
+        {
+            "response": "",
+            "type": "greetings",
+            "data": {
+                "question": "Welcome to Eastman Auto & Power Limited. Please choose from the following options",
+                "choices": true,
+                "bot_message": "question",
+                "response": "",
+                "pre_condition": {
+                    "condition_type": "python",
+                    "value_to_check": "{user_input}",
+                    "condition": "value",
+                    "error_message": "Please enter a 10 digit phone number"
+                },
+                "execution_order": [
+                    {
+                        "type": "api"
+                    }
+                ],
+                "functions": [
+                    {
+                        "name": "fnname",
+                        "input": [
+                            "test"
+                        ],
+                        "output": [
+                            "op"
+                        ],
+                        "description": "desc"
+                    }
+                ],
+                "next_node": [
+                    {
+                        "condition_type": "similarity",
+                        "value_to_check": "{user_input}",
+                        "condition": "(value)",
+                        "value_match": "Services",
+                        "next_node": [
+                            "customer-number"
+                        ]
+                    }
+                ]
+            },
+            "apis": [
+                {
+                    "name": "product_detail",
+                    "endpoint": " https://jsonplaceholder.typicode.com/posts",
+                    "method": "GET",
+                    "params": [],
+                    "error_message": "",
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "output": [
+                        "op"
+                    ]
+                }
+            ]
+        }
+    ]
+}
