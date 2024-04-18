@@ -11,7 +11,7 @@ import { useTheme } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
 import { makeStyles } from '@mui/styles';
 import Axios from 'axios';
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import ReactJson from 'react-json-view';
 import Container from '../../Components/Container/Container';
 import ApiCustomRender from '../../Components/CustomRenders/ApiComponents/ApiCustomRender';
@@ -36,7 +36,7 @@ const apiEndpoint = 'https://jsonplaceholder.typicode.com/posts';
 const App: React.FC = () => {
   // USE STATES
   const theme = useTheme();
-  const [schema, setSchema] = useState(initialSchema);
+  // const [schema, setSchema] = useState(initialSchema);
   const [displayObjectSize, setDisplayObjectSize] = useState<boolean>(false);
   const [displayDataTypes, setDisplayDataTypes] = useState<boolean>(false);
   const [displayRaw, setDisplayRaw] = useState<boolean>(false);
@@ -95,7 +95,7 @@ const App: React.FC = () => {
 
             acc[transformedSlotName].apis = ArrayToObject(transformedApis);
           }
-          // Execution Order
+          // Execution Order 🔻
           if (slot.data && Array.isArray(slot.data.execution_order)) {
             slot.data.execution_order.forEach((order: any) => {
               // Add to list 🔻
@@ -121,6 +121,12 @@ const App: React.FC = () => {
               //   setSchema(newSchema);
               // }
             });
+          }
+
+          // Functions 🔻
+          if (slot.data && Array.isArray(slot.data.functions)) {
+            acc[transformedSlotName].functions = ArrayToObject(slot.data.functions);
+
           }
 
           return acc;
@@ -175,7 +181,7 @@ const App: React.FC = () => {
             <div className={classes.form}>
               {/* {console.log(data)} */}
               <JsonForms
-                schema={schema}
+                schema={initialSchema}
                 uischema={uischema}
                 data={data}
                 renderers={renderers}

@@ -1,12 +1,6 @@
 import { ControlProps } from '@jsonforms/core';
 import { withJsonFormsControlProps } from '@jsonforms/react';
-import {
-  Box,
-  Button,
-  Grid,
-  Tooltip,
-  Typography
-} from '@mui/material';
+import { Box, Button, Grid, Tooltip, Typography } from '@mui/material';
 import React, { useMemo } from 'react';
 import QueryBuilder from 'react-querybuilder';
 
@@ -16,26 +10,26 @@ import './default.css';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 
-const operators = [
-  { name: 'equals', label: '=' },
-  { name: 'notEquals', label: '≠' },
-  { name: 'greaterThan', label: '>' },
-  { name: 'lessThan', label: '<' },
-  { name: 'greaterThanOrEqual', label: '≥' },
-  { name: 'lessThanOrEqual', label: '≤' },
-  { name: 'contains', label: 'Contains' },
-  { name: 'beginsWith', label: 'Begins With' },
-  { name: 'endsWith', label: 'Ends With' },
-  { name: 'doesNotContain', label: 'Does Not Contain' },
-  { name: 'doesNotBeginWith', label: 'Does Not Begin With' },
-  { name: 'doesNotEndWith', label: 'Does Not End With' },
-  { name: 'isNull', label: 'Is Null' },
-  { name: 'isNotNull', label: 'Is Not Null' },
-  { name: 'in', label: 'In' },
-  { name: 'notIn', label: 'Not In' },
-  { name: 'between', label: 'Between' },
-  { name: 'notBetween', label: 'Not Between' },
-];
+// const operators = [
+//   { name: 'equals', label: '=' },
+//   { name: 'notEquals', label: '≠' },
+//   { name: 'greaterThan', label: '>' },
+//   { name: 'lessThan', label: '<' },
+//   { name: 'greaterThanOrEqual', label: '≥' },
+//   { name: 'lessThanOrEqual', label: '≤' },
+//   { name: 'contains', label: 'Contains' },
+//   { name: 'beginsWith', label: 'Begins With' },
+//   { name: 'endsWith', label: 'Ends With' },
+//   { name: 'doesNotContain', label: 'Does Not Contain' },
+//   { name: 'doesNotBeginWith', label: 'Does Not Begin With' },
+//   { name: 'doesNotEndWith', label: 'Does Not End With' },
+//   { name: 'isNull', label: 'Is Null' },
+//   { name: 'isNotNull', label: 'Is Not Null' },
+//   { name: 'in', label: 'In' },
+//   { name: 'notIn', label: 'Not In' },
+//   { name: 'between', label: 'Between' },
+//   { name: 'notBetween', label: 'Not Between' },
+// ];
 
 const combinators = [
   { name: 'and', label: 'AND' },
@@ -181,7 +175,7 @@ const QueryBuilderCustomRender: React.FC<ControlProps> = ({
             display: 'grid',
             maxWidth: 'calc(100vw-3rem)',
             overflowX: 'scroll',
-            scrollbarWidth: 'thin'
+            scrollbarWidth: 'thin',
           }}
         >
           <QueryBuilder

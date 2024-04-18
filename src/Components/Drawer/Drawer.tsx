@@ -34,7 +34,7 @@ type IconMapType = {
   [key: string]: React.ComponentType | undefined;
 };
 
-const iconMap: any = {
+const iconMap: IconMapType = {
   InboxIcon: InboxIcon,
   MailIcon: MailIcon,
   MenuIcon: MenuIcon,
@@ -42,7 +42,7 @@ const iconMap: any = {
   UpdateIcon: UpdateIcon,
   AllInboxIcon: AllInboxIcon,
   NodeRedIcon: NodeRedIcon,
-  ForumIcon:ForumIcon
+  ForumIcon: ForumIcon,
 };
 // TYPES <<
 

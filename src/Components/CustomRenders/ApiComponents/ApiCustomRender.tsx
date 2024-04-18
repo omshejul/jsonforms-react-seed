@@ -13,6 +13,7 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Avatar,
   Box,
   Card,
   CardContent,
@@ -159,11 +160,15 @@ const ApiCustomRender: React.FC<ControlProps> = ({
               aria-controls={`panel${index}-content`}
               id={`panel${index}-header`}
             >
-              <Typography>
+              <Grid container alignItems={'center'}>
+
+              <Avatar>{index + 1}</Avatar>
+              <Typography sx={{margin:"1rem"}}>
                 {apis[index].name
                   ? apis[index].name + ' API Configurations'
                   : `API Configuration ${index + 1}`}
               </Typography>
+                  </Grid>
             </AccordionSummary>
             <AccordionDetails>
               <JsonForms
@@ -258,7 +263,7 @@ const apiSchema = {
       },
     },
     method: { type: 'string', enum: ['GET', 'POST', 'PUT', 'DELETE'] },
-    post_api_variable: { type: 'string'},
+    post_api_variable: { type: 'string' },
     params: {
       type: 'array',
       items: {
@@ -288,7 +293,11 @@ const apiUiSchema = {
     { type: 'Control', scope: '#/properties/endpoint', label: 'Endpoint' },
     { type: 'Control', scope: '#/properties/method', label: 'Method' },
     { type: 'Control', scope: '#/properties/output', label: 'Output' },
-    { type: 'Control', scope: '#/properties/post_api_variable', label: 'Post Api Variable' },
+    {
+      type: 'Control',
+      scope: '#/properties/post_api_variable',
+      label: 'Post Api Variable',
+    },
     {
       type: 'Control',
       scope: '#/properties/params',
