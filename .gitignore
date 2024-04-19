@@ -64,3 +64,4 @@ build
 yalc.lock
 .DS_Store
 .env.development
+.vscode/settings.json
