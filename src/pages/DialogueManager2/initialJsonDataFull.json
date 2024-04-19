@@ -1,0 +1,1193 @@
+{
+  "goal_name": "eastman",
+  "client_id": "88",
+  "language": "en",
+  "source_language": "en",
+  "traget_language": "en",
+  "switch_language": true,
+  "question": "Hi, Hello, hi, hello, hey, Hey",
+  "slots": [
+    {
+      "response": "",
+      "type": "greetings",
+      "data": {
+        "question": "Welcome to Eastman Auto & Power Limited. Please choose from the following options",
+        "choices": true,
+        "bot_message": "question",
+        "response": "",
+        "pre_condition": {
+          "condition_type": "python",
+          "value_to_check": "{user_input}",
+          "condition": "value",
+          "error_message": "Please enter a 10 digit phone number"
+        },
+        "execution_order": [],
+        "functions": [],
+        "next_node": [
+          {
+            "condition_type": "similarity",
+            "value_to_check": "{user_input}",
+            "condition": "(value)",
+            "value_match": "Services",
+            "next_node": ["service-segment"]
+          },
+          {
+            "condition_type": "similarity",
+            "value_to_check": "{user_input}",
+            "condition": "(value)",
+            "value_match": "Sales",
+            "next_node": ["customer-number"]
+          }
+        ],
+        "apis": []
+      },
+      "apis": []
+    },
+    {
+      "response": "",
+      "type": "service-segment",
+      "data": {
+        "question": "Please choose from the following options",
+        "choices": true,
+        "bot_message": "question",
+        "response": "",
+        "pre_condition": {
+          "condition_type": "python",
+          "value_to_check": "{user_input}",
+          "condition": "value",
+          "error_message": "Please enter a 10 digit phone number"
+        },
+        "execution_order": [],
+        "functions": [],
+        "next_node": [
+          {
+            "condition_type": "similarity",
+            "value_to_check": "{user_input}",
+            "condition": "(value)",
+            "value_match": "Raise a Complaint",
+            "next_node": ["customer-number"]
+          },
+          {
+            "condition_type": "similarity",
+            "value_to_check": "{user_input}",
+            "condition": "(value)",
+            "value_match": "Check Complaints Status",
+            "next_node": ["check-complaint-status-1"]
+          },
+          {
+            "condition_type": "similarity",
+            "value_to_check": "{user_input}",
+            "condition": "(value)",
+            "value_match": "Product Registration",
+            "next_node": ["customer-number"]
+          },
+          {
+            "condition_type": "similarity",
+            "value_to_check": "{user_input}",
+            "condition": "(value)",
+            "value_match": "Other Query",
+            "next_node": ["customer-number"]
+          }
+        ],
+        "apis": []
+      },
+      "apis": []
+    },
+    {
+      "response": "",
+      "type": "check-complaint-status-1",
+      "data": {
+        "question": "Enter the complaint number:",
+        "choices": true,
+        "bot_message": "question",
+        "response": "",
+        "pre_condition": {
+          "condition_type": "python",
+          "value_to_check": "{user_input}",
+          "condition": "(value.isalnum() and len(value) == 19)",
+          "error_message": "Please enter the 19 character complaint number."
+        },
+        "execution_order": [
+          {
+            "type": "api"
+          }
+        ],
+        "functions": [],
+        "next_node": [
+          {
+            "condition_type": "python",
+            "value_to_check": "{user_input}",
+            "condition": "(value)",
+            "value_match": "",
+            "next_node": ["check-complaint-status-2"]
+          }
+        ],
+        "apis": []
+      },
+      "apis": [
+        {
+          "name": "complaint_status",
+          "endpoint": "https://crm.eaplworld.com/WhatsAPP_API/prd/getComplaint_Status.php",
+          "method": "GET",
+          "params": [
+            {
+              "key": "complaint_no",
+              "value": "{user_input}"
+            }
+          ],
+          "error_message": "Invalid complaint number. Please try again",
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "output": ["complaint_status_name"]
+        }
+      ]
+    },
+    {
+      "response": "",
+      "type": "check-complaint-status-2",
+      "data": {
+        "question": "",
+        "choices": true,
+        "bot_message": "Complaint status for the complaint number {apis.complaint_status.output[0].complaint_no} is {apis.complaint_status.output[0].status}.",
+        "response": "",
+        "pre_condition": {
+          "condition_type": "python",
+          "value_to_check": "{user_input}",
+          "condition": "(value)",
+          "error_message": "Please enter the 19 character complaint number."
+        },
+        "execution_order": [],
+        "functions": [],
+        "next_node": [
+          {
+            "condition_type": "python",
+            "value_to_check": "{user_input}",
+            "condition": "",
+            "value_match": "",
+            "next_node": ["final-node"]
+          }
+        ],
+        "apis": []
+      },
+      "apis": []
+    },
+    {
+      "response": "",
+      "type": "customer-number",
+      "data": {
+        "question": "Please enter the phone number",
+        "choices": true,
+        "bot_message": "question",
+        "response": "",
+        "pre_condition": {
+          "condition_type": "python",
+          "value_to_check": "{user_input}",
+          "condition": "((value.isnumeric() and len(value) == 10))",
+          "error_message": "Please enter a 10 digit phone number"
+        },
+        "execution_order": [
+          {
+            "type": "api"
+          },
+          {
+            "type": "api"
+          },
+          {
+            "type": "function"
+          }
+        ],
+        "functions": [
+          {
+            "name": "list_product_details",
+            "input": ["{apis.product_details.output}"],
+            "output": ["resp"],
+            "description": ""
+          }
+        ],
+        "next_node": [
+          {
+            "condition_type": "python",
+            "value_to_check": "{apis.phone_api.output[0]}",
+            "condition": "('msg' in value)",
+            "value_match": "",
+            "next_node": ["customer-name"]
+          },
+          {
+            "condition_type": "python",
+            "value_to_check": "{greetings}",
+            "condition": "(value == 'Sales')",
+            "value_match": "",
+            "next_node": ["sales-segment"]
+          },
+          {
+            "condition_type": "python",
+            "value_to_check": "{apis.phone_api.output[0]}",
+            "condition": "('customer_id' in value)",
+            "value_match": "",
+            "next_node": ["product-id"]
+          }
+        ],
+        "apis": []
+      },
+      "apis": [
+        {
+          "name": "phone_api",
+          "endpoint": "https://crm.eaplworld.com/WhatsAPP_API/prd/getCustomer_Details.php",
+          "method": "GET",
+          "params": [
+            {
+              "key": "mobile",
+              "value": "{user_input}"
+            }
+          ],
+          "error_message": "Invalid phone number. Please try again",
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "output": ["phone_name"]
+        },
+        {
+          "name": "product_details",
+          "endpoint": "https://crm.eaplworld.com/WhatsAPP_API/prd/product_master.php",
+          "method": "GET",
+          "params": {},
+          "error_message": "Invalid complaint number. Please try again",
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "output": ["product_details"]
+        }
+      ]
+    },
+    {
+      "response": "",
+      "type": "customer-name",
+      "data": {
+        "question": "Please enter the customer's name.",
+        "choices": true,
+        "bot_message": "question",
+        "response": "",
+        "pre_condition": {
+          "condition_type": "python",
+          "value_to_check": "{user_input}",
+          "condition": "(value.replace(' ', '').isalpha())",
+          "error_message": "Please enter a valid name"
+        },
+        "execution_order": [],
+        "functions": [],
+        "next_node": [
+          {
+            "condition_type": "python",
+            "value_to_check": "{user_input}",
+            "condition": "(value)",
+            "value_match": "",
+            "next_node": ["customer-pincode"]
+          }
+        ],
+        "apis": []
+      },
+      "apis": []
+    },
+    {
+      "response": "",
+      "type": "customer-pincode",
+      "data": {
+        "question": "Please enter the pincode.",
+        "choices": true,
+        "bot_message": "question",
+        "response": "",
+        "pre_condition": {
+          "condition_type": "python",
+          "value_to_check": "{user_input}",
+          "condition": "(value.isnumeric() and len(value) == 6)",
+          "error_message": "Please enter the 6 digit pincode."
+        },
+        "execution_order": [
+          {
+            "type": "api"
+          }
+        ],
+        "functions": [],
+        "next_node": [
+          {
+            "condition_type": "python",
+            "value_to_check": "{user_input}",
+            "condition": "(value)",
+            "value_match": "",
+            "next_node": ["customer-address"]
+          }
+        ],
+        "apis": []
+      },
+      "apis": [
+        {
+          "name": "pincode_api",
+          "endpoint": "https://crm.eaplworld.com/WhatsAPP_API/prd/getPincode_master.php",
+          "method": "GET",
+          "params": [
+            {
+              "key": "pincode",
+              "value": "{user_input}"
+            }
+          ],
+          "error_message": "Invalid pincode. Please try again",
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "output": ["pincode_api"]
+        }
+      ]
+    },
+    {
+      "response": "",
+      "type": "customer-address",
+      "data": {
+        "question": "Please enter the address.",
+        "choices": true,
+        "bot_message": "question",
+        "response": "",
+        "pre_condition": {
+          "condition_type": "python",
+          "value_to_check": "{user_input}",
+          "condition": "(value)",
+          "error_message": "Please enter the 6 digit pincode."
+        },
+        "execution_order": [
+          {
+            "type": "function"
+          },
+          {
+            "type": "api"
+          }
+        ],
+        "functions": [
+          {
+            "name": "customer_registration",
+            "input": [
+              { "number": "{customer-number}" },
+              { "name": "{customer-name}" },
+              { "pincode": "{customer-pincode}" },
+              { "address": "{user_input}" },
+              { "api": "{apis.pincode_api.output[0]}" }
+            ],
+            "output": ["resp"],
+            "description": ""
+          }
+        ],
+        "next_node": [
+          {
+            "condition_type": "python",
+            "value_to_check": "{greetings}",
+            "condition": "(value == 'Sales')",
+            "value_match": "",
+            "next_node": ["sales-segment"]
+          },
+          {
+            "condition_type": "python",
+            "value_to_check": "{user_input}",
+            "condition": "(value)",
+            "value_match": "",
+            "next_node": ["product-id"]
+          }
+        ],
+        "apis": []
+      },
+      "apis": [
+        {
+          "name": "phone_api",
+          "endpoint": "https://crm.eaplworld.com/WhatsAPP_API/prd/getCustomer_Details.php",
+          "method": "GET",
+          "params": [
+            {
+              "key": "mobile",
+              "value": "{customer_number}"
+            }
+          ],
+          "error_message": "Invalid phone number. Please try again",
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "output": ["phone_name"]
+        }
+      ]
+    },
+    {
+      "response": "",
+      "type": "product-id",
+      "data": {
+        "question": "",
+        "choices": false,
+        "bot_message": "Please enter product id:\n{functions.list_product_details.output.resp}",
+        "response": "",
+        "pre_condition": {
+          "condition_type": "python",
+          "value_to_check": "{user_input}",
+          "condition": "(value.isnumeric() and int(value))",
+          "error_message": "Please enter a valid product id."
+        },
+        "execution_order": [
+          {
+            "type": "api"
+          },
+          {
+            "type": "function"
+          }
+        ],
+        "functions": [
+          {
+            "name": "list_problem_details",
+            "input": ["{apis.problem_details.output}"],
+            "output": ["resp"],
+            "description": ""
+          }
+        ],
+        "next_node": [
+          {
+            "condition_type": "python",
+            "value_to_check": "{service-segment}",
+            "condition": "(value == 'Raise a Complaint')",
+            "value_match": "",
+            "next_node": ["problem-id"]
+          },
+          {
+            "condition_type": "python",
+            "value_to_check": "{service-segment}",
+            "condition": "(value == 'Product Registration')",
+            "value_match": "",
+            "next_node": ["serial-number-method"]
+          },
+          {
+            "condition_type": "python",
+            "value_to_check": "{service-segment}",
+            "condition": "(value == 'Other Query')",
+            "value_match": "",
+            "next_node": ["query-1"]
+          },
+          {
+            "condition_type": "python",
+            "value_to_check": "{user_input}",
+            "condition": "(value)",
+            "value_match": "",
+            "next_node": ["final-node"]
+          }
+        ],
+        "apis": []
+      },
+      "apis": [
+        {
+          "name": "problem_details",
+          "endpoint": "https://crm.eaplworld.com/WhatsAPP_API/prd/getProblem_Reported.php",
+          "method": "GET",
+          "params": [
+            {
+              "key": "mobile",
+              "value": "{user_input}"
+            }
+          ],
+          "error_message": "Invalid product id. Please try again",
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "output": ["problem_details"]
+        }
+      ]
+    },
+    {
+      "response": "",
+      "type": "problem-id",
+      "data": {
+        "question": "",
+        "choices": false,
+        "bot_message": "Please enter problem id:\n{functions.list_problem_details.output.resp}",
+        "response": "",
+        "pre_condition": {
+          "condition_type": "python",
+          "value_to_check": "{user_input}",
+          "condition": "(value.isnumeric())",
+          "error_message": "Please enter a valid product id."
+        },
+        "execution_order": [],
+        "functions": [],
+        "next_node": [
+          {
+            "condition_type": "python",
+            "value_to_check": "{user_input}",
+            "condition": "(value)",
+            "value_match": "",
+            "next_node": ["serial-number-method"]
+          }
+        ],
+        "apis": []
+      },
+      "apis": []
+    },
+    {
+      "response": "",
+      "type": "serial-number-method",
+      "data": {
+        "question": "How would you like to enter the serial number?",
+        "choices": true,
+        "bot_message": "question",
+        "response": "",
+        "pre_condition": {
+          "condition_type": "python",
+          "value_to_check": "{user_input}",
+          "condition": "(value)",
+          "error_message": "Please enter a valid product id."
+        },
+        "execution_order": [],
+        "functions": [],
+        "next_node": [
+          {
+            "condition_type": "similarity",
+            "value_to_check": "{user_input}",
+            "condition": "",
+            "value_match": "Scan QR Code",
+            "next_node": ["scan-serial-number"]
+          },
+          {
+            "condition_type": "similarity",
+            "value_to_check": "{user_input}",
+            "condition": "",
+            "value_match": "Enter Manually",
+            "next_node": ["enter-serial-number"]
+          }
+        ],
+        "apis": []
+      },
+      "apis": []
+    },
+    {
+      "response": "",
+      "type": "scan-serial-number",
+      "data": {
+        "question": "",
+        "choices": true,
+        "bot_message": "Scan the QR code to the serial number at: https://qr.assisto.tech/?phonenumber={public_id}&type=product",
+        "response": "",
+        "pre_condition": {
+          "condition_type": "python",
+          "value_to_check": "{user_input}",
+          "condition": "(value)",
+          "error_message": "Please enter a valid product id."
+        },
+        "execution_order": [],
+        "functions": [],
+        "next_node": [
+          {
+            "condition_type": "python",
+            "value_to_check": "{user_input}",
+            "condition": "value",
+            "value_match": "",
+            "next_node": ["purchase-date"]
+          }
+        ],
+        "apis": []
+      },
+      "apis": []
+    },
+    {
+      "response": "",
+      "type": "enter-serial-number",
+      "data": {
+        "question": "Enter the serial number as given on the box.",
+        "choices": true,
+        "bot_message": "question",
+        "response": "",
+        "pre_condition": {
+          "condition_type": "python",
+          "value_to_check": "{user_input}",
+          "condition": "(value.isalnum() and len(value) == 17)",
+          "error_message": "Please enter a valid 17 character serial number."
+        },
+        "execution_order": [
+          {
+            "type": "api"
+          }
+        ],
+        "functions": [],
+        "next_node": [
+          {
+            "condition_type": "python",
+            "value_to_check": "{apis.serial_validate.output.response.message.responseStatus}",
+            "condition": "(value == '1')",
+            "value_match": "",
+            "next_node": ["purchase-date"]
+          }
+        ],
+        "apis": []
+      },
+      "apis": [
+        {
+          "name": "serial_validate",
+          "endpoint": "https://crm.eaplworld.com/Serial_API/getValidateSerial_crm.php",
+          "method": "POST",
+          "params": {},
+          "error_message": "Invalid product id. Please try again",
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "output": ["serial_validate"]
+        }
+      ]
+    },
+    {
+      "response": "",
+      "type": "purchase-date",
+      "data": {
+        "question": "Enter the purchase date of the product in DD-MM-YYYY format.",
+        "choices": false,
+        "bot_message": "question",
+        "response": "",
+        "pre_condition": {
+          "condition_type": "python",
+          "value_to_check": "{user_input}",
+          "condition": "(value)",
+          "error_message": "Please enter a valid product id."
+        },
+        "execution_order": [],
+        "functions": [],
+        "next_node": [
+          {
+            "condition_type": "python",
+            "value_to_check": "{service-segment}",
+            "condition": "(value == 'Raise a Complaint')",
+            "value_match": "",
+            "next_node": ["complaint-registration-confirm"]
+          },
+          {
+            "condition_type": "python",
+            "value_to_check": "{service-segment}",
+            "condition": "(value == 'Product Registration')",
+            "value_match": "",
+            "next_node": ["upload-bill"]
+          },
+          {
+            "condition_type": "python",
+            "value_to_check": "{user_input}",
+            "condition": "(value)",
+            "value_match": "",
+            "next_node": ["greetings"]
+          }
+        ],
+        "apis": []
+      },
+      "apis": []
+    },
+    {
+      "response": "",
+      "type": "complaint-registration-confirm",
+      "data": {
+        "question": "Do you want to register the complaint?",
+        "choices": true,
+        "bot_message": "question",
+        "response": "",
+        "pre_condition": {
+          "condition_type": "python",
+          "value_to_check": "{user_input}",
+          "condition": "(value)",
+          "error_message": "Please enter a valid product id."
+        },
+        "execution_order": [
+          {
+            "type": "function"
+          }
+        ],
+        "functions": [
+          {
+            "name": "complaint_registration",
+            "input": [
+              {
+                "public_id": "{public_id}"
+              }
+            ],
+            "output": ["resp"],
+            "description": ""
+          }
+        ],
+        "next_node": [
+          {
+            "condition_type": "exact",
+            "value_to_check": "{user_input}",
+            "condition": "(value)",
+            "value_match": "Yes",
+            "next_node": ["complaint-registration-success"]
+          },
+          {
+            "condition_type": "exact",
+            "value_to_check": "{user_input}",
+            "condition": "(value)",
+            "value_match": "No",
+            "next_node": ["final-node"]
+          }
+        ],
+        "apis": []
+      },
+      "apis": []
+    },
+    {
+      "response": "",
+      "type": "complaint-registration-success",
+      "data": {
+        "question": "Complaint registration status.",
+        "choices": true,
+        "bot_message": "{functions.complaint_registration.output.resp[0].error_msg}",
+        "response": "",
+        "pre_condition": {
+          "condition_type": "python",
+          "value_to_check": "{user_input}",
+          "condition": "(value)",
+          "error_message": "Please enter a valid product id."
+        },
+        "execution_order": [],
+        "functions": [],
+        "next_node": [
+          {
+            "condition_type": "python",
+            "value_to_check": "{user_input}",
+            "condition": "(value)",
+            "value_match": "",
+            "next_node": ["final-node"]
+          }
+        ],
+        "apis": []
+      },
+      "apis": []
+    },
+    {
+      "response": "",
+      "type": "upload-bill",
+      "data": {
+        "question": "Upload purchase bill.",
+        "choices": true,
+        "bot_message": "question",
+        "response": "",
+        "pre_condition": {
+          "condition_type": "python",
+          "value_to_check": "{user_input}",
+          "condition": "(value)",
+          "error_message": "Please enter a valid product id."
+        },
+        "execution_order": [],
+        "functions": [],
+        "next_node": [
+          {
+            "condition_type": "python",
+            "value_to_check": "{user_input}",
+            "condition": "(value)",
+            "value_match": "",
+            "next_node": ["upload-warranty"]
+          }
+        ],
+        "apis": []
+      },
+      "apis": []
+    },
+    {
+      "response": "",
+      "type": "upload-warranty",
+      "data": {
+        "question": "Upload Warranty card.",
+        "choices": true,
+        "bot_message": "question",
+        "response": "",
+        "pre_condition": {
+          "condition_type": "python",
+          "value_to_check": "{user_input}",
+          "condition": "(value)",
+          "error_message": "Please enter a valid product id."
+        },
+        "execution_order": [],
+        "functions": [],
+        "next_node": [
+          {
+            "condition_type": "python",
+            "value_to_check": "{user_input}",
+            "condition": "(value)",
+            "value_match": "",
+            "next_node": ["product-registration-confirm"]
+          }
+        ],
+        "apis": []
+      },
+      "apis": []
+    },
+    {
+      "response": "",
+      "type": "product-registration-confirm",
+      "data": {
+        "question": "Do you want to register the product?",
+        "choices": true,
+        "bot_message": "question",
+        "response": "",
+        "pre_condition": {
+          "condition_type": "python",
+          "value_to_check": "{user_input}",
+          "condition": "(value)",
+          "error_message": "Please enter a valid product id."
+        },
+        "execution_order": [
+          {
+            "type": "function"
+          }
+        ],
+        "functions": [
+          {
+            "name": "product_registration",
+            "input": [
+              {
+                "public_id": "{public_id}"
+              }
+            ],
+            "output": ["resp"],
+            "description": ""
+          }
+        ],
+        "next_node": [
+          {
+            "condition_type": "exact",
+            "value_to_check": "{user_input}",
+            "condition": "(value)",
+            "value_match": "Yes",
+            "next_node": ["product-registration-success"]
+          },
+          {
+            "condition_type": "exact",
+            "value_to_check": "{user_input}",
+            "condition": "(value)",
+            "value_match": "No",
+            "next_node": ["final-node"]
+          }
+        ],
+        "apis": []
+      },
+      "apis": []
+    },
+    {
+      "response": "",
+      "type": "product-registration-success",
+      "data": {
+        "question": "Complaint registration status.",
+        "choices": true,
+        "bot_message": "{functions.product_registration.output.resp[0].error_msg}",
+        "response": "",
+        "pre_condition": {
+          "condition_type": "python",
+          "value_to_check": "{user_input}",
+          "condition": "(value)",
+          "error_message": "Please enter a valid product id."
+        },
+        "execution_order": [],
+        "functions": [],
+        "next_node": [
+          {
+            "condition_type": "python",
+            "value_to_check": "{user_input}",
+            "condition": "(value)",
+            "value_match": "",
+            "next_node": ["final-node"]
+          }
+        ],
+        "apis": []
+      },
+      "apis": []
+    },
+    {
+      "response": "",
+      "type": "query-1",
+      "data": {
+        "question": "Please enter your query.",
+        "choices": true,
+        "bot_message": "question",
+        "response": "",
+        "pre_condition": {
+          "condition_type": "python",
+          "value_to_check": "{user_input}",
+          "condition": "(value)",
+          "error_message": "Please enter a valid product id."
+        },
+        "execution_order": [],
+        "functions": [],
+        "next_node": [
+          {
+            "condition_type": "python",
+            "value_to_check": "{user_input}",
+            "condition": "(value)",
+            "value_match": "",
+            "next_node": ["query-2"]
+          }
+        ],
+        "apis": []
+      },
+      "apis": []
+    },
+    {
+      "response": "",
+      "type": "query-2",
+      "data": {
+        "question": "For more information, give a missed call on 7872878728 or contact our email id- Support@eaplworld.com",
+        "choices": true,
+        "bot_message": "question",
+        "response": "",
+        "pre_condition": {
+          "condition_type": "python",
+          "value_to_check": "{user_input}",
+          "condition": "(value)",
+          "error_message": "Please enter a valid product id."
+        },
+        "execution_order": [],
+        "functions": [],
+        "next_node": [
+          {
+            "condition_type": "python",
+            "value_to_check": "{user_input}",
+            "condition": "(value)",
+            "value_match": "",
+            "next_node": ["final-node"]
+          }
+        ],
+        "apis": []
+      },
+      "apis": []
+    },
+    {
+      "response": "",
+      "type": "sales-segment",
+      "data": {
+        "question": "Please choose one of the following brands.",
+        "choices": true,
+        "bot_message": "question",
+        "response": "",
+        "pre_condition": {
+          "condition_type": "python",
+          "value_to_check": "{user_input}",
+          "condition": "(value)",
+          "error_message": "Please enter a valid product id."
+        },
+        "execution_order": [
+          {
+            "type": "function"
+          }
+        ],
+        "functions": [
+          {
+            "name": "list_product_cat",
+            "input": [
+              {
+                "company": "{user_input}"
+              }
+            ],
+            "output": ["resp"],
+            "description": ""
+          }
+        ],
+        "next_node": [
+          {
+            "condition_type": "similarity",
+            "value_to_check": "{user_input}",
+            "condition": "",
+            "value_match": "Eastman",
+            "next_node": ["sales-products-1"]
+          },
+          {
+            "condition_type": "similarity",
+            "value_to_check": "{user_input}",
+            "condition": "",
+            "value_match": "Addo",
+            "next_node": ["sales-products-1"]
+          }
+        ],
+        "apis": []
+      },
+      "apis": []
+    },
+    {
+      "response": "",
+      "type": "sales-products-1",
+      "data": {
+        "question": "Please choose one of the following brands.",
+        "choices": true,
+        "bot_message": "Please choose a category from following: \n{functions.list_product_cat.output.resp}",
+        "response": "",
+        "pre_condition": {
+          "condition_type": "python",
+          "value_to_check": "{user_input}",
+          "condition": "(value)",
+          "error_message": "Please enter a valid product id."
+        },
+        "execution_order": [
+          {
+            "type": "function"
+          }
+        ],
+        "functions": [
+          {
+            "name": "list_product_names",
+            "input": [
+              {
+                "company": "{sales-segment}"
+              },
+              {
+                "category": "{user_input}"
+              }
+            ],
+            "output": ["resp"],
+            "description": ""
+          }
+        ],
+        "next_node": [
+          {
+            "condition_type": "python",
+            "value_to_check": "{user_input}",
+            "condition": "(value)",
+            "value_match": "",
+            "next_node": ["sales-products-2"]
+          }
+        ],
+        "apis": []
+      },
+      "apis": []
+    },
+    {
+      "response": "",
+      "type": "sales-products-2",
+      "data": {
+        "question": "Please choose one of the following brands.",
+        "choices": true,
+        "bot_message": "Please choose a product from following: \n{functions.list_product_names.output.resp}",
+        "response": "",
+        "pre_condition": {
+          "condition_type": "python",
+          "value_to_check": "{user_input}",
+          "condition": "(value)",
+          "error_message": "Please enter a valid product id."
+        },
+        "execution_order": [
+          {
+            "type": "function"
+          }
+        ],
+        "functions": [
+          {
+            "name": "product_description",
+            "input": [
+              {
+                "company": "{sales-segment}"
+              },
+              { "category": "{sales-products-1}" },
+              { "product": "{user_input}" }
+            ],
+            "output": ["resp"],
+            "description": ""
+          }
+        ],
+        "next_node": [
+          {
+            "condition_type": "python",
+            "value_to_check": "{user_input}",
+            "condition": "(value)",
+            "value_match": "",
+            "next_node": ["sales-products-3"]
+          }
+        ],
+        "apis": []
+      },
+      "apis": []
+    },
+    {
+      "response": "",
+      "type": "sales-products-3",
+      "data": {
+        "question": "Please choose one of the following brands.",
+        "choices": true,
+        "bot_message": "{functions.product_description.output.resp}",
+        "response": "",
+        "pre_condition": {
+          "condition_type": "python",
+          "value_to_check": "{user_input}",
+          "condition": "(value)",
+          "error_message": "Please enter a valid product id."
+        },
+        "execution_order": [],
+        "functions": [],
+        "next_node": [
+          {
+            "condition_type": "python",
+            "value_to_check": "{user_input}",
+            "condition": "(value)",
+            "value_match": "",
+            "next_node": ["final-node"]
+          }
+        ],
+        "apis": []
+      },
+      "apis": []
+    },
+    {
+      "response": "",
+      "type": "final-node",
+      "data": {
+        "question": "Do you have any other query?",
+        "choices": true,
+        "bot_message": "question",
+        "response": "",
+        "pre_condition": {
+          "condition_type": "python",
+          "value_to_check": "{user_input}",
+          "condition": "(value)",
+          "error_message": "Please enter a valid product id."
+        },
+        "execution_order": [],
+        "functions": [],
+        "next_node": [
+          {
+            "condition_type": "similarity",
+            "value_to_check": "{user_input}",
+            "condition": "(value)",
+            "value_match": "Yes",
+            "next_node": ["greetings"]
+          },
+          {
+            "condition_type": "similarity",
+            "value_to_check": "{user_input}",
+            "condition": "(value)",
+            "value_match": "No",
+            "next_node": ["thanks"]
+          }
+        ],
+        "apis": []
+      },
+      "apis": []
+    },
+    {
+      "response": "",
+      "type": "thanks",
+      "data": {
+        "question": "Thank you for connecting to Eastman Auto & Power Limited. Have a nice day!",
+        "choices": true,
+        "bot_message": "question",
+        "response": "",
+        "pre_condition": {
+          "condition_type": "python",
+          "value_to_check": "{user_input}",
+          "condition": "(value)",
+          "error_message": "Please enter a valid product id."
+        },
+        "execution_order": [],
+        "functions": [],
+        "next_node": [
+          {
+            "condition_type": "python",
+            "value_to_check": "{user_input}",
+            "condition": "",
+            "value_match": "",
+            "next_node": ["greetings"]
+          }
+        ],
+        "apis": []
+      },
+      "apis": []
+    }
+  ]
+}
