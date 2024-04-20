@@ -4,9 +4,20 @@ import {
 } from '@jsonforms/material-renderers';
 import { JsonForms } from '@jsonforms/react';
 import DeleteIcon from '@mui/icons-material/Delete';
+import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
+import DoneIcon from '@mui/icons-material/Done';
+import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined';
+import ContentCopyOutlinedIcon from '@mui/icons-material/ContentCopyOutlined';
+import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutlined';
+import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
+import RestorePageOutlinedIcon from '@mui/icons-material/RestorePageOutlined';
 import SendIcon from '@mui/icons-material/Send';
 import LoadingButton from '@mui/lab/LoadingButton';
-import { Box, Button, FormControlLabel, Grid } from '@mui/material';
+import { Backdrop, Box, Button, FormControlLabel, Grid } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
+import SpeedDial from '@mui/material/SpeedDial';
+import SpeedDialAction from '@mui/material/SpeedDialAction';
+import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 import { useTheme } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
 import { makeStyles } from '@mui/styles';
@@ -22,6 +33,7 @@ import ratingControlTester from '../../Components/RatingControl/ratingControlTes
 import { ArrayToObject } from '../../Components/Utility/ArrToObj';
 import clearJsonData from './clearJsonData.json';
 import initialJsonData from './initialJsonData2.json';
+import initialJsonDataFull from './initialJsonDataFull.json';
 import initialSchema from './schema.json';
 import uischema from './uischema.json';
 
@@ -47,7 +59,18 @@ const App: React.FC = () => {
   const [loadingStates, setLoadingStates] = React.useState<{
     [key: string]: boolean;
   }>({});
-  const [data, setData] = useState<any>(initialJsonData);
+  const loadInitialData = (): any => {
+    const storedData = localStorage.getItem('data');
+    if (storedData) {
+      try {
+        return JSON.parse(storedData);
+      } catch (error) {
+        console.error('Failed to parse data from localStorage:', error);
+      }
+    }
+    return initialJsonData;
+  };
+  const [data, setData] = useState<any>(loadInitialData);
   const [transformedData, setTransformedData] = useState({});
 
   // FUNCTIONS
@@ -63,6 +86,7 @@ const App: React.FC = () => {
   };
 
   const handleChanges = async (updatedData: any) => {
+    localStorage.setItem('data', JSON.stringify(updatedData));
     setData(updatedData);
     console.log('Original data:', updatedData);
 
@@ -83,13 +107,12 @@ const App: React.FC = () => {
           if (slot.apis) {
             const transformedApis = slot.apis.map((api: any) => {
               api.headers = { 'Content-Type': 'application/json' };
-              const paramsObject = (Array.isArray(api.params) ? api.params : []).reduce(
-                (paramsAcc: any, param: any) => {
-                  paramsAcc[param.key] = param.value;
-                  return paramsAcc;
-                },
-                {}
-              );
+              const paramsObject = (
+                Array.isArray(api.params) ? api.params : []
+              ).reduce((paramsAcc: any, param: any) => {
+                paramsAcc[param.key] = param.value;
+                return paramsAcc;
+              }, {});
               return { ...api, params: paramsObject };
             });
 
@@ -125,8 +148,9 @@ const App: React.FC = () => {
 
           // Functions 🔻
           if (slot.data && Array.isArray(slot.data.functions)) {
-            acc[transformedSlotName].functions = ArrayToObject(slot.data.functions);
-
+            acc[transformedSlotName].functions = ArrayToObject(
+              slot.data.functions
+            );
           }
 
           return acc;
@@ -168,9 +192,126 @@ const App: React.FC = () => {
     }, 0);
   };
 
+  const handleAction = async (actionType: string) => {
+    console.log(`${actionType} action`);
+    setLoadingStates((prev) => ({ ...prev, [actionType]: true }));
+    setLoadingStates((prev) => ({ ...prev, fullScreenCircularProgress: true }));
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      switch (actionType) {
+        case 'copy':
+          await navigator.clipboard.writeText(
+            JSON.stringify(transformedData, null, 2)
+          );
+          console.log('Data copied');
+          break;
+        case 'restore':
+          setData(initialJsonData);
+          console.log('Data restore');
+          break;
+        case 'blank':
+          clearData();
+          console.log('Data blank');
+          break;
+        case 'full':
+          alert('JSON size is too large to load. May take a while.');
+          setData(initialJsonDataFull);
+          console.log('Data full');
+          break;
+          default:
+            throw new Error('Unknown action');
+          }
+          setLoadingStates((prev) => ({
+            ...prev,
+            [actionType]: false,
+            [`${actionType}Done`]: true,
+          }));
+          setTimeout(() => {
+        setLoadingStates((prev) => ({ ...prev, fullScreenCircularProgress: false }));
+        setLoadingStates((prev) => ({ ...prev, [`${actionType}Done`]: false }));
+      }, 0);
+    } catch (error) {
+      console.error(`Failed to complete ${actionType}:`, error);
+      setLoadingStates((prev) => ({ ...prev, [actionType]: false }));
+    }
+  };
+
+  const actions = [
+    {
+      icon: loadingStates.copy ? (
+        <CircularProgress size={24} />
+      ) : loadingStates.copyDone ? (
+        <DoneIcon />
+      ) : (
+        <ContentCopyOutlinedIcon />
+      ),
+      name: loadingStates.copyDone ? 'Copied' : 'Copy JSON Data',
+      onClick: () => handleAction('copy'),
+    },
+    {
+      icon: loadingStates.restore ? (
+        <CircularProgress size={24} />
+      ) : loadingStates.restoreDone ? (
+        <DoneIcon />
+      ) : (
+        <RestorePageOutlinedIcon />
+      ),
+      name: loadingStates.restoreDone ? 'Restored' : 'Restore Initial Form',
+      onClick: () => handleAction('restore'),
+    },
+    {
+      icon: loadingStates.blank ? (
+        <CircularProgress size={24} />
+      ) : loadingStates.blankDone ? (
+        <DoneIcon />
+      ) : (
+        <InsertDriveFileOutlinedIcon />
+      ),
+      name: loadingStates.blankDone ? 'Loaded' : 'Load Blank Form',
+      onClick: () => handleAction('blank'),
+    },
+    {
+      icon: loadingStates.full ? (
+        <CircularProgress size={24} />
+      ) : loadingStates.fullDone ? (
+        <DoneIcon />
+      ) : (
+        <DescriptionOutlinedIcon />
+      ),
+      name: loadingStates.fullDone ? 'Loaded' : 'Load Full 28 Slots Form',
+      onClick: () => handleAction('full'),
+    },
+  ];
+
   return (
     <Container>
       <Fragment>
+        <SpeedDial
+          ariaLabel='SpeedDial openIcon example'
+          sx={{ position: 'fixed', bottom: 16, right: 16 }}
+          icon={
+            <SpeedDialIcon
+              icon={<FeedOutlinedIcon />}
+              openIcon={<KeyboardArrowDownOutlinedIcon />}
+            />
+          }
+        >
+          {actions.map((action) => (
+            <SpeedDialAction
+              key={action.name}
+              icon={action.icon}
+              tooltipTitle={action.name}
+              onClick={action.onClick}
+            />
+          ))}
+        </SpeedDial>
+        <Backdrop
+          open={loadingStates.fullScreenCircularProgress}
+          style={{ color: '#fff', zIndex: 1201 }}
+        >
+          <CircularProgress color='inherit' />
+        </Backdrop>
+
         <Grid
           container
           justifyContent={'center'}

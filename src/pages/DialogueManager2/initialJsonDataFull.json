@@ -365,11 +365,11 @@
           {
             "name": "customer_registration",
             "input": [
-              { "number": "{customer-number}" },
-              { "name": "{customer-name}" },
-              { "pincode": "{customer-pincode}" },
-              { "address": "{user_input}" },
-              { "api": "{apis.pincode_api.output[0]}" }
+              "{\"number\": \"{customer-number}\"}",
+              "{\"name\": \"{customer-name}\"}",
+              "{\"pincode\": \"{customer-pincode}\"}",
+              "{\"address\": \"{user_input}\"}",
+              "{\"api\": \"{apis.pincode_api.output[0]}\"}"
             ],
             "output": ["resp"],
             "description": ""
@@ -697,11 +697,7 @@
         "functions": [
           {
             "name": "complaint_registration",
-            "input": [
-              {
-                "public_id": "{public_id}"
-              }
-            ],
+            "input": ["{\"public_id\": \"{public_id}\"}"],
             "output": ["resp"],
             "description": ""
           }
@@ -835,11 +831,7 @@
         "functions": [
           {
             "name": "product_registration",
-            "input": [
-              {
-                "public_id": "{public_id}"
-              }
-            ],
+            "input": ["{\"public_id\": \"{public_id}\"}"],
             "output": ["resp"],
             "description": ""
           }
@@ -973,11 +965,7 @@
         "functions": [
           {
             "name": "list_product_cat",
-            "input": [
-              {
-                "company": "{user_input}"
-              }
-            ],
+            "input": ["{\"company\": \"{user_input}\"}"],
             "output": ["resp"],
             "description": ""
           }
@@ -1025,12 +1013,8 @@
           {
             "name": "list_product_names",
             "input": [
-              {
-                "company": "{sales-segment}"
-              },
-              {
-                "category": "{user_input}"
-              }
+              "{\"company\": \"{sales-segment}\"}",
+              "{\"category\": \"{user_input}\"}"
             ],
             "output": ["resp"],
             "description": ""
@@ -1072,11 +1056,9 @@
           {
             "name": "product_description",
             "input": [
-              {
-                "company": "{sales-segment}"
-              },
-              { "category": "{sales-products-1}" },
-              { "product": "{user_input}" }
+              "{\"company\": \"{sales-segment}\"}",
+              "{\"category\": \"{sales-products-1}\"}",
+              "{\"product\": \"{user_input}\"}"
             ],
             "output": ["resp"],
             "description": ""
