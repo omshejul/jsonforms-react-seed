@@ -16,8 +16,6 @@ import SpellcheckIcon from '@mui/icons-material/Spellcheck';
 import SaveIcon from '@mui/icons-material/Save';
 import Container from '../../Components/Container/Container';
 import ResponseModal from '../../Components/Modal/Modal';
-import RatingControl from '../../Components/RatingControl/RatingControl';
-import ratingControlTester from '../../Components/RatingControl/ratingControlTester';
 import clearJsonData from './clearJsonData.json';
 import initialJsonData from './initialJsonData.json';
 import schema from './schema.json';
@@ -26,7 +24,6 @@ import uischema from './uischema.json';
 
 const renderers = [
   ...materialRenderers,
-  { tester: ratingControlTester, renderer: RatingControl },
 ];
 
 const App: React.FC = () => {
