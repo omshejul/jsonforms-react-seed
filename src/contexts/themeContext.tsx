@@ -43,8 +43,8 @@ export const CustomThemeProvider: React.FC = ({ children }) => {
               main: 'rgb(255, 118, 111)',
             },
             background: {
-              default: '#1E2129',
-              paper: '#11151e',
+              default: '#000',
+              paper: '#000',
             },
           }),
           ...(mode === 'light' && {
@@ -71,8 +71,13 @@ export const CustomThemeProvider: React.FC = ({ children }) => {
             styleOverrides: {
               root: {
                 margin:"-1px",
-                border:"1px solid hsla(0, 0%, 50%, 0.3)",
                 boxShadow: 'none',
+                border:"1px solid hsla(0, 0%, 50%, 0.3)",
+                backdropFilter: "blur(10px)",
+                backgroundColor: `${
+                  mode === "dark" ? "rgba(10, 10, 10, 0.7)" : "rgba(255, 255, 255, 0.9)"
+                  // mode === "dark" ? "rgba(17, 21, 30, 0.7)" : "rgba(255, 255, 255, 0.7)"
+                }`,
                 // boxShadow: '0px 0px 0px 1px hsla(0, 0%, 50%, 0.3)',
               },
             },

@@ -28,6 +28,7 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 import NodeRedIcon from '../Icons/NodeRedIcon';
 import ForumIcon from '@mui/icons-material/Forum';
 import HomeIcon from '@mui/icons-material/Home';
+import AccountTreeIcon from '@mui/icons-material/AccountTree';
 // ICONS <<
 
 //TYPES >>
@@ -45,6 +46,7 @@ const iconMap: IconMapType = {
   NodeRedIcon: NodeRedIcon,
   ForumIcon: ForumIcon,
   HomeIcon:HomeIcon,
+  AccountTreeIcon:AccountTreeIcon,
 };
 // TYPES <<
 
@@ -184,7 +186,7 @@ const NavBar = styled.nav`
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border: 1px solid hsla(0, 0%, 50%, 0.2);
 `;
 
 const StyledButton = styled(Button)`
