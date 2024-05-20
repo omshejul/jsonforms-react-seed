@@ -28,8 +28,6 @@ import Container from '../../Components/Container/Container';
 import ApiCustomRender from '../../Components/CustomRenders/ApiComponents/ApiCustomRender';
 import { customControlWithButtonTester } from '../../Components/CustomRenders/ApiComponents/testers';
 import ResponseModal from '../../Components/Modal/Modal';
-import RatingControl from '../../Components/RatingControl/RatingControl';
-import ratingControlTester from '../../Components/RatingControl/ratingControlTester';
 import { ArrayToObject } from '../../Components/Utility/ArrToObj';
 import clearJsonData from './clearJsonData.json';
 import initialJsonData from './initialJsonData2.json';
@@ -39,7 +37,6 @@ import uischema from './uischema.json';
 
 const renderers = [
   ...materialRenderers,
-  { tester: ratingControlTester, renderer: RatingControl },
   { tester: customControlWithButtonTester, renderer: ApiCustomRender },
   // { tester: queryBuilder, renderer: QueryBuilderCustomRender },
 ];

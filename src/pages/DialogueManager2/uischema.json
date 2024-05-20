@@ -30,8 +30,8 @@
             },
             {
               "type": "Control",
-              "scope": "#/properties/traget_language",
-              "label": "Traget Language"
+              "scope": "#/properties/target_language",
+              "label": "Target Language"
             },
             {
               "type": "Control",

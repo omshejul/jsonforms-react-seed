@@ -19,15 +19,12 @@ import { customControlWithButtonTester } from '../../Components/CustomRenders/Ap
 import QueryBuilderCustomRender from '../../Components/CustomRenders/QueryBuilder/QueryBuilderCustomRender';
 import { queryBuilder } from '../../Components/CustomRenders/QueryBuilder/testers';
 import ResponseModal from '../../Components/Modal/Modal';
-import RatingControl from '../../Components/RatingControl/RatingControl';
-import ratingControlTester from '../../Components/RatingControl/ratingControlTester';
 import clearJsonData from './clearJsonData.json';
 import initialJsonData from './initialJsonData.json';
 import schema from './schema.json';
 import uischema from './uischema.json';
 const renderers = [
   ...materialRenderers,
-  { tester: ratingControlTester, renderer: RatingControl },
   { tester: customControlWithButtonTester, renderer: ApiCustomRender },
   { tester: queryBuilder, renderer: QueryBuilderCustomRender },
 ];
