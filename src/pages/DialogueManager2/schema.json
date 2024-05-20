@@ -47,7 +47,7 @@
         { "title": "Urdu اُردُو", "const": "ur" }
       ]
     },
-    "traget_language": {
+    "target_language": {
       "type": "string",
       "oneOf": [
         { "title": "", "const": "" },
