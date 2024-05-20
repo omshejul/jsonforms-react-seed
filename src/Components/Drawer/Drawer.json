@@ -15,6 +15,11 @@
     "path": "/dialogue-manager-v2"
   },
   {
+    "text": "Workflow",
+    "icon": "AccountTreeIcon",
+    "path": "/workflow"
+  },
+  {
     "text": "Update and Encode",
     "icon": "UpdateIcon",
     "path": "/update-and-encode"

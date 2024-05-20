@@ -24,13 +24,10 @@ import {
 } from '@mui/material';
 import axios from 'axios';
 import React, { useState } from 'react';
-import RatingControl from '../../RatingControl/RatingControl';
-import ratingControlTester from '../../RatingControl/ratingControlTester';
 import RenderButton from './RenderButton';
 
 const renderers = [
   ...materialRenderers,
-  { tester: ratingControlTester, renderer: RatingControl },
 ];
 
 const ApiCustomRender: React.FC<ControlProps> = ({
@@ -161,7 +158,6 @@ const ApiCustomRender: React.FC<ControlProps> = ({
               id={`panel${index}-header`}
             >
               <Grid container alignItems={'center'}>
-
                 <Avatar>{index + 1}</Avatar>
                 <Typography sx={{ margin: "1rem" }}>
                   {apis[index].name
