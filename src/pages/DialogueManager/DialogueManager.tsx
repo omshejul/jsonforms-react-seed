@@ -15,16 +15,16 @@ import React, { Fragment, useState } from 'react';
 import ReactJson from 'react-json-view';
 import Container from '../../Components/Container/Container';
 import ApiCustomRender from '../../Components/CustomRenders/ApiComponents/ApiCustomRender';
-import QueryBuilderCustomRender from '../../Components/CustomRenders/QueryBuilder/QueryBuilderCustomRender';
 import { customControlWithButtonTester } from '../../Components/CustomRenders/ApiComponents/testers';
+import QueryBuilderCustomRender from '../../Components/CustomRenders/QueryBuilder/QueryBuilderCustomRender';
 import { queryBuilder } from '../../Components/CustomRenders/QueryBuilder/testers';
+import ResponseModal from '../../Components/Modal/Modal';
 import RatingControl from '../../Components/RatingControl/RatingControl';
 import ratingControlTester from '../../Components/RatingControl/ratingControlTester';
 import clearJsonData from './clearJsonData.json';
 import initialJsonData from './initialJsonData.json';
 import schema from './schema.json';
 import uischema from './uischema.json';
-import ResponseModal from '../../Components/Modal/Modal';
 const renderers = [
   ...materialRenderers,
   { tester: ratingControlTester, renderer: RatingControl },
@@ -215,9 +215,8 @@ const App: React.FC = () => {
                   overflowX: 'scroll',
                   scrollbarWidth: 'none',
                   borderRadius: '8px',
-                  border: `1.7px solid ${
-                    theme.palette.mode === 'dark' ? '#545454' : '#CBCBCB'
-                  }`,
+                  border: `1.7px solid ${theme.palette.mode === 'dark' ? '#545454' : '#CBCBCB'
+                    }`,
                 }}
               >
                 <ReactJson

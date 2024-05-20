@@ -1,5 +1,10 @@
 [
   {
+    "text": "Home",
+    "icon": "HomeIcon",
+    "path": "/"
+  },
+  {
     "text": "Dialogue Manager",
     "icon": "TryIcon",
     "path": "/dialogue-manager"

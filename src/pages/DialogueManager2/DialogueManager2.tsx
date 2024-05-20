@@ -3,11 +3,11 @@ import {
   materialRenderers,
 } from '@jsonforms/material-renderers';
 import { JsonForms } from '@jsonforms/react';
+import ContentCopyOutlinedIcon from '@mui/icons-material/ContentCopyOutlined';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import DoneIcon from '@mui/icons-material/Done';
 import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined';
-import ContentCopyOutlinedIcon from '@mui/icons-material/ContentCopyOutlined';
 import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutlined';
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import RestorePageOutlinedIcon from '@mui/icons-material/RestorePageOutlined';
@@ -218,15 +218,15 @@ const App: React.FC = () => {
           setData(initialJsonDataFull);
           console.log('Data full');
           break;
-          default:
-            throw new Error('Unknown action');
-          }
-          setLoadingStates((prev) => ({
-            ...prev,
-            [actionType]: false,
-            [`${actionType}Done`]: true,
-          }));
-          setTimeout(() => {
+        default:
+          throw new Error('Unknown action');
+      }
+      setLoadingStates((prev) => ({
+        ...prev,
+        [actionType]: false,
+        [`${actionType}Done`]: true,
+      }));
+      setTimeout(() => {
         setLoadingStates((prev) => ({ ...prev, fullScreenCircularProgress: false }));
         setLoadingStates((prev) => ({ ...prev, [`${actionType}Done`]: false }));
       }, 0);
@@ -387,9 +387,8 @@ const App: React.FC = () => {
                   overflowX: 'scroll',
                   scrollbarWidth: 'none',
                   borderRadius: '8px',
-                  border: `1.7px solid ${
-                    theme.palette.mode === 'dark' ? '#545454' : '#CBCBCB'
-                  }`,
+                  border: `1.7px solid ${theme.palette.mode === 'dark' ? '#545454' : '#CBCBCB'
+                    }`,
                 }}
               >
                 <ReactJson

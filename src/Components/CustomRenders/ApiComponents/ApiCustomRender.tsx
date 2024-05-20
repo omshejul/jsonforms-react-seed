@@ -162,13 +162,13 @@ const ApiCustomRender: React.FC<ControlProps> = ({
             >
               <Grid container alignItems={'center'}>
 
-              <Avatar>{index + 1}</Avatar>
-              <Typography sx={{margin:"1rem"}}>
-                {apis[index].name
-                  ? apis[index].name + ' API Configurations'
-                  : `API Configuration ${index + 1}`}
-              </Typography>
-                  </Grid>
+                <Avatar>{index + 1}</Avatar>
+                <Typography sx={{ margin: "1rem" }}>
+                  {apis[index].name
+                    ? apis[index].name + ' API Configurations'
+                    : `API Configuration ${index + 1}`}
+                </Typography>
+              </Grid>
             </AccordionSummary>
             <AccordionDetails>
               <JsonForms

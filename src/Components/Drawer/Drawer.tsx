@@ -27,6 +27,7 @@ import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import NodeRedIcon from '../Icons/NodeRedIcon';
 import ForumIcon from '@mui/icons-material/Forum';
+import HomeIcon from '@mui/icons-material/Home';
 // ICONS <<
 
 //TYPES >>
@@ -43,6 +44,7 @@ const iconMap: IconMapType = {
   AllInboxIcon: AllInboxIcon,
   NodeRedIcon: NodeRedIcon,
   ForumIcon: ForumIcon,
+  HomeIcon:HomeIcon,
 };
 // TYPES <<
 
@@ -67,7 +69,7 @@ export default function DrawerMenu() {
       icon: currentItem
         ? React.createElement(iconMap[currentItem.icon]! as any, {
             fontSize: 'large',
-            style: { marginInlineEnd: '1rem' }, // Add your style here
+            style: { marginInlineEnd: '1rem' },
           })
         : null,
     };
