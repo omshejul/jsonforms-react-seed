@@ -15,7 +15,7 @@ const Home = () => {
                 <Button sx={{m:1}}component={Link} to="/dialogue-manager-v2" variant="contained" color="primary">
                     Dialogue Manager
                 </Button>
-                <Button sx={{m:1}}component={Link} to="/dialogue-manager" variant="contained" color="primary">
+                <Button sx={{m:1}}component={Link} to="/workflow" variant="contained" color="primary">
                     Workflow
                 </Button>
                 </Box>
