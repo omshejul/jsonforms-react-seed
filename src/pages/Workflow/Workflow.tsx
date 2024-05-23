@@ -63,7 +63,6 @@ const DynamicForms: React.FC = () => {
       'input',
       'output',
       'parent',
-      // 'url',
     ],
   }
 
@@ -197,14 +196,22 @@ const DynamicForms: React.FC = () => {
     if (index === 0) {
       const allInputs = Object.values(workflowData)
         .flatMap(workflow => workflow.input)
-        .filter((value, idx, self) => self.indexOf(value) === idx) // Remove duplicates
-
+        .filter((value, idx, self) => self.indexOf(value) === idx) 
+  
+      // Filter outputs that start with 'Start_'
+      const startOutputs = Object.values(workflowData)
+        .flatMap(workflow => workflow.output)
+        .filter(output => output.startsWith('Start_'))
+        .filter((value, idx, self) => self.indexOf(value) === idx) 
+  
+      updatedFormDataArray[index].output = startOutputs as any;
+  
       updatedSchemaArray[index] = {
         ...schemaArray[index],
         properties: {
           ...schemaArray[index].properties,
           type: {
-            ...schemaArray[index].properties.next,
+            ...schemaArray[index].properties.type,
             enum: ["Start"],
           },
           next: {
@@ -218,46 +225,57 @@ const DynamicForms: React.FC = () => {
               enum: allInputs.length > 0 ? allInputs : ['No Items'],
             },
           },
-        },
-      }
-    } else {
-      const selectedNextValues = formDataArray.slice(0, index).map(form => form.next)
-      let remainingOptions = dropdownOptions.filter(option => !selectedNextValues.includes(option))
-      remainingOptions = remainingOptions.length === 0 ? ['NONE'] : remainingOptions
-
-      const selectedType = formDataArray[index - 1]?.next || ''
-      const typeInputs = workflowData[selectedType]?.input || ['']
-      const typeOutputs = workflowData[selectedType]?.output || ['']
-
-      updatedSchemaArray[index] = {
-        ...schemaArray[index],
-        properties: {
-          ...schemaArray[index].properties,
-          type: {
-            ...schemaArray[index].properties.type,
-            enum: [selectedType],
-          },
-          next: {
-            ...schemaArray[index].properties.next,
-            enum: remainingOptions,
-          },
-          input: {
-            ...schemaArray[index].properties.input,
-            items: {
-              type: 'string',
-              enum: typeInputs.length > 0 ? typeInputs : [''],
-            },
-          },
           output: {
             ...schemaArray[index].properties.output,
             items: {
-              type: 'string',
-              enum: typeOutputs.length > 0 ? typeOutputs : [''],
+              ...schemaArray[index].properties.output.items,
+              enum: startOutputs.length > 0 ? startOutputs : ['No Outputs'],
             },
           },
         },
       }
+    } else {
+    const selectedNextValues = formDataArray.slice(0, index).map(form => form.next)
+    let remainingOptions = dropdownOptions.filter(option => !selectedNextValues.includes(option))
+    remainingOptions = remainingOptions.length === 0 ? ['NONE'] : remainingOptions
+
+    const selectedType = formDataArray[index - 1]?.next || ''
+    const previousOutputs = formDataArray[index - 1]?.output || []
+    const typeInputs = workflowData[selectedType]?.input || ['']
+    const typeOutputs = workflowData[selectedType]?.output || ['']
+
+    // Combine the previous node's outputs with current type inputs
+    const combinedInputs = Array.from(new Set([...previousOutputs, ...typeInputs]))
+
+    updatedSchemaArray[index] = {
+      ...schemaArray[index],
+      properties: {
+        ...schemaArray[index].properties,
+        type: {
+          ...schemaArray[index].properties.type,
+          enum: [selectedType],
+        },
+        next: {
+          ...schemaArray[index].properties.next,
+          enum: remainingOptions,
+        },
+        input: {
+          ...schemaArray[index].properties.input,
+          items: {
+            type: 'string',
+            enum: combinedInputs.length > 0 ? combinedInputs : [''],
+          },
+        },
+        output: {
+          ...schemaArray[index].properties.output,
+          items: {
+            type: 'string',
+            enum: typeOutputs.length > 0 ? typeOutputs : [''],
+          },
+        },
+      },
     }
+  }
 
     setSchemaArray(updatedSchemaArray)
     setFormDataArray(updatedFormDataArray)
